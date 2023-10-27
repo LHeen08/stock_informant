@@ -52,6 +52,7 @@ basic_data_to_print = [["Current Price", current_price], ["Net Income", format_v
                        ["Shares Outstanding", format_value(shares_outstanding)], 
                        ["Preferred Dividends", format_value(preferred_dividends)]] # Basic financial data about the company
 
+print("\n\nBasic Financials for: ", company_full_name)
 print(tabulate(basic_data_to_print, headers=['Attribute', 'Value'], tablefmt="mixed_grid", floatfmt=".2f"))
 
 
@@ -63,7 +64,7 @@ eps_actual_total = sum(row[0] for row in eps_data_to_print) # Get the total 12 M
 eps_actual_total = round(eps_actual_total, 2) # Round
 eps_data_to_print = [row[::-1] for row in eps_data_to_print] # Reverse columns
 
-eps_data_to_print.append(['', '', '', '', '12 Month EPS', eps_actual_total]) # Append the 12 Month eps to the table
+eps_data_to_print.append(['', '', '', '', 'Current Year EPS', eps_actual_total]) # Append the 12 Month eps to the table
 headers = ["Period", "Quarter", "Surprise Percent", "EPS Difference", "EPS Estimate", "EPS Actual"] # Setup the headers
 print("\n\nEPS Quarters: ")
 print(tabulate(eps_data_to_print, headers, tablefmt="mixed_grid")) # Print the table
@@ -77,5 +78,37 @@ print(tabulate(eps_data_to_print, headers, tablefmt="mixed_grid")) # Print the t
 #     growth = trend['growth']
 #     print(f"EPS TREND for period {period}: {growth}")
 
+print("\n\n\n")
+print("EPS calc: ", round(net_income/shares_outstanding, 2))
+trailing_eps = key_stock_stats['trailingEps']
+print("Basic - Trailing EPS: ", trailing_eps)
+print("Forward PE: ", round(key_stock_stats['forwardPE'], 2))
+print("Current P/E(TTM): ", round(current_price/key_stock_stats['trailingEps'], 2))
 
-print(key_stock_stats)
+
+eps_trends = stock_data.earnings_trend[ticker_sym]['trend']
+data_for_current_q = [trend for trend in eps_trends if trend['period'] == '0q']
+data_for_current_q = data_for_current_q[0]['growth']
+next_five_yrs_growth = [trend for trend in eps_trends if trend['period'] == '+5y']
+next_five_yrs_growth = next_five_yrs_growth[0]['growth']
+print("Current quarter future eps growth: ", f"{data_for_current_q:.2%}")
+print("Next 5 years future eps growth: ", f"{next_five_yrs_growth:.2%}")
+
+
+# Benjamin graham formula 
+# Function to calculate benjamin grahams formula (old)
+def calc_benjamin_graham_old(eps, pe_no_growth, growth_rate_next_five_yrs, avg_yield_aaa_corp_bond, current_yield_aaa_corp_bond):
+	intrinsic_value = ((eps * (pe_no_growth + (2 * growth_rate_next_five_yrs)) * avg_yield_aaa_corp_bond) / current_yield_aaa_corp_bond)
+	return intrinsic_value
+
+ben_graham_old_intrinsic_value = round(calc_benjamin_graham_old(trailing_eps, 8.5, next_five_yrs_growth, 4.4, 4.8), 2)
+print("Benjamin graham old: ", ben_graham_old_intrinsic_value)
+
+
+# # # Function to calculate benjamin grahams formula new
+def calc_benjamin_graham_new(eps, pe_no_growth, growth_rate_next_five_yrs, avg_yield_aaa_corp_bond, current_yield_aaa_corp_bond):
+	intrinsic_value = ((eps * (pe_no_growth + (2 * growth_rate_next_five_yrs)) * avg_yield_aaa_corp_bond) / current_yield_aaa_corp_bond)
+	return intrinsic_value
+
+ben_graham_new_intrinsic_value = round(calc_benjamin_graham_old(trailing_eps, 7, next_five_yrs_growth, 4.4, 4.8), 2)
+print("Benjamin graham new: ", ben_graham_new_intrinsic_value)
