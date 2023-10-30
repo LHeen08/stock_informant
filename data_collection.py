@@ -21,11 +21,14 @@ company_profile = stock_data.asset_profile[ticker_sym] # Store some data to use 
 current_price = stock_data.financial_data[ticker_sym]['currentPrice'] # Current price
 shares_outstanding = stock_data.key_stats[ticker_sym]['sharesOutstanding'] # Shares Outstanding
 income_stmnt = stock_data.income_statement() # Income statement
+cash_flow_stmnt = stock_data.cash_flow() # cash flow statement
+# for index, row in cash_flow_stmnt.iterrows():
+#     cash_flow = row['FreeCashFlow']
+#     print(f"Row {index}: free cash flow = {cash_flow}")
+    
 key_stock_stats = stock_data.key_stats[ticker_sym] # Some key stats
 
-data_to_fetch = ['NetIncome'] # Get other financial data
-fetched_data = stock_data.get_financial_data(data_to_fetch, trailing=True) # Fetch the data
-net_income = fetched_data['NetIncome'].iloc[-1] # Net Income 
+net_income_ttm = income_stmnt.iloc[-1]['NetIncome'] # Trailing Twelve months net income
 
 eps_data_from_earning_hist = stock_data.earning_history # EPS calc from earning history
 trailing_eps_ttm = key_stock_stats['trailingEps'] # TTM EPS

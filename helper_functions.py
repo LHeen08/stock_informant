@@ -21,3 +21,17 @@ def calc_benjamin_graham_old(eps, pe_no_growth, growth_rate_next_five_yrs, avg_y
 def calc_benjamin_graham_new(eps, pe_no_growth, growth_rate_next_five_yrs, avg_yield_aaa_corp_bond, current_yield_aaa_corp_bond):
 	intrinsic_value = ((eps * (pe_no_growth + (2 * growth_rate_next_five_yrs)) * avg_yield_aaa_corp_bond) / current_yield_aaa_corp_bond)
 	return intrinsic_value
+
+
+
+# Calculate dcf based off last 5 years of cash flow
+def calculate_dcf(cash_flows_five_yrs, discount_rate):
+    dcfs = []  # To store DCF for each year
+
+    for year, cash_flow in cash_flows_five_yrs:
+        year = year.year # Extract year from the asOfDate
+        dcf = round((cash_flow / (1 + discount_rate) ** len(dcfs)), 2)
+        dcfs.append((year, dcf))
+
+    return dcfs
+
