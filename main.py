@@ -36,6 +36,8 @@ def main():
     print("Benjamin graham new: ", ben_graham_new_intrinsic_value)
 
 
+
+
     # for index, row in cash_flow_stmnt.iterrows():
     #     cash_flow = row['FreeCashFlow']
     #     print(f"Row {index}: free cash flow = {cash_flow}")
@@ -62,13 +64,61 @@ def main():
 
     # Calculate DCF values
     discount_rate = .10
-    dcf_values = calculate_dcf(cash_flow_years, discount_rate)
+    perpetual_growth_rate = .025
+    data_for_dcf = {
+         "PreviousCashFlows" : cash_flow_years,
+         "DiscountRate" : discount_rate,
+         "PerpetualGrowthRate" : perpetual_growth_rate,
+         "CashAndCashEquivalentsAndShortTermInvestments" : balance_sheet['CashCashEquivalentsAndShortTermInvestments'].iloc[-1],
+         "TotalDebt" : balance_sheet['TotalDebt'].iloc[-1],
+         "SharesOutstanding" : shares_outstanding,
+         "ProjectedGrowthRate" : eps_growth_next_five_yrs
+    }
+    dcf_table = calculate_dcf(data_for_dcf)
+    # print(dcf_table)
 
-    # Print the results
-    print(tabulate(dcf_values, headers = ["Year", "DCF"], tablefmt="mixed_grid", floatfmt=".2f"))
-    
+#     df = pd.DataFrame(dcf_table.items(), columns=["Year" , "Amount"])
+#     print(tabulate(df, tablefmt="mixed_grid", floatfmt=".2f"))
 
+    dcf_table['PrevCashFlows'] = [(entry[0].year, entry[1]) if len(entry) == 2 else (entry[0].year, entry[1], entry[2]) for entry in dcf_table['PrevCashFlows']]
 
+    # Create the table for Previous Cash Flows and Growth Rate
+    prev_cash_flows_table = pd.DataFrame(dcf_table['PrevCashFlows'], columns=["Year", "Free Cash Flow", "Growth Rate"])
+    avg_growth_rate = {'Year': 'Average Growth Rate', 'Free Cash Flow': dcf_table['AverageGrowthRate']}
+    prev_cash_flows_table = pd.concat([prev_cash_flows_table, pd.DataFrame([avg_growth_rate])], ignore_index=True)
+    prev_cash_flows_table.index += 1
+
+    # Create the table for Estimated FFCF, PVFFCF, Terminal Val, and Terminal Val PVFFCF
+    est_ffcf_table = pd.DataFrame(dcf_table['EstimatedFFCF'].items(), columns=["Year", "Estimated FFCF"])
+    est_ffcf_table['PVFFCF'] = est_ffcf_table['Year'].map(dcf_table['PVFFCF'])
+    terminal_row = {'Year': 'Terminal Val', 'Estimated FFCF': dcf_table['TerminalVal'], 'PVFFCF': dcf_table['TerminalValPVFFCF']}
+    terminal_row_df = pd.DataFrame([terminal_row])
+
+    # Concatenate the DataFrames
+    est_ffcf_table = pd.concat([est_ffcf_table, terminal_row_df], ignore_index=True)
+    est_ffcf_table.index += 1
+
+    # Print or display the tables
+    print("Table 1: Previous Cash Flows and Growth Rate")
+    print(tabulate(prev_cash_flows_table, headers="keys", tablefmt="mixed_grid", floatfmt=".2f", showindex=False))
+
+    print("\nTable 2: Estimated FFCF, PVFFCF, Terminal Val, and Terminal Val PVFFCF")
+    print(tabulate(est_ffcf_table, headers="keys", tablefmt="mixed_grid", floatfmt=".2f"))
+
+    summary_data = {
+        "Row": ["Sum of FFCF", "Cash and Cash Equivalents + Short Term Investments", "Total Debt", "Equity Value", "Shares Outstanding", "DCF Value"],
+        "Amount": [
+            dcf_table['SumOfFFCF'],  # Use .values to extract the scalar value from the Series
+            data_for_dcf['CashAndCashEquivalentsAndShortTermInvestments'],
+            data_for_dcf['TotalDebt'],
+            dcf_table['EquityVal'],
+            shares_outstanding,
+            dcf_table['DCFVal']
+        ]
+    }
+
+    summary_table = pd.DataFrame(summary_data)
+    print(tabulate(summary_table, headers="keys", tablefmt="mixed_grid", floatfmt=".2f", showindex=False))
 
 if __name__=="__main__": 
     main()

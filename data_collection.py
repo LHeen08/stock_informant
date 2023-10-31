@@ -5,9 +5,12 @@ import pandas as pd
 # Get the ticker: Getting from the ticker.py file for now
 from ticker import ticker_sym
 
+
+ticker_sym = ticker_sym.upper()
+
 # Make a query to see if we can even get data for this stock ticker
 try:
-    stock_data = Ticker(ticker_sym)
+    stock_data = Ticker(ticker_sym, validate=True, progress=True)
 
 except Exception as exc:
     print(f"Error: Unable to retrieve data for ticker '{ticker_sym}'.")
@@ -22,6 +25,7 @@ current_price = stock_data.financial_data[ticker_sym]['currentPrice'] # Current 
 shares_outstanding = stock_data.key_stats[ticker_sym]['sharesOutstanding'] # Shares Outstanding
 income_stmnt = stock_data.income_statement() # Income statement
 cash_flow_stmnt = stock_data.cash_flow() # cash flow statement
+balance_sheet = stock_data.balance_sheet(trailing=True) # Balance sheet
 # for index, row in cash_flow_stmnt.iterrows():
 #     cash_flow = row['FreeCashFlow']
 #     print(f"Row {index}: free cash flow = {cash_flow}")
