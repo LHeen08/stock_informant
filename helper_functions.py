@@ -3,9 +3,9 @@
 # Formatting functions
 def format_value(value):
     if value >= 1e9:
-        return f'{value/1e9:.2f}B'
+        return f"{value/1e9:.2f}B"
     elif value >= 1e6:
-        return f'{value/1e6:.2f}M'
+        return f"{value/1e6:.2f}M"
     return str(value)
 
 
@@ -27,13 +27,13 @@ def calc_benjamin_graham_new(eps, pe_no_growth, growth_rate_next_five_yrs, avg_y
 # Calculate dcf based off last 5 years of cash flow
 def calculate_dcf(data_for_dcf):
     # extract this data for easier usage
-    prev_cash_flows = data_for_dcf['PreviousCashFlows']
-    discount_rate = data_for_dcf['DiscountRate']
-    perpetual_growth_rate = data_for_dcf['PerpetualGrowthRate']
-    cash_and_cash_equiv = data_for_dcf['CashAndCashEquivalentsAndShortTermInvestments']
-    total_debt = data_for_dcf['TotalDebt']
-    shares_outstanding = data_for_dcf['SharesOutstanding']
-    projected_growth_rate = data_for_dcf['ProjectedGrowthRate']
+    prev_cash_flows = data_for_dcf["PreviousCashFlows"]
+    discount_rate = data_for_dcf["DiscountRate"]
+    perpetual_growth_rate = data_for_dcf["PerpetualGrowthRate"]
+    cash_and_cash_equiv = data_for_dcf["CashAndCashEquivalentsAndShortTermInvestments"]
+    total_debt = data_for_dcf["TotalDebt"]
+    shares_outstanding = data_for_dcf["SharesOutstanding"]
+    projected_growth_rate = data_for_dcf["ProjectedGrowthRate"]
 
 
     # Return a dictionary of all my values
