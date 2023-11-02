@@ -1,55 +1,153 @@
 <!DOCTYPE html>
+<head>
+    <title>Stock Informant</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 550px}   
+    
+        .container-fluid {
+            padding-right:15px;
+            padding-left:15px;
+            margin-right:auto;
+            margin-left:auto
+        }
+
+    </style>
+  </head>
+<div class="container-fluid">
+    <div class="row content">
+    <div class="col-sm-9">
+        <div class="well">
+          <h4>Stock Informant</h4>
+          <p>Enter Ticker: </p>
+          <input type="text" name="ticker" id="ticker" class="form-control form-control-sm mr-2 mb-2" required>
+          <button type="button" class="btn btn-primary btn-sm mr-2" onclick="fetchCompanyData();">Fetch Data</button>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="well">
+              <h4>Current Price</h4>
+              <p>{price}</p> 
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="well">
+              <h4>Pages</h4>
+              <p>100 Million</p> 
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="well">
+              <h4>Sessions</h4>
+              <p>10 Million</p> 
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="well">
+              <h4>Bounce</h4>
+              <p>30%</p> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </body>
+</html>
+
+
+<!-- 
 <html>
 <head>
     <title>Company Data</title>
-    <!-- Include Bootstrap CSS (you might need to adjust the file path) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: top;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="mt-5">Company Data</h1>
-        <form action="/fetch_data" method="post" class="mt-4">
-            <div class="form-group">
-                <label for="ticker">Enter Ticker Symbol:</label>
-                <input type="text" name="ticker" id="ticker" class="form-control" required>
+    <div class="container centered">
+        <h1 class="text-center">Company Data</h1>
+        <form action="/fetch_data" method="post" class="mt-4 text-center">
+            <div class="form-group d-inline">
+                <label for="ticker" class="mr-2">Enter Ticker Symbol:</label>
+                <input type="text" name="ticker" id="ticker" class="form-control form-control-sm mr-2 mb-2" required>
+                <button type="button" class="btn btn-primary btn-sm" onclick="displayData();">Display Data</button>
             </div>
-            <button type="button" class="btn btn-primary" onclick="fetchCompanyData();">Fetch Data</button>
-            <button type="button" class="btn btn-primary" onclick="displayData();">Display Data</button>
         </form>
 
-        <div class="mt-5" id="company_data">
-            <!-- Company data will be displayed here -->
+        <div class="mt-5" id="company_main_data">
+        </div>
+        <div class="mt-5" id="company_stats">
         </div>
     </div>
 
-    <!-- Include Bootstrap JavaScript (you might need to adjust the file path) -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         // Function to send a POST request to fetch company data
         function fetchCompanyData() {
+        var ticker = document.getElementById('ticker').value;
+        var formData = new FormData();
+        formData.append('ticker', ticker);
+
+        fetch('/fetch_data', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())  // Parse the response as JSON
+        .then(data => {
+            // Update the placeholders in your HTML template
+            var companyData = document.getElementById('company_main_data');
+            companyData.innerHTML = `
+            <div class="container px-4">
+                <div class="row gx-5">
+                    <div class="col">
+                    <div class="p-3 border bg-light">Company Name:</div>
+                    </div>
+                    <div class="col">
+                    <div class="p-3 border bg-light">Current Price:</div>
+                    </div>
+                </div>
+            </div>                
+            `;
+            var companyName = data.company_name;
+            var currentPrice = data.current_price;
+            companyData.innerHTML += `
+                <h3 class="text-right"><b>${companyName}</b></h3>
+                <h4 class="text-right"><b>$${currentPrice}</b></h4>
+            `;
+        });
+    }
+
+        // Function to send a POST request to display the fetched data
+        function displayData() {
             var ticker = document.getElementById('ticker').value;
             var formData = new FormData();
             formData.append('ticker', ticker);
 
-            fetch('/fetch_data', {
+            fetch('/display_data', {
                 method: 'POST',
                 body: formData,
             })
-            .then(response => response.text())  // Parse the response as text
+            .then(response => response.text())
             .then(data => {
-                // Store the fetched data in a global variable
-                window.fetchedData = data;
+                // Append the fetched data as HTML to the company_data div
+                var companyData = document.getElementById('company_stats');
+                companyData.innerHTML = data;
             });
         }
-
-        // Function to display the fetched data
-        function displayData() {
-            var companyData = document.getElementById('company_data');
-            companyData.innerHTML = '';  // Clear previous content
-
-            // Append the fetched data as HTML to the company_data div
-            companyData.innerHTML = window.fetchedData;
-        }
     </script>
+
 </body>
-</html>
+</html> -->
