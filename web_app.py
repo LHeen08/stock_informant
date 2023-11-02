@@ -24,17 +24,17 @@ def fetch_data():
     if fetched_data:
         response_data = {
             'company_name': fetched_data.company_full_name,
+            'ticker' : ticker.upper(),
             'current_price': fetched_data.current_price,
-            # Add other data here
+            'shares_outstanding': fetched_data.shares_outstanding,
+            'trailing_eps_ttm' : fetched_data.trailing_eps_ttm,
+            'eps_growth_next_five_years' : fetched_data.eps_growth_next_five_years,
+            'net_income_ttm' : fetched_data.net_income_ttm,
         }
     else:
-        response_data = {
-            'company_name': 'N/A',
-            'current_price': 'N/A',
-            # Add other data here
-        }
+        response_data = None
     
-    return jsonify(response_data)
+    return response_data
 
 
 @app.route('/display_data', methods=['POST'])
@@ -50,6 +50,10 @@ def display_data():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='10.0.2.15', port='5000')
+    # For VM
+    # app.run(debug=True, host='10.0.2.15', port='5000')
+    app.run(debug=True, host='127.0.0.1', port='5000')
+
+
 
 

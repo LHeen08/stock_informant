@@ -4,155 +4,130 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="#">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
         .container-fluid {
-            padding-right:20px;
-            padding-left:20px;
-            margin-right:auto;
-            margin-left:auto;
+            padding-right: 20px;
+            padding-left: 20px;
+            margin-right: auto;
+            margin-left: auto;
             padding-top: 20px;
         }
-    
 
-    </style>
-  </head>
-  <div class="container-fluid">
-    <div class="row content">
-        <div class="col-sm-3">
-            <div class="well">
-                <h4>Stock Informant</h4>
-                <p>Enter Ticker: </p>
-                <input type="text" name="ticker" id="ticker" class="form-control form-control-sm mr-2 mb-2" required>
-                <button type="button" class="btn btn-primary btn-sm mr-2" onclick="fetchCompanyData();">Fetch Data</button>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <div class="well">
-                <h4>Current Data vs Predicted Price</h4>
-                <p></p>
-            </div>
-        </div>
-    </div>
-    <div class="row content">
-        <div class="col-sm-3">
-            <div class="well">
-                <h4>Current Price</h4>
-                <p>{price}</p> 
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="well">
-                <h4>Pages</h4>
-                <p>100 Million</p> 
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="well">
-                <h4>Sessions</h4>
-                <p>10 Million</p> 
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="well">
-                <h4>Bounce</h4>
-                <p>30%</p> 
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+        /* Add margin to the button for spacing */
+        .custom-button {
+            margin-top: 10px; /* Adjust as needed */
+        }
 
+        .title {
+            font-weight: bold;
+        }
 
-<!-- 
-<html>
-<head>
-    <title>Company Data</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .centered {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: top;
-            height: 100vh;
+        .hidden {
+            display: none;
+        }
+
+        .input-container {
+            float: left;
+            text-align: center;
+        }
+
+        /* Smaller input field */
+        #ticker {
+            position: relative;
+            text-align: center;
+            width: 100px;
+        }
+
+        .form-control {
+            margin: auto;
+            display: block;
         }
     </style>
 </head>
 <body>
-    <div class="container centered">
-        <h1 class="text-center">Company Data</h1>
-        <form action="/fetch_data" method="post" class="mt-4 text-center">
-            <div class="form-group d-inline">
-                <label for="ticker" class="mr-2">Enter Ticker Symbol:</label>
-                <input type="text" name="ticker" id="ticker" class="form-control form-control-sm mr-2 mb-2" required>
-                <button type="button" class="btn btn-primary btn-sm" onclick="displayData();">Display Data</button>
+<div class="container-fluid">
+    <div class="centered-input">
+        <div class="well input-container">
+            <h4>Stock Informant</h4>
+            <div id="input-container">
+                <p>Enter Ticker: </p>
+                <input type="text" name="ticker" id="ticker" class="form-control form-control-sm" required>
+                <button type="button" id="fetch-button" class="btn btn-primary btn-sm custom-button">Fetch Data</button>
             </div>
-        </form>
-
-        <div class="mt-5" id="company_main_data">
-        </div>
-        <div class="mt-5" id="company_stats">
         </div>
     </div>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        // Function to send a POST request to fetch company data
-        function fetchCompanyData() {
-        var ticker = document.getElementById('ticker').value;
-        var formData = new FormData();
-        formData.append('ticker', ticker);
-
-        fetch('/fetch_data', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json())  // Parse the response as JSON
-        .then(data => {
-            // Update the placeholders in your HTML template
-            var companyData = document.getElementById('company_main_data');
-            companyData.innerHTML = `
-            <div class="container px-4">
-                <div class="row gx-5">
-                    <div class="col">
-                    <div class="p-3 border bg-light">Company Name:</div>
-                    </div>
-                    <div class="col">
-                    <div class="p-3 border bg-light">Current Price:</div>
-                    </div>
+    <div class="container-fluid hidden" id="data-container">
+        <div class="row content">
+            <div class="col-sm-3">
+                <div class="well">
+                    <h4>Company Quick Info</h4>
+                    <p class="title" id="company_name"></p>
+                    <p class="title" id="current_price"></p>
+                    <p class="title" id="shares_outstanding"></p>
+                    <p class="title" id="trailing_eps_ttm"></p>
+                    <p class="title" id="net_income_ttm"></p>
+                    <p class="title" id="eps_growth_next_five_years"></p>
                 </div>
-            </div>                
-            `;
-            var companyName = data.company_name;
-            var currentPrice = data.current_price;
-            companyData.innerHTML += `
-                <h3 class="text-right"><b>${companyName}</b></h3>
-                <h4 class="text-right"><b>$${currentPrice}</b></h4>
-            `;
-        });
-    }
+            </div>
+            <div class="col-sm-3">
+                <div class="well">
+                    <h4>Pages</h4>
+                    <p>100 Million</p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="well">
+                    <h4>Sessions</h4>
+                    <p>10 Million</p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="well">
+                    <h4>Bounce</h4>
+                    <p>30%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            // Handle button click event with jQuery
+            $('#fetch-button').click(function() {
+                // Get the ticker value from the input field
+                var ticker = $('#ticker').val();
 
-        // Function to send a POST request to display the fetched data
-        function displayData() {
-            var ticker = document.getElementById('ticker').value;
-            var formData = new FormData();
-            formData.append('ticker', ticker);
+                // Make an AJAX POST request to fetch data and update the page
+                $.ajax({
+                    method: 'POST',
+                    url: '/fetch_data', // Call the fetch_data function in python
+                    data: {ticker: ticker},
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data) {
+                            // Data is valid, show the data container and update the elements
+                            $('#data-container').removeClass('hidden');
 
-            fetch('/display_data', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Append the fetched data as HTML to the company_data div
-                var companyData = document.getElementById('company_stats');
-                companyData.innerHTML = data;
+                            $('#company_name').html('<b>Company Name: </b>' + data.company_name + ' (' + ticker + ')');
+                            $('#current_price').html('<b>Current Price:</b> $' + data.current_price);
+                            $('#shares_outstanding').html('<b>Shares Outstanding:</b> ' + data.shares_outstanding);
+                            $('#trailing_eps_ttm').html('<b>Trailing EPS (TTM):</b> ' + data.trailing_eps_ttm + '%');
+                            $('#net_income_ttm').html('<b>Net Income (TTM):</b> $' + data.net_income_ttm);
+                            $('#eps_growth_next_five_years').html('<b>EPS Growth Estimate next 5 Years:</b> ' + data.eps_growth_next_five_years + '%');
+                        } else {
+                            alert('Invalid data or an error occurred while fetching data. Please make sure you entered a correct ticker');
+                        }
+                    },
+                    error: function() {
+                        alert('Invalid data or an error occurred while fetching data. Please make sure you entered a correct ticker');
+                    }
+                });
             });
-        }
+        });
     </script>
-
+</div>
 </body>
-</html> -->
+</html>
