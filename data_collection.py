@@ -16,11 +16,11 @@ def get_company_data(ticker):
 
 
     # Cache the api calls, so we dont have to do it multiple times in the dict for specific members
-    income_stmnt = stock_data.income_statement().to_dict(orient="records") # Income statement
-    cash_flow_stmnt = stock_data.cash_flow().to_dict(orient="records") # Cash flow statement
-    balance_sheet = stock_data.balance_sheet(trailing=True).to_dict(orient="records") # Balance sheet TTM
+    income_stmnt = stock_data.income_statement().to_dict(orient="dict") # Income statement
+    cash_flow_stmnt = stock_data.cash_flow().to_dict(orient="dict") # Cash flow statement
+    balance_sheet = stock_data.balance_sheet(trailing=True).to_dict(orient="dict") # Balance sheet TTM
     key_stock_stats = stock_data.key_stats[ticker_sym]  # Some key stats (used for trailing_eps, )
-    eps_data_from_earning_hist = stock_data.earning_history # EPS calc from earning history
+    eps_data_from_earning_hist = stock_data.earning_history.to_dict(orient="dict") # EPS calc from earning history
     eps_growth_trends = stock_data.earnings_trend[ticker_sym]["trend"] # EPS Trends: eps growth is retrieved from this
 
     # Get the preferred dividends
@@ -47,7 +47,7 @@ def get_company_data(ticker):
         "balance_sheet" : balance_sheet, # balance sheet
         "cash_flow_statement" : cash_flow_stmnt, # cash flow statement
         "trailing_eps_ttm" : key_stock_stats["trailingEps"], # TTM EPS
-        "net_income_ttm" : income_stmnt[-1]["NetIncome"], # Trailing Twelve months net income
+        "net_income_ttm" : income_stmnt["NetIncome"][ticker_sym], # Trailing Twelve months net income
         "eps_data_from_earnings_history" : eps_data_from_earning_hist, # EPS data from earnings history
         "eps_growth_trends" : eps_growth_trends, # Trend data for earnings and revenue data
         "preferred_dividends" : preferred_dividends, # Preferred dividends
@@ -78,20 +78,5 @@ def get_company_data(ticker):
 
 company_data = get_company_data('AAPL')
 
-print(company_data['net_income_ttm'])
+print(company_data["income_statement"])
 
-
-class ModelEncoder( JSONEncoder ) :
-    def default( self , obj ) :
-        if isinstance( obj , Model ):
-            return obj.to_json()
-        # Let the base class default method raise the TypeError
-        return json.JSONEncoder.default( self , obj )
-
-class Model( JSONEncoder ) :
-    ....
-    def to_json( self ) :
-        """
-        to_json transforms the Model instance into a JSON string
-        """
-        return jsonpickle.encode( self )
