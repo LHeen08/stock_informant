@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, jsonify, session
-from flask_session import Session
 from data_collection import *
 
 app = Flask(__name__)
-app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
 
-# app.secret_key = 'my_flask_app'  # Replace with your own secret key
+
+app.secret_key = 'my_flask_app'  # Replace with your own secret key
 
 # Initialize a variable to store the fetched data
 fetched_data = None

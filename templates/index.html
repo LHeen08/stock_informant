@@ -7,57 +7,62 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
       /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {height: 550px}   
-    
         .container-fluid {
-            padding-right:15px;
-            padding-left:15px;
+            padding-right:20px;
+            padding-left:20px;
             margin-right:auto;
-            margin-left:auto
+            margin-left:auto;
+            padding-top: 20px;
         }
+    
 
     </style>
   </head>
-<div class="container-fluid">
+  <div class="container-fluid">
     <div class="row content">
-    <div class="col-sm-9">
-        <div class="well">
-          <h4>Stock Informant</h4>
-          <p>Enter Ticker: </p>
-          <input type="text" name="ticker" id="ticker" class="form-control form-control-sm mr-2 mb-2" required>
-          <button type="button" class="btn btn-primary btn-sm mr-2" onclick="fetchCompanyData();">Fetch Data</button>
+        <div class="col-sm-3">
+            <div class="well">
+                <h4>Stock Informant</h4>
+                <p>Enter Ticker: </p>
+                <input type="text" name="ticker" id="ticker" class="form-control form-control-sm mr-2 mb-2" required>
+                <button type="button" class="btn btn-primary btn-sm mr-2" onclick="fetchCompanyData();">Fetch Data</button>
+            </div>
         </div>
-        <div class="row">
-          <div class="col-sm-3">
+        <div class="col-sm-9">
             <div class="well">
-              <h4>Current Price</h4>
-              <p>{price}</p> 
+                <h4>Current Data vs Predicted Price</h4>
+                <p></p>
             </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="well">
-              <h4>Pages</h4>
-              <p>100 Million</p> 
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="well">
-              <h4>Sessions</h4>
-              <p>10 Million</p> 
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="well">
-              <h4>Bounce</h4>
-              <p>30%</p> 
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  
-  </body>
+    <div class="row content">
+        <div class="col-sm-3">
+            <div class="well">
+                <h4>Current Price</h4>
+                <p>{price}</p> 
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="well">
+                <h4>Pages</h4>
+                <p>100 Million</p> 
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="well">
+                <h4>Sessions</h4>
+                <p>10 Million</p> 
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="well">
+                <h4>Bounce</h4>
+                <p>30%</p> 
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>
 
 
