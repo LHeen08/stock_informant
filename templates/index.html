@@ -2,48 +2,54 @@
 <html>
 <head>
     <title>Company Data</title>
+    <!-- Include Bootstrap CSS (you might need to adjust the file path) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Company Data</h1>
-    <form action="/fetch_data" method="post">
-        <label for="ticker">Enter Ticker Symbol:</label>
-        <input type="text" name="ticker" id="ticker" required>
-        <button type="submit">Fetch Data</button>
-    </form>
+    <div class="container">
+        <h1 class="mt-5">Company Data</h1>
+        <form action="/fetch_data" method="post" class="mt-4">
+            <div class="form-group">
+                <label for="ticker">Enter Ticker Symbol:</label>
+                <input type="text" name="ticker" id="ticker" class="form-control" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="fetchCompanyData();">Fetch Data</button>
+            <button type="button" class="btn btn-primary" onclick="displayData();">Display Data</button>
+        </form>
 
-    <div id="company_data">
-        <!-- Company data will be displayed here -->
+        <div class="mt-5" id="company_data">
+            <!-- Company data will be displayed here -->
+        </div>
     </div>
-</body>
-</html>
 
+    <!-- Include Bootstrap JavaScript (you might need to adjust the file path) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to send a POST request to fetch company data
+        function fetchCompanyData() {
+            var ticker = document.getElementById('ticker').value;
+            var formData = new FormData();
+            formData.append('ticker', ticker);
 
-<script>
-    // Function to send a POST request to fetch company data
-    function fetchCompanyData() {
-        var ticker = document.getElementById('ticker').value;
-        var formData = new FormData();
-        formData.append('ticker', ticker);
+            fetch('/fetch_data', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())  // Parse the response as text
+            .then(data => {
+                // Store the fetched data in a global variable
+                window.fetchedData = data;
+            });
+        }
 
-        fetch('/fetch_data', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.text())  // Parse the response as text
-        .then(data => {
+        // Function to display the fetched data
+        function displayData() {
             var companyData = document.getElementById('company_data');
             companyData.innerHTML = '';  // Clear previous content
 
-            // Append the response as HTML to the company_data div
-            companyData.innerHTML = data;
-        });
-    }
-
-    // Attach the form submission event
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting traditionally
-        fetchCompanyData();
-    });
-</script>
-
-
+            // Append the fetched data as HTML to the company_data div
+            companyData.innerHTML = window.fetchedData;
+        }
+    </script>
+</body>
+</html>
