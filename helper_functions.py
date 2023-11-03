@@ -25,18 +25,45 @@ def calc_benjamin_graham_new(eps, pe_no_growth, growth_rate_next_five_yrs, avg_y
 
 
 # Calculate dcf based off last 5 years of cash flow
-def calculate_dcf(data_for_dcf):
+def calculate_dcf_with_obj(stock_obj):
+
+    # Get the last few years of cash flow with their associated date
+    cash_flow_years = [(entry['asOfDate'][:4], entry['FreeCashFlow']) for entry in stock_obj.cash_flow_statement]
+
+    # Calculate the growth rate for each previous year 
+    for i in range(1, len(cash_flow_years)):
+            growth_rate = ((cash_flow_years[i][1] - cash_flow_years[i-1][1]) / cash_flow_years[i-1][1]) * 100
+            cash_flow_years[i] = (*cash_flow_years[i], round(growth_rate, 2))
+
+    total_growth_rate = 0
+    for i in range(1, len(cash_flow_years)):
+         total_growth_rate = total_growth_rate + cash_flow_years[i][2]
+
+    average_growth_rate = total_growth_rate / (len(cash_flow_years) - 1)  # Subtract 1 to exclude the first row
+
+
+    # Calculate DCF values
+    discount_rate = .10
+    perpetual_growth_rate = .025
+    data_for_dcf = {
+         "PreviousCashFlows" : cash_flow_years,
+         "DiscountRate" : discount_rate,
+         "PerpetualGrowthRate" : perpetual_growth_rate,
+         "CashAndCashEquivalents" : stock_obj.balance_sheet[-1]["CashAndCashEquivalents"],
+         "TotalDebt" : stock_obj.balance_sheet[-1]["TotalDebt"],
+         "SharesOutstanding" : stock_obj.shares_outstanding,
+         "ProjectedGrowthRate" : stock_obj.eps_growth_next_five_years
+    }
+
+
     # extract this data for easier usage
     prev_cash_flows = data_for_dcf["PreviousCashFlows"]
     discount_rate = data_for_dcf["DiscountRate"]
     perpetual_growth_rate = data_for_dcf["PerpetualGrowthRate"]
-    cash_and_cash_equiv = data_for_dcf["CashAndCashEquivalentsAndShortTermInvestments"]
+    cash_and_cash_equiv = data_for_dcf["CashAndCashEquivalents"]
     total_debt = data_for_dcf["TotalDebt"]
     shares_outstanding = data_for_dcf["SharesOutstanding"]
     projected_growth_rate = data_for_dcf["ProjectedGrowthRate"]
-
-
-    # Return a dictionary of all my values
     curr_growth_rate = 0
 
     # Given the previous free cash flows, calculate the average growth rate between them
@@ -55,7 +82,7 @@ def calculate_dcf(data_for_dcf):
     # That is, using the most recent FCF number * (1+growth rate projection)
     most_recent_FCF_val = prev_cash_flows[len(prev_cash_flows) - 1][1]
 
-    current_year = prev_cash_flows[len(prev_cash_flows) - 1][0].year
+    current_year = prev_cash_flows[len(prev_cash_flows) - 1][0]
     previous_year_fcf = most_recent_FCF_val # set previous to most recent
 
     dcf_estimated_fcf_dict = {}
@@ -65,8 +92,7 @@ def calculate_dcf(data_for_dcf):
         estimated_fcf = round(previous_year_fcf * ( 1 + projected_growth_rate), 2)
         previous_year_fcf = estimated_fcf
         # print("Year: ", yr + current_year, " Estimated FCF: ", estimated_fcf)
-        dcf_estimated_fcf_dict[yr+current_year] = estimated_fcf 
-    
+        dcf_estimated_fcf_dict[str(yr + int(current_year))] = estimated_fcf    
 
     last_estimated_fcf = dcf_estimated_fcf_dict[max(dcf_estimated_fcf_dict.keys())]    
 
@@ -78,8 +104,8 @@ def calculate_dcf(data_for_dcf):
     # Thats the estimated FFCF / (1+DiscountRate)^year_out
     for future_yr in range(1, 10):
 
-        pv_of_ffcf = round(dcf_estimated_fcf_dict[future_yr+current_year] / ( 1 + discount_rate)**future_yr, 2)
-        dcf_present_value_of_FCFF[future_yr+current_year] = pv_of_ffcf 
+        pv_of_ffcf = round(dcf_estimated_fcf_dict[str(future_yr+ int(current_year))] / ( 1 + discount_rate)**future_yr, 2)
+        dcf_present_value_of_FCFF[str(future_yr+ int(current_year))] = pv_of_ffcf 
     
     terminal_val_pv_ffcf = round(terminal_val / (1 + discount_rate)**(future_yr+1), 2)
 

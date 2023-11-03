@@ -1,102 +1,90 @@
 <!DOCTYPE html>
+
 <head>
     <title>Stock Informant</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="shortcut icon" href="#">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
-        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .container-fluid {
-            padding-right: 20px;
-            padding-left: 20px;
-            margin-right: auto;
-            margin-left: auto;
-            padding-top: 20px;
-        }
-
-        /* Add margin to the button for spacing */
-        .custom-button {
-            margin-top: 10px; /* Adjust as needed */
-        }
-
-        .title {
-            font-weight: bold;
-        }
-
-        .hidden {
+        .hidden{
             display: none;
         }
 
-        .input-container {
-            float: left;
-            text-align: center;
-        }
-
-        /* Smaller input field */
-        #ticker {
-            position: relative;
-            text-align: center;
-            width: 100px;
-        }
-
-        .form-control {
-            margin: auto;
-            display: block;
-        }
     </style>
 </head>
+
 <body>
-<div class="container-fluid">
-    <div class="centered-input">
-        <div class="well input-container">
+    <div class="container-fluid">
+        <div class="mt-2 row d-flex justify-content-center">
             <h4>Stock Informant</h4>
-            <div id="input-container">
-                <p>Enter Ticker: </p>
-                <input type="text" name="ticker" id="ticker" class="form-control form-control-sm" required>
-                <button type="button" id="fetch-button" class="btn btn-primary btn-sm custom-button">Fetch Data</button>
+        </div>
+        <div class="mt-4 mb-4 ml-4 mr-4 row">
+            <div class="col-sm-2 d-flex">
+                <div id="input-container">
+                    <p>Enter Ticker: </p>
+                    <input type="text" name="ticker" id="ticker" class="form-control form-control-sm" required>
+                    <button type="button" id="fetch-button" class="btn btn-primary mt-2">Fetch
+                        Data</button>
+                </div>
+            </div>
+            <div id="company-info-header" class="col-sm hidden">
+                <div>
+                    <h3>Company Name: <span id="company_name"></span></h3>
+                </div>
+                <div>
+                    <h4>Current Price: <span id="current_price"></span></h4>
+                </div>
+            </div>
+            
+        </div>
+        <div id="main-data-row" class="mt-4 mb-4 ml-4 mr-4 row hidden">
+
+            <div class="container-fluid" id="data-container">
+                <div class="row content">
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Company Quick Info</h4>
+                            <p class="title" ></p>
+                            <p class="title" id="shares_outstanding"></p>
+                            <p class="title" id="trailing_eps_ttm"></p>
+                            <p class="title" id="net_income_ttm"></p>
+                            <p class="title" id="eps_growth_next_five_years"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>DCF</h4>
+                            <p id="dcf_value"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Benjamin Graham Evaluation: </h4>
+                            <p>New evaluation: <span id="ben_graham_new"></span></p>
+                            <p>Old evaluation: <span id="ben_graham_old"></span></p>
+                        </div>  
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Multiples Evaluation</h4>
+                            <p>30%</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid hidden" id="data-container">
-        <div class="row content">
-            <div class="col-sm-3">
-                <div class="well">
-                    <h4>Company Quick Info</h4>
-                    <p class="title" id="company_name"></p>
-                    <p class="title" id="current_price"></p>
-                    <p class="title" id="shares_outstanding"></p>
-                    <p class="title" id="trailing_eps_ttm"></p>
-                    <p class="title" id="net_income_ttm"></p>
-                    <p class="title" id="eps_growth_next_five_years"></p>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h4>Pages</h4>
-                    <p>100 Million</p>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h4>Sessions</h4>
-                    <p>10 Million</p>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="well">
-                    <h4>Bounce</h4>
-                    <p>30%</p>
-                </div>
-            </div>
-        </div>
     </div>
+
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+
+
             // Handle button click event with jQuery
-            $('#fetch-button').click(function() {
+            $('#fetch-button').click(function () {
                 // Get the ticker value from the input field
                 var ticker = $('#ticker').val();
 
@@ -104,30 +92,60 @@
                 $.ajax({
                     method: 'POST',
                     url: '/fetch_data', // Call the fetch_data function in python
-                    data: {ticker: ticker},
+                    data: { ticker: ticker },
                     dataType: 'json',
-                    success: function(data) {
+                    success: function (data) {
                         if (data) {
-                            // Data is valid, show the data container and update the elements
-                            $('#data-container').removeClass('hidden');
+                            $('#main-data-row').removeClass('hidden');
+                            $('#company-info-header').removeClass('hidden');
+                        
 
-                            $('#company_name').html('<b>Company Name: </b>' + data.company_name + ' (' + ticker + ')');
-                            $('#current_price').html('<b>Current Price:</b> $' + data.current_price);
-                            $('#shares_outstanding').html('<b>Shares Outstanding:</b> ' + data.shares_outstanding);
+                            $('#company_name').text(data.company_name + ' (' + data.ticker + ')');
+                            $('#current_price').text('$' + data.current_price.toFixed(2));
+                            $('#shares_outstanding').html('<b>Shares Outstanding:</b> ' + data.shares_outstanding.toLocaleString());
                             $('#trailing_eps_ttm').html('<b>Trailing EPS (TTM):</b> ' + data.trailing_eps_ttm + '%');
-                            $('#net_income_ttm').html('<b>Net Income (TTM):</b> $' + data.net_income_ttm);
-                            $('#eps_growth_next_five_years').html('<b>EPS Growth Estimate next 5 Years:</b> ' + data.eps_growth_next_five_years + '%');
+                            $('#net_income_ttm').html('<b>Net Income (TTM):</b> $' + data.net_income_ttm.toLocaleString());
+                            $('#eps_growth_next_five_years').html('<b>EPS Growth Estimate next 5 Years:</b> ' + (data.eps_growth_next_five_years * 100).toFixed(2) + '%');
+
+                            // Put in the defaults for calculations
+                            $('#ben_graham_new').text('$' + data.ben_graham_new)
+                            $('#ben_graham_old').text('$' + data.ben_graham_old)
+
+
+                            $.ajax({
+                                method: 'POST',
+                                url: '/calculate_dcf', // Call the fetch_data function in python
+                                dataType: 'json',
+                                success: function (result) {
+                                    if (data) {
+                                        $('#dcf_value').text('DCF FCF Intrinsic Value: $' + result['DCFVal'].toFixed(2));
+                                    } else {
+                                        alert('Invalid data or an error occurred while calculating DCF.');
+                                    }
+                                },
+                                error: function () {
+                                    alert('Invalid data or an error occurred while calculating DCF.');
+                                }
+                            });
+
                         } else {
                             alert('Invalid data or an error occurred while fetching data. Please make sure you entered a correct ticker');
                         }
                     },
-                    error: function() {
+                    error: function () {
                         alert('Invalid data or an error occurred while fetching data. Please make sure you entered a correct ticker');
                     }
                 });
             });
         });
     </script>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

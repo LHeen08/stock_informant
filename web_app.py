@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request, jsonify, session
 from data_collection import *
+from helper_functions import *
 
 app = Flask(__name__)
 
 
 app.secret_key = 'my_flask_app'  # Replace with your own secret key
 
-# Initialize a variable to store the fetched data
+# Initialize a variable to store the fetched data ( this is the acutal object of the stock )
 fetched_data = None
 
 # Define a route to render the HTML page
@@ -30,6 +31,8 @@ def fetch_data():
             'trailing_eps_ttm' : fetched_data.trailing_eps_ttm,
             'eps_growth_next_five_years' : fetched_data.eps_growth_next_five_years,
             'net_income_ttm' : fetched_data.net_income_ttm,
+            'ben_graham_new' : fetched_data.ben_graham_new,
+            'ben_graham_old' : fetched_data.ben_graham_old,
         }
     else:
         response_data = None
@@ -37,22 +40,18 @@ def fetch_data():
     return response_data
 
 
-@app.route('/display_data', methods=['POST'])
-def display_data():  
+@app.route('/calculate_dcf', methods=['POST'])
+def calculate_dcf():
     global fetched_data
-    response_html = f"<p>Shares Outstanding: {fetched_data.shares_outstanding}</p>"
-    response_html += f"<p>Trailing EPS (TTM): {fetched_data.trailing_eps_ttm}%</p>"
-    response_html += f"<p>Net Income (TTM): ${fetched_data.net_income_ttm:,.2f}</p>"
-    response_html += f"<p>EPS Growth Estimate next 5 Years: {fetched_data.eps_growth_next_five_years * 100:.2f}%</p>"
-    
-    return response_html
 
+    dcf_response = calculate_dcf_with_obj(fetched_data)
 
+    return dcf_response
 
 if __name__ == '__main__':
     # For VM
-    # app.run(debug=True, host='10.0.2.15', port='5000')
-    app.run(debug=True, host='127.0.0.1', port='5000')
+    app.run(debug=True, host='10.0.2.15', port='5000')
+    # app.run(debug=True, host='127.0.0.1', port='5000')
 
 
 
