@@ -9,7 +9,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
-        form.ticker-entry *{
+        form.ticker-entry * {
             box-sizing: border-box;
         }
 
@@ -17,10 +17,50 @@
             margin: auto;
             width: 55%;
         }
+
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            display: none;
+            /* Initially hidden */
+        }
+
+        .loader {
+            position: relative;
+            top: 25%;
+            margin: auto;
+            justify-content: center;
+            align-items: center;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
 <body>
+
     <div class="container-fluid">
         <div class="mt-5 row d-flex justify-content-center">
             <h4>Stock Informant</h4>
@@ -30,19 +70,35 @@
                 <div id="input-container" class="text-center align-items-center">
                     <p>Enter Ticker: </p>
                     <form class="ticker-entry">
-                    <input type="text" name="ticker" id="ticker" class="form-control form-control-sm text-center" required>
-                    <button type="button" id="fetch-button" class="btn btn-primary mt-2">Fetch
-                        Data</button>
+                        <input type="text" name="ticker" id="ticker" class="form-control form-control-sm text-center"
+                            required>
+                        <button type="button" id="fetch-button" class="btn btn-primary mt-2">Fetch
+                            Data</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="loader-container" id="loader-container">
+        <div class="loader"></div>
+    </div>
     <script>
-        $(document).ready(function () {
-            // Handle button click event with jQuery
-            $('#fetch-button').click(function () {
+        function showLoader() {
+            $("#loader-container").show();
+        }
+
+        function hideLoader() {
+            $("#loader-container").hide();
+        }
+
+
+        function fetchData() {
+            // Show the loader when fetching data
+            showLoader();
+
+            // Simulate a delay (you can replace this with your actual AJAX call)
+            setTimeout(function () {
                 // Get the ticker value from the input field
                 var ticker = $('#ticker').val();
 
@@ -53,22 +109,45 @@
                     data: { ticker: ticker },
                     dataType: 'json',
                     success: function (data) {
-                        if('success' in data)
-                        {
+                        if ('success' in data) {
                             console.log("Successful response from /fetch_data");
+
+                            // Hide the loader when data is fetched
+                            hideLoader();
+                            
                             // Route to main_page using flask
                             window.location.href = '/main_page';
                         }
-                        else
-                        {
-                            alert(data.error)
+                        else {
+                            hideLoader();
+                            alert(data.error);
                         }
                     },
                     error: function () {
+                        hideLoader();
                         alert('Invalid data or an error occurred while fetching data. Please make sure you entered a correct ticker');
+
+
                     }
+                    
                 });
+            }, 2000); // Simulated delay of 2 seconds
+        }
+
+        $(document).ready(function () {
+            // Handle button click event with jQuery
+            $('#fetch-button').click(fetchData);
+
+            // Handle enter event with jQuery
+            $('#ticker').on("keydown", function (e) {
+                if (e.key == "Enter") {
+                    console.log("Handling enter event with jQuery: " + e.key);
+                    fetchData();
+                    event.preventDefault();
+                    return false;
+                }
             });
+
         });
     </script>
 

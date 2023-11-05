@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 app.secret_key = 'my_flask_app'  # Replace with your own secret key
 
-# Initialize a variable to store the fetched data ( this is the acutal object of the stock )
+# Initialize a variable to store the fetched data ( this is the actual object of the stock )
 fetched_company_data = None
 
 # Define a route to render the HTML page
