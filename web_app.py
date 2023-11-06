@@ -49,6 +49,7 @@ def display_main_page():
 @app.route('/calculate_dcf', methods=['POST'])
 def calculate_dcf():
     global fetched_company_data
+    # TODO: Need to take into account a margin of safety
 
     #  Get the discount rate, growth rate and terminal growth rate from the user
 
