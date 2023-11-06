@@ -4,11 +4,19 @@ import json
 
 from helper_functions import calculate_dcf_with_obj
 
+
+# What data is needed for every calculation
+# Peter Lynch evaluation: Notes Earnings growth rate * earnings
+
+
+
+
+
 class CompanyData:
     def __init__(self, ticker):
         self.ticker = str(ticker).upper()
         try:
-            stock_data = Ticker(ticker, validate=True)
+            stock_data = Ticker(ticker, validate=True, progress=True)
             treasury_data = Ticker('^TYX').summary_detail['^TYX']
 
         except Exception as exc:

@@ -1,0 +1,1025 @@
+{
+    "assetProfile": {
+        "address1": "One Apple Park Way",
+        "city": "Cupertino",
+        "state": "CA",
+        "zip": "95014",
+        "country": "United States",
+        "phone": "408 996 1010",
+        "website": "https://www.apple.com",
+        "industry": "Consumer Electronics",
+        "industryKey": "consumer-electronics",
+        "industryDisp": "Consumer Electronics",
+        "sector": "Technology",
+        "sectorKey": "technology",
+        "sectorDisp": "Technology",
+        "longBusinessSummary": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, and HomePod. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts. In addition, the company offers various services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and resellers. Apple Inc. was founded in 1976 and is headquartered in Cupertino, California.",
+        "fullTimeEmployees": 161000,
+        "companyOfficers": [
+            {
+                "maxAge": 1,
+                "name": "Mr. Timothy D. Cook",
+                "age": 61,
+                "title": "CEO & Director",
+                "yearBorn": 1961,
+                "fiscalYear": 2022,
+                "totalPay": 16425933,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            },
+            {
+                "maxAge": 1,
+                "name": "Mr. Luca  Maestri",
+                "age": 59,
+                "title": "CFO & Senior VP",
+                "yearBorn": 1963,
+                "fiscalYear": 2022,
+                "totalPay": 5019783,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            },
+            {
+                "maxAge": 1,
+                "name": "Mr. Jeffrey E. Williams",
+                "age": 58,
+                "title": "Chief Operating Officer",
+                "yearBorn": 1964,
+                "fiscalYear": 2022,
+                "totalPay": 5018337,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            },
+            {
+                "maxAge": 1,
+                "name": "Ms. Katherine L. Adams",
+                "age": 58,
+                "title": "Senior VP, General Counsel & Secretary",
+                "yearBorn": 1964,
+                "fiscalYear": 2022,
+                "totalPay": 5015208,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            },
+            {
+                "maxAge": 1,
+                "name": "Ms. Deirdre  O'Brien",
+                "age": 55,
+                "title": "Senior Vice President of Retail",
+                "yearBorn": 1967,
+                "fiscalYear": 2022,
+                "totalPay": 5019783,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            },
+            {
+                "maxAge": 1,
+                "name": "Mr. Chris  Kondo",
+                "title": "Senior Director of Corporate Accounting",
+                "fiscalYear": 2022,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            },
+            {
+                "maxAge": 1,
+                "name": "Mr. James  Wilson",
+                "title": "Chief Technology Officer",
+                "fiscalYear": 2022,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            },
+            {
+                "maxAge": 1,
+                "name": "Ms. Mary  Demby",
+                "title": "Chief Information Officer",
+                "fiscalYear": 2022,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            },
+            {
+                "maxAge": 1,
+                "name": "Ms. Nancy  Paxton",
+                "title": "Senior Director of Investor Relations & Treasury",
+                "fiscalYear": 2022,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            },
+            {
+                "maxAge": 1,
+                "name": "Mr. Greg  Joswiak",
+                "title": "Senior Vice President of Worldwide Marketing",
+                "fiscalYear": 2022,
+                "exercisedValue": 0,
+                "unexercisedValue": 0
+            }
+        ],
+        "auditRisk": 5,
+        "boardRisk": 1,
+        "compensationRisk": 5,
+        "shareHolderRightsRisk": 1,
+        "overallRisk": 1,
+        "governanceEpochDate": "2023-10-31 20:00:00",
+        "compensationAsOfEpochDate": "2022-12-30 19:00:00",
+        "maxAge": 86400
+    },
+    "recommendationTrend": {
+        "trend": [
+            {
+                "period": "0m",
+                "strongBuy": 11,
+                "buy": 21,
+                "hold": 6,
+                "sell": 0,
+                "strongSell": 0
+            },
+            {
+                "period": "-1m",
+                "strongBuy": 11,
+                "buy": 20,
+                "hold": 10,
+                "sell": 1,
+                "strongSell": 0
+            },
+            {
+                "period": "-2m",
+                "strongBuy": 11,
+                "buy": 20,
+                "hold": 11,
+                "sell": 1,
+                "strongSell": 0
+            },
+            {
+                "period": "-3m",
+                "strongBuy": 10,
+                "buy": 24,
+                "hold": 7,
+                "sell": 1,
+                "strongSell": 0
+            }
+        ],
+        "maxAge": 86400
+    },
+    "cashflowStatementHistory": {
+        "cashflowStatements": [
+            {
+                "maxAge": 1,
+                "endDate": "2022-09-24",
+                "netIncome": 99803000000,
+                "depreciation": 11104000000,
+                "changeToNetincome": 10044000000,
+                "changeToAccountReceivables": -1823000000,
+                "changeToLiabilities": 9926000000,
+                "changeToInventory": 1484000000,
+                "changeToOperatingActivities": -8387000000,
+                "totalCashFromOperatingActivities": 122151000000,
+                "capitalExpenditures": -10708000000,
+                "investments": -9560000000,
+                "otherCashflowsFromInvestingActivities": -1780000000,
+                "totalCashflowsFromInvestingActivities": -22354000000,
+                "dividendsPaid": -14841000000,
+                "netBorrowings": -123000000,
+                "otherCashflowsFromFinancingActivities": -160000000,
+                "totalCashFromFinancingActivities": -110749000000,
+                "changeInCash": -10952000000,
+                "repurchaseOfStock": -95625000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2021-09-25",
+                "netIncome": 94680000000,
+                "depreciation": 11284000000,
+                "changeToNetincome": 2985000000,
+                "changeToAccountReceivables": -10125000000,
+                "changeToLiabilities": 14002000000,
+                "changeToInventory": -2642000000,
+                "changeToOperatingActivities": -6146000000,
+                "totalCashFromOperatingActivities": 104038000000,
+                "capitalExpenditures": -11085000000,
+                "investments": -3075000000,
+                "otherCashflowsFromInvestingActivities": -352000000,
+                "totalCashflowsFromInvestingActivities": -14545000000,
+                "dividendsPaid": -14467000000,
+                "netBorrowings": 12665000000,
+                "otherCashflowsFromFinancingActivities": 976000000,
+                "totalCashFromFinancingActivities": -93353000000,
+                "changeInCash": -3860000000,
+                "repurchaseOfStock": -92527000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2020-09-26",
+                "netIncome": 57411000000,
+                "depreciation": 11056000000,
+                "changeToNetincome": 6517000000,
+                "changeToAccountReceivables": 6917000000,
+                "changeToLiabilities": -1981000000,
+                "changeToInventory": -127000000,
+                "changeToOperatingActivities": 881000000,
+                "totalCashFromOperatingActivities": 80674000000,
+                "capitalExpenditures": -7309000000,
+                "investments": 5453000000,
+                "otherCashflowsFromInvestingActivities": -909000000,
+                "totalCashflowsFromInvestingActivities": -4289000000,
+                "dividendsPaid": -14081000000,
+                "netBorrowings": 2499000000,
+                "otherCashflowsFromFinancingActivities": 754000000,
+                "totalCashFromFinancingActivities": -86820000000,
+                "changeInCash": -10435000000,
+                "repurchaseOfStock": -75992000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2019-09-28",
+                "netIncome": 55256000000,
+                "depreciation": 12547000000,
+                "changeToNetincome": 5076000000,
+                "changeToAccountReceivables": 245000000,
+                "changeToLiabilities": -2548000000,
+                "changeToInventory": -289000000,
+                "changeToOperatingActivities": -896000000,
+                "totalCashFromOperatingActivities": 69391000000,
+                "capitalExpenditures": -10495000000,
+                "investments": 58093000000,
+                "otherCashflowsFromInvestingActivities": -1078000000,
+                "totalCashflowsFromInvestingActivities": 45896000000,
+                "dividendsPaid": -14119000000,
+                "netBorrowings": -7819000000,
+                "otherCashflowsFromFinancingActivities": -105000000,
+                "totalCashFromFinancingActivities": -90976000000,
+                "changeInCash": 24311000000,
+                "repurchaseOfStock": -69714000000,
+                "issuanceOfStock": 781000000
+            }
+        ],
+        "maxAge": 86400
+    },
+    "balanceSheetHistoryQuarterly": {
+        "balanceSheetStatements": [
+            {
+                "maxAge": 1,
+                "endDate": "2023-07-01",
+                "cash": 28408000000,
+                "shortTermInvestments": 34074000000,
+                "netReceivables": 39186000000,
+                "inventory": 7351000000,
+                "otherCurrentAssets": 13640000000,
+                "totalCurrentAssets": 122659000000,
+                "longTermInvestments": 104061000000,
+                "propertyPlantEquipment": 43550000000,
+                "otherAssets": 64768000000,
+                "totalAssets": 335038000000,
+                "accountsPayable": 46699000000,
+                "shortLongTermDebt": 7216000000,
+                "otherCurrentLiab": 67055000000,
+                "longTermDebt": 98071000000,
+                "otherLiab": 51730000000,
+                "totalCurrentLiabilities": 124963000000,
+                "totalLiab": 274764000000,
+                "commonStock": 70667000000,
+                "retainedEarnings": 1408000000,
+                "treasuryStock": -11801000000,
+                "otherStockholderEquity": -11801000000,
+                "totalStockholderEquity": 60274000000,
+                "netTangibleAssets": 60274000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2023-04-01"
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2022-12-31",
+                "cash": 20535000000,
+                "shortTermInvestments": 30820000000,
+                "netReceivables": 54180000000,
+                "inventory": 6820000000,
+                "otherCurrentAssets": 16422000000,
+                "totalCurrentAssets": 128777000000,
+                "longTermInvestments": 114095000000,
+                "propertyPlantEquipment": 42951000000,
+                "otherAssets": 60924000000,
+                "totalAssets": 346747000000,
+                "accountsPayable": 57918000000,
+                "shortLongTermDebt": 9740000000,
+                "otherCurrentLiab": 67885000000,
+                "longTermDebt": 99627000000,
+                "otherLiab": 53107000000,
+                "totalCurrentLiabilities": 137286000000,
+                "totalLiab": 290020000000,
+                "commonStock": 66399000000,
+                "retainedEarnings": 3240000000,
+                "treasuryStock": -12912000000,
+                "otherStockholderEquity": -12912000000,
+                "totalStockholderEquity": 56727000000,
+                "netTangibleAssets": 56727000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2022-09-24",
+                "cash": 23646000000,
+                "shortTermInvestments": 24658000000,
+                "netReceivables": 60932000000,
+                "inventory": 4946000000,
+                "otherCurrentAssets": 21223000000,
+                "totalCurrentAssets": 135405000000,
+                "longTermInvestments": 120805000000,
+                "propertyPlantEquipment": 52534000000,
+                "otherAssets": 44011000000,
+                "totalAssets": 352755000000,
+                "accountsPayable": 64115000000,
+                "shortLongTermDebt": 11128000000,
+                "otherCurrentLiab": 67094000000,
+                "longTermDebt": 98959000000,
+                "otherLiab": 38394000000,
+                "totalCurrentLiabilities": 153982000000,
+                "totalLiab": 302083000000,
+                "commonStock": 64849000000,
+                "retainedEarnings": -3068000000,
+                "treasuryStock": -11109000000,
+                "otherStockholderEquity": -11109000000,
+                "totalStockholderEquity": 50672000000,
+                "netTangibleAssets": 50672000000
+            }
+        ],
+        "maxAge": 86400
+    },
+    "earningsHistory": {
+        "history": [
+            {
+                "maxAge": 1,
+                "epsActual": 1.29,
+                "epsEstimate": 1.27,
+                "epsDifference": 0.02,
+                "surprisePercent": 0.016,
+                "quarter": "2022-09-30",
+                "period": "-4q"
+            },
+            {
+                "maxAge": 1,
+                "epsActual": 1.88,
+                "epsEstimate": 1.94,
+                "epsDifference": -0.06,
+                "surprisePercent": -0.031,
+                "quarter": "2022-12-31",
+                "period": "-3q"
+            },
+            {
+                "maxAge": 1,
+                "epsActual": 1.52,
+                "epsEstimate": 1.43,
+                "epsDifference": 0.09,
+                "surprisePercent": 0.063,
+                "quarter": "2023-03-31",
+                "period": "-2q"
+            },
+            {
+                "maxAge": 1,
+                "epsActual": 1.26,
+                "epsEstimate": 1.19,
+                "epsDifference": 0.07,
+                "surprisePercent": 0.059,
+                "quarter": "2023-06-30",
+                "period": "-1q"
+            }
+        ],
+        "maxAge": 86400
+    },
+    "defaultKeyStatistics": {
+        "maxAge": 1,
+        "priceHint": 2,
+        "enterpriseValue": 2809768706048,
+        "forwardPE": 28.537964,
+        "profitMargins": 0.25305998,
+        "floatShares": 15535332918,
+        "sharesOutstanding": 15634199552,
+        "sharesShort": 93026130,
+        "sharesShortPriorMonth": 107325921,
+        "sharesShortPreviousMonthDate": "2023-09-14 20:00:00",
+        "dateShortInterest": "2023-10-12 20:00:00",
+        "sharesPercentSharesOut": 0.006,
+        "heldPercentInsiders": 0.00071999995,
+        "heldPercentInstitutions": 0.61317,
+        "shortRatio": 1.6,
+        "shortPercentOfFloat": 0.006,
+        "beta": 1.308,
+        "impliedSharesOutstanding": 15634199552,
+        "category": null,
+        "bookValue": 3.997,
+        "priceToBook": 44.195644,
+        "fundFamily": null,
+        "legalType": null,
+        "lastFiscalYearEnd": "2023-09-29 20:00:00",
+        "nextFiscalYearEnd": "2024-09-29 20:00:00",
+        "mostRecentQuarter": "2023-09-29 20:00:00",
+        "earningsQuarterlyGrowth": 0.108,
+        "netIncomeToCommon": 96995000320,
+        "trailingEps": 6.13,
+        "forwardEps": 6.19,
+        "pegRatio": 4.33,
+        "lastSplitFactor": "4:1",
+        "lastSplitDate": "2020-08-30 20:00:00",
+        "enterpriseToRevenue": 7.331,
+        "enterpriseToEbitda": 22.332,
+        "52WeekChange": 0.27159512,
+        "SandP52WeekChange": 0.1448828,
+        "lastDividendValue": 0.24,
+        "lastDividendDate": 1691712000
+    },
+    "industryTrend": {
+        "maxAge": 1,
+        "symbol": null,
+        "estimates": []
+    },
+    "incomeStatementHistory": {
+        "incomeStatementHistory": [
+            {
+                "maxAge": 1,
+                "endDate": "2022-09-24",
+                "totalRevenue": 394328000000,
+                "costOfRevenue": 223546000000,
+                "grossProfit": 170782000000,
+                "researchDevelopment": 26251000000,
+                "sellingGeneralAdministrative": 25094000000,
+                "nonRecurring": {},
+                "otherOperatingExpenses": {},
+                "totalOperatingExpenses": 274891000000,
+                "operatingIncome": 119437000000,
+                "totalOtherIncomeExpenseNet": -334000000,
+                "ebit": 119437000000,
+                "interestExpense": -2931000000,
+                "incomeBeforeTax": 119103000000,
+                "incomeTaxExpense": 19300000000,
+                "minorityInterest": {},
+                "netIncomeFromContinuingOps": 99803000000,
+                "discontinuedOperations": {},
+                "extraordinaryItems": {},
+                "effectOfAccountingCharges": {},
+                "otherItems": {},
+                "netIncome": 99803000000,
+                "netIncomeApplicableToCommonShares": 99803000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2021-09-25",
+                "totalRevenue": 365817000000,
+                "costOfRevenue": 212981000000,
+                "grossProfit": 152836000000,
+                "researchDevelopment": 21914000000,
+                "sellingGeneralAdministrative": 21973000000,
+                "nonRecurring": {},
+                "otherOperatingExpenses": {},
+                "totalOperatingExpenses": 256868000000,
+                "operatingIncome": 108949000000,
+                "totalOtherIncomeExpenseNet": 258000000,
+                "ebit": 108949000000,
+                "interestExpense": -2645000000,
+                "incomeBeforeTax": 109207000000,
+                "incomeTaxExpense": 14527000000,
+                "minorityInterest": {},
+                "netIncomeFromContinuingOps": 94680000000,
+                "discontinuedOperations": {},
+                "extraordinaryItems": {},
+                "effectOfAccountingCharges": {},
+                "otherItems": {},
+                "netIncome": 94680000000,
+                "netIncomeApplicableToCommonShares": 94680000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2020-09-26",
+                "totalRevenue": 274515000000,
+                "costOfRevenue": 169559000000,
+                "grossProfit": 104956000000,
+                "researchDevelopment": 18752000000,
+                "sellingGeneralAdministrative": 19916000000,
+                "nonRecurring": {},
+                "otherOperatingExpenses": {},
+                "totalOperatingExpenses": 208227000000,
+                "operatingIncome": 66288000000,
+                "totalOtherIncomeExpenseNet": 803000000,
+                "ebit": 66288000000,
+                "interestExpense": -2873000000,
+                "incomeBeforeTax": 67091000000,
+                "incomeTaxExpense": 9680000000,
+                "minorityInterest": {},
+                "netIncomeFromContinuingOps": 57411000000,
+                "discontinuedOperations": {},
+                "extraordinaryItems": {},
+                "effectOfAccountingCharges": {},
+                "otherItems": {},
+                "netIncome": 57411000000,
+                "netIncomeApplicableToCommonShares": 57411000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2019-09-28",
+                "totalRevenue": 260174000000,
+                "costOfRevenue": 161782000000,
+                "grossProfit": 98392000000,
+                "researchDevelopment": 16217000000,
+                "sellingGeneralAdministrative": 18245000000,
+                "nonRecurring": {},
+                "otherOperatingExpenses": {},
+                "totalOperatingExpenses": 196244000000,
+                "operatingIncome": 63930000000,
+                "totalOtherIncomeExpenseNet": 1807000000,
+                "ebit": 63930000000,
+                "interestExpense": -3576000000,
+                "incomeBeforeTax": 65737000000,
+                "incomeTaxExpense": 10481000000,
+                "minorityInterest": {},
+                "netIncomeFromContinuingOps": 55256000000,
+                "discontinuedOperations": {},
+                "extraordinaryItems": {},
+                "effectOfAccountingCharges": {},
+                "otherItems": {},
+                "netIncome": 55256000000,
+                "netIncomeApplicableToCommonShares": 55256000000
+            }
+        ],
+        "maxAge": 86400
+    },
+    "sectorTrend": {
+        "maxAge": 1,
+        "symbol": null,
+        "estimates": []
+    },
+    "earnings": {
+        "maxAge": 86400,
+        "earningsChart": {
+            "quarterly": [
+                {
+                    "date": "3Q2022",
+                    "actual": 1.29,
+                    "estimate": 1.27
+                },
+                {
+                    "date": "4Q2022",
+                    "actual": 1.88,
+                    "estimate": 1.94
+                },
+                {
+                    "date": "1Q2023",
+                    "actual": 1.52,
+                    "estimate": 1.43
+                },
+                {
+                    "date": "2Q2023",
+                    "actual": 1.26,
+                    "estimate": 1.19
+                }
+            ],
+            "currentQuarterEstimate": 1.31,
+            "currentQuarterEstimateDate": "3Q",
+            "currentQuarterEstimateYear": 2023,
+            "earningsDate": [
+                "2024-01-31 05:59:S",
+                "2024-02-05 07:00:S"
+            ]
+        },
+        "financialsChart": {
+            "yearly": [
+                {
+                    "date": 2019,
+                    "revenue": 260174000000,
+                    "earnings": 55256000000
+                },
+                {
+                    "date": 2020,
+                    "revenue": 274515000000,
+                    "earnings": 57411000000
+                },
+                {
+                    "date": 2021,
+                    "revenue": 365817000000,
+                    "earnings": 94680000000
+                },
+                {
+                    "date": 2022,
+                    "revenue": 394328000000,
+                    "earnings": 99803000000
+                }
+            ],
+            "quarterly": [
+                {
+                    "date": "3Q2022",
+                    "revenue": 90146000000,
+                    "earnings": 20721000000
+                },
+                {
+                    "date": "4Q2022",
+                    "revenue": 117154000000,
+                    "earnings": 29998000000
+                },
+                {
+                    "date": "2Q2023",
+                    "revenue": 0,
+                    "earnings": 0
+                },
+                {
+                    "date": "3Q2023",
+                    "revenue": 81797000000,
+                    "earnings": 19881000000
+                }
+            ]
+        },
+        "financialCurrency": "USD"
+    },
+    "price": {
+        "maxAge": 1,
+        "preMarketSource": "FREE_REALTIME",
+        "postMarketChangePercent": 2.8332199e-05,
+        "postMarketChange": 0.00500488,
+        "postMarketTime": "2023-11-03 19:59:57",
+        "postMarketPrice": 176.655,
+        "postMarketSource": "FREE_REALTIME",
+        "regularMarketChangePercent": -0.005181131,
+        "regularMarketChange": -0.9200134,
+        "regularMarketTime": "2023-11-03 16:00:00",
+        "priceHint": 2,
+        "regularMarketPrice": 176.65,
+        "regularMarketDayHigh": 176.82,
+        "regularMarketDayLow": 173.35,
+        "regularMarketVolume": 79829246,
+        "averageDailyVolume10Day": 59608850,
+        "averageDailyVolume3Month": 59127807,
+        "regularMarketPreviousClose": 177.57,
+        "regularMarketSource": "FREE_REALTIME",
+        "regularMarketOpen": 174.24,
+        "exchange": "NMS",
+        "exchangeName": "NasdaqGS",
+        "exchangeDataDelayedBy": 0,
+        "marketState": "CLOSED",
+        "quoteType": "EQUITY",
+        "symbol": "AAPL",
+        "underlyingSymbol": null,
+        "shortName": "Apple Inc.",
+        "longName": "Apple Inc.",
+        "currency": "USD",
+        "quoteSourceName": "Nasdaq Real Time Price",
+        "currencySymbol": "$",
+        "fromCurrency": null,
+        "toCurrency": null,
+        "lastMarket": null,
+        "marketCap": 2761781149696
+    },
+    "balanceSheetHistory": {
+        "balanceSheetStatements": [
+            {
+                "maxAge": 1,
+                "endDate": "2022-09-24",
+                "cash": 23646000000,
+                "shortTermInvestments": 24658000000,
+                "netReceivables": 60932000000,
+                "inventory": 4946000000,
+                "otherCurrentAssets": 21223000000,
+                "totalCurrentAssets": 135405000000,
+                "longTermInvestments": 120805000000,
+                "propertyPlantEquipment": 52534000000,
+                "otherAssets": 44011000000,
+                "totalAssets": 352755000000,
+                "accountsPayable": 64115000000,
+                "shortLongTermDebt": 11128000000,
+                "otherCurrentLiab": 67094000000,
+                "longTermDebt": 98959000000,
+                "otherLiab": 38394000000,
+                "totalCurrentLiabilities": 153982000000,
+                "totalLiab": 302083000000,
+                "commonStock": 64849000000,
+                "retainedEarnings": -3068000000,
+                "treasuryStock": -11109000000,
+                "otherStockholderEquity": -11109000000,
+                "totalStockholderEquity": 50672000000,
+                "netTangibleAssets": 50672000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2021-09-25",
+                "cash": 34940000000,
+                "shortTermInvestments": 27699000000,
+                "netReceivables": 51506000000,
+                "inventory": 6580000000,
+                "otherCurrentAssets": 14111000000,
+                "totalCurrentAssets": 134836000000,
+                "longTermInvestments": 127877000000,
+                "propertyPlantEquipment": 49527000000,
+                "otherAssets": 38762000000,
+                "totalAssets": 351002000000,
+                "accountsPayable": 54763000000,
+                "shortLongTermDebt": 9613000000,
+                "otherCurrentLiab": 53577000000,
+                "longTermDebt": 109106000000,
+                "otherLiab": 43050000000,
+                "totalCurrentLiabilities": 125481000000,
+                "totalLiab": 287912000000,
+                "commonStock": 57365000000,
+                "retainedEarnings": 5562000000,
+                "treasuryStock": 163000000,
+                "otherStockholderEquity": 163000000,
+                "totalStockholderEquity": 63090000000,
+                "netTangibleAssets": 63090000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2020-09-26",
+                "cash": 38016000000,
+                "shortTermInvestments": 52927000000,
+                "netReceivables": 37445000000,
+                "inventory": 4061000000,
+                "otherCurrentAssets": 11264000000,
+                "totalCurrentAssets": 143713000000,
+                "longTermInvestments": 100887000000,
+                "propertyPlantEquipment": 45336000000,
+                "otherAssets": 33952000000,
+                "totalAssets": 323888000000,
+                "accountsPayable": 42296000000,
+                "shortLongTermDebt": 8773000000,
+                "otherCurrentLiab": 47867000000,
+                "longTermDebt": 98667000000,
+                "otherLiab": 46108000000,
+                "totalCurrentLiabilities": 105392000000,
+                "totalLiab": 258549000000,
+                "commonStock": 50779000000,
+                "retainedEarnings": 14966000000,
+                "treasuryStock": -406000000,
+                "otherStockholderEquity": -406000000,
+                "totalStockholderEquity": 65339000000,
+                "netTangibleAssets": 65339000000
+            },
+            {
+                "maxAge": 1,
+                "endDate": "2019-09-28",
+                "cash": 48844000000,
+                "shortTermInvestments": 51713000000,
+                "netReceivables": 45804000000,
+                "inventory": 4106000000,
+                "otherCurrentAssets": 12352000000,
+                "totalCurrentAssets": 162819000000,
+                "longTermInvestments": 105341000000,
+                "propertyPlantEquipment": 37378000000,
+                "otherAssets": 32978000000,
+                "totalAssets": 338516000000,
+                "accountsPayable": 46236000000,
+                "shortLongTermDebt": 10260000000,
+                "otherCurrentLiab": 43242000000,
+                "longTermDebt": 91807000000,
+                "otherLiab": 50503000000,
+                "totalCurrentLiabilities": 105718000000,
+                "totalLiab": 248028000000,
+                "commonStock": 45174000000,
+                "retainedEarnings": 45898000000,
+                "treasuryStock": -584000000,
+                "otherStockholderEquity": -584000000,
+                "totalStockholderEquity": 90488000000,
+                "netTangibleAssets": 90488000000
+            }
+        ],
+        "maxAge": 86400
+    },
+    "earningsTrend": {
+        "trend": [
+            {
+                "maxAge": 1,
+                "period": "0q",
+                "endDate": "2023-09-30",
+                "growth": 0.016,
+                "earningsEstimate": {
+                    "avg": 1.31,
+                    "low": 1.27,
+                    "high": 1.37,
+                    "yearAgoEps": 1.29,
+                    "numberOfAnalysts": 28,
+                    "growth": 0.016
+                },
+                "revenueEstimate": {
+                    "avg": 84175800000,
+                    "low": 82803200000,
+                    "high": 86888400000,
+                    "numberOfAnalysts": 24,
+                    "yearAgoRevenue": 90146000000,
+                    "growth": -0.066
+                },
+                "epsTrend": {
+                    "current": 1.31,
+                    "7daysAgo": 1.39,
+                    "30daysAgo": 1.3,
+                    "60daysAgo": 1.39,
+                    "90daysAgo": 1.22
+                },
+                "epsRevisions": {
+                    "upLast7days": 0,
+                    "upLast30days": 0,
+                    "downLast30days": 0,
+                    "downLast90days": {}
+                }
+            },
+            {
+                "maxAge": 1,
+                "period": "+1q",
+                "endDate": "2023-12-31",
+                "growth": 0.053000003,
+                "earningsEstimate": {
+                    "avg": 1.98,
+                    "low": 1.62,
+                    "high": 2.27,
+                    "yearAgoEps": 1.88,
+                    "numberOfAnalysts": 25,
+                    "growth": 0.053000003
+                },
+                "revenueEstimate": {
+                    "avg": 116370000000,
+                    "low": 110210000000,
+                    "high": 125380000000,
+                    "numberOfAnalysts": 23,
+                    "yearAgoRevenue": {},
+                    "growth": {}
+                },
+                "epsTrend": {
+                    "current": 1.98,
+                    "7daysAgo": 2.11,
+                    "30daysAgo": 1.98,
+                    "60daysAgo": 2.12,
+                    "90daysAgo": 1.93
+                },
+                "epsRevisions": {
+                    "upLast7days": 0,
+                    "upLast30days": 1,
+                    "downLast30days": 1,
+                    "downLast90days": {}
+                }
+            },
+            {
+                "maxAge": 1,
+                "period": "0y",
+                "endDate": "2023-09-30",
+                "growth": -0.064,
+                "earningsEstimate": {
+                    "avg": 5.72,
+                    "low": 5.49,
+                    "high": 5.82,
+                    "yearAgoEps": 6.11,
+                    "numberOfAnalysts": 36,
+                    "growth": -0.064
+                },
+                "revenueEstimate": {
+                    "avg": 360831000000,
+                    "low": 343999000000,
+                    "high": 363959000000,
+                    "numberOfAnalysts": 35,
+                    "yearAgoRevenue": 394328000000,
+                    "growth": -0.085
+                },
+                "epsTrend": {
+                    "current": 5.72,
+                    "7daysAgo": 6.06,
+                    "30daysAgo": 5.7,
+                    "60daysAgo": 6.07,
+                    "90daysAgo": 5.38
+                },
+                "epsRevisions": {
+                    "upLast7days": 0,
+                    "upLast30days": 1,
+                    "downLast30days": 1,
+                    "downLast90days": {}
+                }
+            },
+            {
+                "maxAge": 1,
+                "period": "+1y",
+                "endDate": "2024-09-30",
+                "growth": 0.081999995,
+                "earningsEstimate": {
+                    "avg": 6.19,
+                    "low": 5.28,
+                    "high": 6.69,
+                    "yearAgoEps": 5.72,
+                    "numberOfAnalysts": 36,
+                    "growth": 0.081999995
+                },
+                "revenueEstimate": {
+                    "avg": 382244000000,
+                    "low": 364639000000,
+                    "high": 394245000000,
+                    "numberOfAnalysts": 35,
+                    "yearAgoRevenue": 360831000000,
+                    "growth": 0.059
+                },
+                "epsTrend": {
+                    "current": 6.19,
+                    "7daysAgo": 6.57,
+                    "30daysAgo": 6.19,
+                    "60daysAgo": 6.61,
+                    "90daysAgo": 5.92
+                },
+                "epsRevisions": {
+                    "upLast7days": 0,
+                    "upLast30days": 0,
+                    "downLast30days": 2,
+                    "downLast90days": {}
+                }
+            },
+            {
+                "maxAge": 1,
+                "period": "+5y",
+                "endDate": null,
+                "growth": 0.0698,
+                "earningsEstimate": {
+                    "avg": {},
+                    "low": {},
+                    "high": {},
+                    "yearAgoEps": {},
+                    "numberOfAnalysts": {},
+                    "growth": {}
+                },
+                "revenueEstimate": {
+                    "avg": {},
+                    "low": {},
+                    "high": {},
+                    "numberOfAnalysts": {},
+                    "yearAgoRevenue": {},
+                    "growth": {}
+                },
+                "epsTrend": {
+                    "current": {},
+                    "7daysAgo": {},
+                    "30daysAgo": {},
+                    "60daysAgo": {},
+                    "90daysAgo": {}
+                },
+                "epsRevisions": {
+                    "upLast7days": {},
+                    "upLast30days": {},
+                    "downLast30days": {},
+                    "downLast90days": {}
+                }
+            },
+            {
+                "maxAge": 1,
+                "period": "-5y",
+                "endDate": null,
+                "growth": 0.22156,
+                "earningsEstimate": {
+                    "avg": {},
+                    "low": {},
+                    "high": {},
+                    "yearAgoEps": {},
+                    "numberOfAnalysts": {},
+                    "growth": {}
+                },
+                "revenueEstimate": {
+                    "avg": {},
+                    "low": {},
+                    "high": {},
+                    "numberOfAnalysts": {},
+                    "yearAgoRevenue": {},
+                    "growth": {}
+                },
+                "epsTrend": {
+                    "current": {},
+                    "7daysAgo": {},
+                    "30daysAgo": {},
+                    "60daysAgo": {},
+                    "90daysAgo": {}
+                },
+                "epsRevisions": {
+                    "upLast7days": {},
+                    "upLast30days": {},
+                    "downLast30days": {},
+                    "downLast90days": {}
+                }
+            }
+        ],
+        "maxAge": 1
+    },
+    "financialData": {
+        "maxAge": 86400,
+        "currentPrice": 176.65,
+        "targetHighPrice": 226.34,
+        "targetLowPrice": 140.52,
+        "targetMeanPrice": 187.73,
+        "targetMedianPrice": 188.62,
+        "recommendationMean": 2.1,
+        "recommendationKey": "buy",
+        "numberOfAnalystOpinions": 37,
+        "totalCash": 61554999296,
+        "totalCashPerShare": 3.958,
+        "ebitda": 125820002304,
+        "totalDebt": 123930001408,
+        "quickRatio": 0.843,
+        "currentRatio": 0.988,
+        "totalRevenue": 383285002240,
+        "debtToEquity": 199.418,
+        "revenuePerShare": 24.344,
+        "returnOnAssets": 0.20256001,
+        "returnOnEquity": 1.7195,
+        "grossProfits": 170782000000,
+        "freeCashflow": 82179997696,
+        "operatingCashflow": 110543003648,
+        "earningsGrowth": 0.135,
+        "revenueGrowth": -0.007,
+        "grossMargins": 0.44131002,
+        "ebitdaMargins": 0.32827,
+        "operatingMargins": 0.30134,
+        "profitMargins": 0.25305998,
+        "financialCurrency": "USD"
+    }
+}
