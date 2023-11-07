@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../static/custom-scripts.js"></script>
     <style>
         form.ticker-entry * {
             box-sizing: border-box;
         }
 
-        #ticker {
+        #initial-ticker {
             margin: auto;
             width: 55%;
         }
@@ -63,15 +64,15 @@
 
     <div class="container-fluid">
         <div class="mt-5 row d-flex justify-content-center">
-            <h4>Stock Informant</h4>
+            <h3><b>Stock Informant</b></h3>
         </div>
         <div class="mt-4 mb-4 ml-4 mr-4 row justify-content-center">
             <div class="col-sm d-flex justify-content-center">
                 <div id="input-container" class="text-center align-items-center">
                     <p>Enter Ticker: </p>
                     <form class="ticker-entry">
-                        <input type="text" name="ticker" id="ticker" class="form-control form-control-sm text-center"
-                            required>
+                        <input type="text" name="initial-ticker" id="initial-ticker" class="form-control form-control-sm text-center"
+                            placeholder="ticker" required>
                         <button type="button" id="fetch-button" class="btn btn-primary mt-2">Fetch
                             Data</button>
                     </form>
@@ -84,71 +85,70 @@
         <div class="loader"></div>
     </div>
     <script>
-        function showLoader() {
-            $("#loader-container").show();
-        }
+        // function showLoader() {
+        //     $("#loader-container").show();
+        // }
 
-        function hideLoader() {
-            $("#loader-container").hide();
-        }
-
-
-        function fetchData() {
-            // Show the loader when fetching data
-            showLoader();
-
-            // Simulate a delay (you can replace this with your actual AJAX call)
-            setTimeout(function () {
-                // Get the ticker value from the input field
-                var ticker = $('#ticker').val();
-
-                // Make an AJAX POST request to fetch data and update the page
-                $.ajax({
-                    method: 'POST',
-                    url: '/fetch_data', // Call the fetch_data function in python
-                    data: { ticker: ticker },
-                    dataType: 'json',
-                    success: function (data) {
-                        if ('success' in data) {
-                            console.log("Successful response from /fetch_data");
-
-                            // Hide the loader when data is fetched
-                            hideLoader();
-                            
-                            // Route to main_page using flask
-                            window.location.href = '/main_page';
-                        }
-                        else {
-                            hideLoader();
-                            alert(data.error);
-                        }
-                    },
-                    error: function () {
-                        hideLoader();
-                        alert('Invalid data or an error occurred while fetching data. Please make sure you entered a correct ticker');
+        // function hideLoader() {
+        //     $("#loader-container").hide();
+        // }
 
 
-                    }
-                    
-                });
-            }, 2000); // Simulated delay of 2 seconds
-        }
+        // function fetchData() {
+        //     // Show the loader when fetching data
+        //     showLoader();
 
-        $(document).ready(function () {
-            // Handle button click event with jQuery
-            $('#fetch-button').click(fetchData);
+        //     // Simulate a delay (you can replace this with your actual AJAX call)
+        //     setTimeout(function () {
+        //         // Get the ticker value from the input field
+        //         var ticker = $('#ticker').val();
 
-            // Handle enter event with jQuery
-            $('#ticker').on("keydown", function (e) {
-                if (e.key == "Enter") {
-                    console.log("Handling enter event with jQuery: " + e.key);
-                    fetchData();
-                    event.preventDefault();
-                    return false;
-                }
-            });
+        //         // Make an AJAX POST request to fetch data and update the page
+        //         $.ajax({
+        //             method: 'POST',
+        //             url: '/fetch_data', // Call the fetch_data function in python
+        //             data: { ticker: ticker },
+        //             dataType: 'json',
+        //             success: function (data) {
+        //                 if ('success' in data) {
+        //                     console.log("Successful response from /fetch_data");
 
-        });
+        //                     // Route to main_page using flask
+        //                     window.location.href = '/main_page';
+        //                 }
+        //                 else {
+        //                     alert(data.error);
+        //                 }
+
+        //                 hideLoader();
+
+        //             },
+        //             error: function () {
+        //                 hideLoader();
+        //                 alert('Invalid data or an error occurred while fetching data. Please make sure you entered a correct ticker');
+
+
+        //             }
+
+        //         });
+        //     }, 2000); // Simulated delay of 2 seconds
+        // }
+
+        // $(document).ready(function () {
+        //     // Handle button click event with jQuery
+        //     $('#fetch-button').click(fetchData);
+
+        //     // Handle enter event with jQuery
+        //     $('#ticker').on("keydown", function (e) {
+        //         if (e.key == "Enter") {
+        //             console.log("Handling enter event with jQuery: " + e.key);
+        //             fetchData();
+        //             event.preventDefault();
+        //             return false;
+        //         }
+        //     });
+
+        // });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"

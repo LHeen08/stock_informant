@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify, session
 from data_collection import *
-from helper_functions import *
 
 app = Flask(__name__)
 
@@ -14,7 +13,7 @@ fetched_company_data = None
 @app.route('/')
 def index():
     # Start at our home page (ticker entry)
-    return render_template('start_page.html')
+    return render_template('ticker-entry-page.html')
 
 
 # Define a route to the ticker to fetch, this just tries to fetch the data, if successful it populated global data and rerturns success
@@ -42,7 +41,7 @@ def display_main_page():
     global fetched_company_data
 
 
-    return render_template('main_page.html')
+    return render_template('data-page.html')
 
 
 
@@ -53,14 +52,14 @@ def calculate_dcf():
 
     #  Get the discount rate, growth rate and terminal growth rate from the user
 
-    dcf_response = calculate_dcf_with_obj(fetched_company_data)
+    # dcf_response = calculate_dcf_with_obj(fetched_company_data)
 
-    return dcf_response
+    # return dcf_response
 
 if __name__ == '__main__':
     # For VM
-    # app.run(debug=True, host='10.0.2.15', port='5000')
-    app.run(debug=True, host='127.0.0.1', port='8000')
+    app.run(debug=True, host='10.0.2.15', port='5000')
+    # app.run(debug=True, host='127.0.0.1', port='8000')
 
 
 
