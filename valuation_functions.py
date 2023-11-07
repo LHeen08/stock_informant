@@ -1,11 +1,38 @@
 # This file will hold the functions for all valuation methods
 
-# Peter Lynch evaluation: Notes Earnings growth rate * earnings
-# Formula: (Future EPS + Dividend Yield) / (P/E ration)
-# Only used for growth companies
-# Note: We use EBITDA (5-Year CAGR) for non-banking companies and the average growth rate of BVPS (Book Value Per Share) for banking instead of Earnings Growth Rate. 
-# Fair value = PEG * Earnings Growth rate * EPS TTM
+# Peter Lynch evaluation:
+# Methods: 
+#           - guru focus: peg * eps growth * eps
+#           - nasdaq: eps growth * eps
+#           - my method: (eps growth + dividend yield) / pe
+def calculate_peter_lynch_formulas(eps, eps_growth_rate, peg_ratio, pe_ratio, dividend_yield):
+    peter_lynch_dict = {} # Dict for each method
+    
+    gurufocus_formula = (peg_ratio * eps_growth_rate * eps) / 100 # Calculate the GuruGocus formula
+    peter_lynch_dict['gurufocus'] = gurufocus_formula
+    
+    nasdaq_formula = (eps_growth_rate * eps) / 100 # Calculate the NASDAQ formula
+    peter_lynch_dict['nasdaq'] = nasdaq_formula
+    
+    my_method = (eps_growth_rate + dividend_yield) / pe_ratio # Calculate the My method formula
+    peter_lynch_dict['my_method'] = my_method
+    
+    return peter_lynch_dict
+    
+    
 
+# Graham number calculation for calculating undervalued stocks
+# Shows the maximum price that should be paid for a stock
+# extermely defensive
+def calculate_graham_number(eps, book_value_per_share):
+    graham_number = (22.5 * eps * book_value_per_share)**(1/2)
+    return graham_number    
+
+
+# Benjamin graham formula
+def calculate_benjamin_graham_new(eps, growth_rate_next_five_yrs, avg_yield_aaa_corp_bond, current_yield_aaa_corp_bond):
+    intrinsic_value = ((eps * (7 + (2 * growth_rate_next_five_yrs)) * avg_yield_aaa_corp_bond) / current_yield_aaa_corp_bond)
+    return intrinsic_value
 
 
 # Discounted Cash Flow: 

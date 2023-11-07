@@ -1,7 +1,6 @@
 # Main driver for code
 from tabulate import tabulate
 from data_collection import *
-from helper_functions import *
 
 def main():
 

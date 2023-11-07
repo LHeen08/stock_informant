@@ -2,7 +2,6 @@
 from yahooquery import Ticker
 import json
 
-from helper_functions import calculate_dcf_with_obj
 
 
 # What data is needed for every calculation

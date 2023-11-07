@@ -4,7 +4,7 @@ from valuation_functions import *
 from yahooquery import Ticker
 import json
 
-TICKER = 'XOM'
+TICKER = 'GOOGL'
 
 
 if __name__ == '__main__':
@@ -27,7 +27,24 @@ if __name__ == '__main__':
         # Writing to sample.json
         # with open("test.json", "w") as outfile:
         #     outfile.write(json_object)
+        
+        
+        # Test peter lynch values:
+        # GOOGL
+        peg_ratio = 1.22
+        pe_ratio = 24.73
+        eps = 5.21
+        dividend_yield = 1.41
+        eps_growth_rate = 19.03
+        print("Peter Lynch: ", calculate_peter_lynch_formulas(eps, eps_growth_rate, peg_ratio, pe_ratio, dividend_yield))
 
+        # Test graham number
+        bvps = 50.39
+        print("graham number : ", calculate_graham_number(eps, bvps))
+        
+        # Test ben graham formula
+        print("Ben graham: ", calculate_benjamin_graham_new(eps, eps_growth_rate, 4.4,  5.43))
+        
 
         cash_flow_to_use = test_data.cash_flow().to_dict(orient="records")
         for entry in cash_flow_to_use:
