@@ -8,13 +8,13 @@
 def calculate_peter_lynch_formulas(eps, eps_growth_rate, peg_ratio, pe_ratio, dividend_yield):
     peter_lynch_dict = {} # Dict for each method
     
-    gurufocus_formula = (peg_ratio * eps_growth_rate * eps) / 100 # Calculate the GuruGocus formula
+    gurufocus_formula = (peg_ratio * eps_growth_rate * eps) # Calculate the GuruGocus formula
     peter_lynch_dict['gurufocus'] = gurufocus_formula
     
-    nasdaq_formula = (eps_growth_rate * eps) / 100 # Calculate the NASDAQ formula
+    nasdaq_formula = (eps_growth_rate * eps) # Calculate the NASDAQ formula
     peter_lynch_dict['nasdaq'] = nasdaq_formula
     
-    my_method = (eps_growth_rate + dividend_yield) / pe_ratio # Calculate the My method formula
+    my_method = ((eps_growth_rate + dividend_yield) / pe_ratio) * 100 # Calculate the My method formula
     peter_lynch_dict['my_method'] = my_method
     
     return peter_lynch_dict
@@ -31,7 +31,7 @@ def calculate_graham_number(eps, book_value_per_share):
 
 # Benjamin graham formula
 def calculate_benjamin_graham_new(eps, growth_rate_next_five_yrs, avg_yield_aaa_corp_bond, current_yield_aaa_corp_bond):
-    intrinsic_value = ((eps * (7 + (2 * growth_rate_next_five_yrs)) * avg_yield_aaa_corp_bond) / current_yield_aaa_corp_bond)
+    intrinsic_value = ((eps * (7 + (1 * growth_rate_next_five_yrs)) * avg_yield_aaa_corp_bond) / current_yield_aaa_corp_bond)
     return intrinsic_value
 
 

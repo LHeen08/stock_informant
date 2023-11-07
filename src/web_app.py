@@ -24,8 +24,11 @@ def fetch_data():
     
     # Try to fetch the data
     try:
-        fetched_company_data = CompanyData(ticker)
+        # fetched_company_data = CompanyData(ticker)
+        fetched_company_data = Ticker(ticker)
         if fetched_company_data:
+            # Get modules to retrieve
+            modules_to_retrieve = "assetProfile"
             return jsonify({'success': True}), 200
         else:
             # Return an error response with an appropriate status code
@@ -36,9 +39,12 @@ def fetch_data():
 
 
 
-@app.route('/main_page', methods=['GET','POST'])
+@app.route('/data-page', methods=['GET','POST'])
 def display_main_page():
     global fetched_company_data
+
+    # We need to send in the data for the data page to use
+    modules_to_retrieve
 
 
     return render_template('data-page.html')
