@@ -14,7 +14,11 @@ def calculate_peter_lynch_formulas(eps, eps_growth_rate, peg_ratio, pe_ratio, di
     nasdaq_formula = (eps_growth_rate * eps) # Calculate the NASDAQ formula
     peter_lynch_dict['nasdaq'] = nasdaq_formula
     
-    my_method = ((eps_growth_rate + dividend_yield) / pe_ratio) * 100 # Calculate the My method formula
+    if pe_ratio == "N/A":
+         my_method = "N/A"
+    else: 
+        my_method = ((eps_growth_rate + dividend_yield) / pe_ratio) * 100 # Calculate the My method formula
+
     peter_lynch_dict['my_method'] = my_method
     
     return peter_lynch_dict
@@ -26,6 +30,8 @@ def calculate_peter_lynch_formulas(eps, eps_growth_rate, peg_ratio, pe_ratio, di
 # extermely defensive
 def calculate_graham_number(eps, book_value_per_share):
     graham_number = (22.5 * eps * book_value_per_share)**(1/2)
+    if isinstance(graham_number, complex):
+         graham_number = "N/A: Negative Number"
     return graham_number    
 
 

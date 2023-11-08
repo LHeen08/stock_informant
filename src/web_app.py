@@ -44,22 +44,20 @@ def display_main_page():
     return render_template('data-page.html', data=fetched_company_data)
 
 
-@app.route('/calculate_dcf', methods=['POST'])
-def calculate_dcf():
+@app.route('/calculate_valuation_methods', methods=['POST'])
+def calculate_valuation_methods():
     global fetched_company_data
     # TODO: Need to take into account a margin of safety
 
-    #  Get the discount rate, growth rate and terminal growth rate from the user
 
-    # dcf_response = calculate_dcf_with_obj(fetched_company_data)
 
     # return dcf_response
 
 
 if __name__ == '__main__':
     # For VM
-    # app.run(debug=True, host='10.0.2.15', port='5000')
-    app.run(debug=True, host='127.0.0.1', port='8000')
+    app.run(debug=True, host='10.0.2.15', port='5000')
+    # app.run(debug=True, host='127.0.0.1', port='8000')
 
 
 

@@ -1,320 +1,278 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <title>Stock Informant</title>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="#" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="../static/custom-scripts.js"></script>
-    <link rel="stylesheet" href="../static/custom-style.css" />
 
-    <style></style>
-  </head>
+<head>
+  <title>Stock Informant</title>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="#" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="../static/custom-scripts.js"></script>
+  <link rel="stylesheet" href="../static/custom-style.css" />
 
-  <body>
-    <div class="container-fluid">
-      <div class="mt-5 row d-flex justify-content-center">
-        <h3><b>Stock Informant</b></h3>
-      </div>
-      <div id="input-data-row" class="mt-4 mb-4 ml-4 mr-4 row">
-        <div class="col-sm-2 d-flex">
-          <div class="card w-100">
-            <div class="card-header text-center">Fetch Data for Ticker</div>
-            <div>
-              <div class="card-body">
-                <div
-                  id="input-container"
-                  class="row d-flex text-center justify-content-center"
-                >
-                  <form class="ticker-entry">
-                    <input
-                      type="text"
-                      name="ticker"
-                      id="ticker"
-                      class="form-control form-control-sm text-center"
-                      placeholder="ticker"
-                      required
-                    />
-                    <button
-                      type="button"
-                      id="fetch-button"
-                      class="btn btn-primary mt-2"
-                    >
-                      Fetch Data
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center">
-          <div class="card w-100">
-            <div class="card-header">Showing Stock Data For:</div>
-            <div class="card-body pb-0 ml-3 mr-3">
-              <div class="row justify-content-between">
-                <h5 class="card-title pb-2">Company name</h5>
-                <h5 class="card-title pb-2" id="company-name">
-                  {{data.company_name}} ({{data.company_ticker}})
-                </h5>
-              </div>
-              <div class="row justify-content-between">
-                <h5 class="card-subtitle mb-2 text-muted pb-2">
-                  Current Price
-                </h5>
-                <h5
-                  class="card-subtitle mb-2 text-success pb-2"
-                  id="current-price"
-                >
-                  <b>${{data.current_price}}</b>
-                </h5>
-              </div>
-              <div class="row justify-content-between">
-                <button id="summary-button" class="btn btn btn-secondary btn-sm mt-2">
-                  Show Company Summary
-                </button>
-                <p class="card-text" id="company-summary" style="display: none">
-                  {{data.company_summary}}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="quick-data" class="col">
-          <div class="card w-100">
-            <div class="card-header text-center">Company Quick Info</div>
-            <div class="card-body pb-0 ml-3 mr-3">
-              <div class="row justify-content-between">
-                <div class="card-content">EPS (TTM):</div>
-                <p id="quick-data-eps">{{data.eps}}</p>
-              </div>
-              <div class="row justify-content-between">
-                <div class="card-content">P/E:</div>
-                <p id="quick-data-pe">{{data.pe_ratio}}</p>
-              </div>
-              <div class="row justify-content-between">
-                <div class="card-content">Shares Outstanding:</div>
-                <p id="quick-data-shares">{{data.shares}}</p>
-              </div>
-              <div class="row justify-content-between">
-                <div class="card-content">Market Cap:</div>
-                <p id="quick-data-market-cap">{{data.market_cap}}</p>
-              </div>
-              <div class="row justify-content-between">
-                <div class="card-content">Beta:</div>
-                <p id="quick-data-beta">{{data.beta}}</p>
-              </div>
-              <div class="row justify-content-between">
-                <div class="card-content">
-                  EPS Estimated Growth (Next 5 years):
-                </div>
-                <p id="quick-data-eps-growth">{{data.eps_growth_rate}}</p>
+  <style></style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="mt-5 row d-flex justify-content-center">
+      <h3><strong>Stock Informant</strong></h3>
+    </div>
+    <div id="input-data-row" class="mt-4 mb-4 ml-4 mr-4 row">
+      <div class="col-sm-2 d-flex">
+        <div class="card w-100">
+          <div class="card-header text-center">Fetch Data for Ticker</div>
+          <div>
+            <div class="card-body">
+              <div id="input-container" class="row d-flex text-center justify-content-center">
+                <form class="ticker-entry">
+                  <input type="text" name="ticker" id="ticker" class="form-control form-control-sm text-center"
+                    placeholder="ticker" required />
+                  <button type="button" id="fetch-button" class="btn btn-primary mt-2">
+                    Fetch Data
+                  </button>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around">
-        <div id="dcf-card" class="col">
-          <div class="card w-100">
-            <div class="card-header text-center">
-              DCF Free Cash Flow Valuation:
+      <div class="col d-flex justify-content-center">
+        <div class="card w-100">
+          <div class="card-header">Showing Stock Data For:</div>
+          <div class="card-body pb-0 ml-3 mr-3">
+            <div class="row justify-content-between">
+              <h5 class="card-title pb-2">Company name</h5>
+              <h5 class="card-title pb-2" id="company-name">
+                <strong>{{data.company_name}} ({{data.company_ticker}})</strong>
+              </h5>
             </div>
-            <div class="card-body pb-3 ml-3 mr-3">
-              <div class="row justify-content-around align-items-center">
-                <div class="card-content"><b>DCF Value:</b></div>
-                <p id="dcf-val"><b>val</b></p>
-              </div>
-              <div class="row pb-3 justify-content-between align-items-center">
+            <div class="row justify-content-between">
+              <h5 class="card-subtitle mb-2 pb-2">
+                Current Price
+              </h5>
+              <h5 class="card-subtitle mb-2 text-success pb-2" id="current-price">
+                <strong>${{data.current_price}}</strong>
+              </h5>
+            </div>
+            <div class="row justify-content-between">
+              <a tabindex="0" class="btn btn-md btn-outline-secondary" role="button" data-toggle="popover" data-trigger="focus"
+                title="Company Summary" data-content="{{data.company_summary}}"
+                id="company-summary">Company Summary</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="quick-data" class="col">
+        <div class="card w-100">
+          <div class="card-header text-center">Company Quick Info</div>
+          <div class="card-body">
+            <div class="container px-3">
+              <div class="row gx-5">
                 <div class="col">
+                  <div class="row justify-content-between pr-3">
+                    <div class="card-content">EPS (TTM):</div>
+                    <p id="quick-data-eps"><strong>{{data.eps}}</strong></p>
+                  </div>
+                  <div class="row justify-content-between pr-3">
+                    <div class="card-content">P/E:</div>
+                    <p id="quick-data-pe"><strong>{{data.pe_ratio}}</strong></p>
+                  </div>
+                  <div class="row justify-content-between pr-3">
+                    <div class="card-content">Shares Outstanding:</div>
+                    <p id="quick-data-shares"><strong>{{data.shares}}</strong></p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="row justify-content-between pl-3">
+                    <div class="card-content">Market Cap:</div>
+                    <p id="quick-data-market-cap"><strong>{{data.market_cap}}</strong></p>
+                  </div>
+                  <div class="row justify-content-between pl-3">
+                    <div class="card-content">Beta:</div>
+                    <p id="quick-data-beta"><strong>{{data.beta}}</strong></p>
+                  </div>
+                  <div class="row justify-content-between pl-3">
+                    <div class="card-content">
+                      Growth Estimate (+5yrs):
+                    </div>
+                    <p id="quick-data-eps-growth"><strong>{{data.eps_growth_rate}}</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around">
+      <div id="dcf-card" class="col">
+        <div class="card w-100">
+          <div class="card-header text-center">
+            DCF Free Cash Flow Valuation:
+          </div>
+          <div class="card-body pb-3 ml-3 mr-3">
+            <div class="row justify-content-between">
+              <div class="card-content"><strong>DCF Value:</strong></div>
+              <p id="dcf-val"><strong>${{data.dcf_val}}</strong></p>
+            </div>
+            <div class="row pb-3 justify-content-between align-items-center">
+              <div class="col">
                 <div class="card-content">EPS Projected Growth Rate:</div>
               </div>
               <div class="col-sm-4">
                 <form class="eps-growth-rate-entry">
-                  <input
-                    type="text"
-                    name="eps-growth-entry"
-                    id="eps-growth-entry"
-                    class="form-control form-control-sm text-center"
-                    placeholder="EPS Growth Rate"
-                    required
-                  />
+                  <input type="text" name="dcf-eps-growth-entry" id="dcf-eps-growth-entry"
+                    class="form-control form-control-sm text-center" placeholder="EPS Growth Rate"
+                    value="{{data.eps_growth_rate}}" required />
                 </form>
               </div>
-              </div>
-              <div class="row pb-3 justify-content-between align-items-center">
-                <div class="col">
+            </div>
+            <div class="row pb-3 justify-content-between align-items-center">
+              <div class="col">
                 <div class="card-content">Discount Rate:</div>
-                </div>
-                <div class="col-sm-4">
+              </div>
+              <div class="col-sm-4">
                 <form class="discount-rate-entry">
-                  <input
-                    type="text"
-                    name="discount-rate"
-                    id="discount-rate-entry"
-                    class="form-control form-control-sm text-center"
-                    placeholder="Discount Rate"
-                    required
-                  />
+                  <input type="text" name="discount-rate" id="discount-rate-entry"
+                    class="form-control form-control-sm text-center" placeholder="Discount Rate"
+                    value="{{data.default_discount}}" required />
                 </form>
-                </div>
               </div>
-              <div class="row pb-3 justify-content-between align-items-center">
-                <div class="col">
+            </div>
+            <div class="row pb-3 justify-content-between align-items-center">
+              <div class="col">
                 <div class="card-content">Terminal Growth Rate:</div>
-                </div>
-                <div class="col-sm-4">
+              </div>
+              <div class="col-sm-4">
                 <form class="terminal-growth-rate-entry">
-                  <input
-                    type="text"
-                    name="terminal-growth-entry"
-                    id="terminal-growth-entry"
-                    class="form-control form-control-sm text-center"
-                    placeholder="Terminal Growth Rate"
-                    required
-                  />
+                  <input type="text" name="terminal-growth-entry" id="terminal-growth-entry"
+                    class="form-control form-control-sm text-center" placeholder="Terminal Growth Rate"
+                    value="{{data.default_terminal_growth}}" required />
                 </form>
-                </div>
               </div>
-              <div class="row justify-content-between align-items-center">
-                <div class="col">
+            </div>
+            <div class="row justify-content-between align-items-center">
+              <div class="col">
                 <div class="card-content">Margin Of Safety:</div>
-                </div>
-                <div class="col-sm-4">
+              </div>
+              <div class="col-sm-4">
                 <form class="margin-of-safety-entry">
-                  <input
-                    type="text"
-                    name="margin-of-safety-entry"
-                    id="margin-of-safety-entry"
-                    class="form-control form-control-sm text-center"
-                    placeholder="Margin Of Safety"
-                    required
-                  />
-                </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="recommendation-eval-card" class="col">
-          <div class="card w-100">
-            <div class="card-header text-center">Recommendation</div>
-            <div class="card-body pb-0 ml-3 mr-3 mb-3">
-              <div class="row justify-content-center">
-                <div class="card-content"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="lynch-eval-card" class="col">
-          <div class="card w-100">
-            <div class="card-header text-center">Peter Lynch Valuation</div>
-            <div class="card-body pb-3 ml-3 mr-3">
-              <div class="row justify-content-around align-items-center">
-                <div class="card-content"><b>Peter Lynch Value:</b></div>
-                <p id="peter-lynch-val"><b>val</b></p>
-              </div>
-              <div class="row justify-content-between align-items-center">
-                <div class="card-content">Projected Growth Rate:</div>
-                <form class="eps-growth-rate-entry">
-                  <input
-                    type="text"
-                    name="eps-growth-entry"
-                    id="eps-growth-entry"
-                    class="form-control form-control-sm text-center"
-                    placeholder="EPS Growth Rate"
-                    required
-                  />
+                  <input type="text" name="margin-of-safety-entry" id="margin-of-safety-entry"
+                    class="form-control form-control-sm text-center" placeholder="Margin Of Safety" value="0"
+                    required />
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around">
-        <div id="ben-graham-formula-eval-card" class="col">
-          <div class="card w-100">
-            <div class="card-header text-center">Benjamin Graham Valuation</div>
-            <div class="card-body pb-3 ml-3 mr-3">
-              <div class="row justify-content-between align-items-center">
-                <div class="card-content"><b>Benjamin Graham Formula:</b></div>
-                <p id="ben-graham-formula-val"><b>val</b></p>
-              </div>
-              <div class="row justify-content-between align-items-center">
-                <div class="card-content">Projected Growth Rate:</div>
-                <form class="eps-growth-rate-entry">
-                  <input
-                    type="text"
-                    name="eps-growth-entry"
-                    id="eps-growth-entry"
-                    class="form-control form-control-sm text-center"
-                    placeholder="EPS Growth Rate"
-                    required
-                  />
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="graham-number-eval-card" class="col">
-          <div class="card w-100">
-            <div class="card-header text-center">Graham Number</div>
-            <div class="card-body pb-2 ml-3 mr-3">
-              <div class="row justify-content-between align-items-center">
-                <div class="card-content"><b>Graham Number:</b></div>
-                <p id="graham-num-val"><b>val</b></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="multiples-eval-card" class="col">
-          <div class="card w-100">
-            <div class="card-header text-center">Multiples Valuation</div>
-            <div class="card-body pb-0 ml-3 mr-3">
-              <div class="row justify-content-between align-items-center">
-                <div class="card-content">Company 1:</div>
-                <p>val</p>
-              </div>
-              <div class="row justify-content-between align-items-center">
-                <div class="card-content">Company 2:</div>
-                <p>val</p>
-              </div>
-              <div class="row justify-content-between align-items-center">
-                <div class="card-content">Company 3:</div>
-                <p>val</p>
-              </div>
-              <div class="row justify-content-between align-items-center">
-                <div class="card-content">Company 4:</div>
-                <p>val</p>
-              </div>
+      <div id="recommendation-eval-card" class="col">
+        <div class="card w-100">
+          <div class="card-header text-center">Recommendation</div>
+          <div class="card-body pb-0 ml-3 mr-3 mb-3">
+            <div class="row justify-content-center">
+              <div class="card-content"></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around"></div>
+      <div id="lynch-eval-card" class="col">
+        <div class="card w-100">
+          <div class="card-header text-center">Peter Lynch Valuation</div>
+          <div class="card-body pb-3 ml-3 mr-3">
+            <div class="row justify-content-around">
+              <div class="card-content"><strong>Peter Lynch Value:</strong></div>
+              <p id="peter-lynch-val"><strong>{{data.peter_lynch_calcs}}</strong></p>
+            </div>
+            <div class="row justify-content-between align-items-center">
+              <div class="card-content">Projected Growth Rate:</div>
+              <form class="eps-growth-rate-entry">
+                <input type="text" name="lynch-eps-growth-entry" id="lynch-eps-growth-entry"
+                  class="form-control form-control-sm text-center" placeholder="EPS Growth Rate"
+                  value="{{data.eps_growth_rate}}" required />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="loader-container" id="loader-container">
-      <div class="loader"></div>
+    <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around">
+      <div id="ben-graham-formula-eval-card" class="col">
+        <div class="card w-100">
+          <div class="card-header text-center">Benjamin Graham Valuation</div>
+          <div class="card-body pb-3 ml-3 mr-3">
+            <div class="row justify-content-between align-items-center">
+              <div class="card-content"><strong>Benjamin Graham Formula:</strong></div>
+              <p id="ben-graham-formula-val"><strong>{{data.ben_graham_calc}}</strong></p>
+            </div>
+            <div class="row justify-content-between align-items-center">
+              <div class="card-content">Projected Growth Rate:</div>
+              <form class="eps-growth-rate-entry">
+                <input type="text" name="bg-eps-growth-entry" id="bg-eps-growth-entry"
+                  class="form-control form-control-sm text-center" placeholder="EPS Growth Rate"
+                  value="{{data.eps_growth_rate}}" required />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="graham-number-eval-card" class="col">
+        <div class="card w-100">
+          <div class="card-header text-center">Graham Number</div>
+          <div class="card-body pb-2 ml-3 mr-3">
+            <div class="row justify-content-between align-items-center">
+              <div class="card-content"><strong>Graham Number:</strong></div>
+              <p id="graham-num-val"><strong>{{data.graham_num}}</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="multiples-eval-card" class="col">
+        <div class="card w-100">
+          <div class="card-header text-center">Multiples Valuation</div>
+          <div class="card-body pb-0 ml-3 mr-3">
+            <div class="row justify-content-between align-items-center">
+              <div class="card-content">Company 1:</div>
+              <p>val</p>
+            </div>
+            <div class="row justify-content-between align-items-center">
+              <div class="card-content">Company 2:</div>
+              <p>val</p>
+            </div>
+            <div class="row justify-content-between align-items-center">
+              <div class="card-content">Company 3:</div>
+              <p>val</p>
+            </div>
+            <div class="row justify-content-between align-items-center">
+              <div class="card-content">Company 4:</div>
+              <p>val</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around"></div>
+  </div>
 
-    <script></script>
-  </body>
+  <div class="d-flex justify-content-center" id="loader-container">
+    <div class="spinner-border text-primary" role="status" id="loader-spinner">
+      <div class="visually-hidden"></div>
+    </div>
+  </div>
+
+  <script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</body>
+
 </html>

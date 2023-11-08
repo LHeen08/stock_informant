@@ -1,11 +1,16 @@
 function showLoader() {
-  $("#loader-container").show();
+  $("#loader-container").addClass("show");
+  $("#loader-spinner").show();
 }
 
 function hideLoader() {
-  $("#loader-container").hide();
+  $("#loader-container").removeClass("show");
+  $("#loader-spinner").hide();
 }
 
+// const popover = new bootstrap.Popover('.popover-dismiss', {
+//   trigger: 'focus'
+// })
 
 
 
@@ -34,7 +39,7 @@ function fetchData(inital_fetch) {
       if ('success' in data) {
         console.log("Successful response from /fetch_data");
 
-        // Route to main_page using flask
+        // Route to data_page using flask
         window.location.href = '/data_page';
       }
       else {
@@ -54,12 +59,16 @@ function fetchData(inital_fetch) {
 
 
 $(document).ready(function () {
+
+  hideLoader();
+  
   // Handle button click event with jQuery
   $('#fetch-button').click(fetchData);
 
-  $('#summary-button').click(function() {
-    $('#company-summary').toggle();
+  $('#company-summary').click(function () {
+    $('#company-summary').popover('show');
   });
+
 
   // Handle initial page ticker fetch data button with jQuery
   $('#initial-ticker').on("keydown", function (e) {
@@ -81,4 +90,56 @@ $(document).ready(function () {
       return false;
     }
   });
+
+
+  // Handle dcf eps growth rate input
+  $('#dcf-eps-growth-entry').on("keydown", function (event) {
+    if (event.key == "Enter") {
+      console.log("Handling enter event with jQuery: " + event.key);
+      event.preventDefault();
+
+      var new_eps_growth = this.value;
+      this.value = new_eps_growth;
+    }
+  }).on("blur", function () {
+    console.log("Handling blur: ");
+    var new_eps_growth = this.value;
+
+    this.value = new_eps_growth;
+  });
+
+
+  // Handle eps growth rate input
+  $('#lynch-eps-growth-entry').on("keydown", function (event) {
+    if (event.key == "Enter") {
+      console.log("Handling enter event with jQuery: " + event.key);
+      event.preventDefault();
+
+      var new_eps_growth = this.value;
+      this.value = new_eps_growth;
+    }
+  }).on("blur", function () {
+    console.log("Handling blur: ");
+    var new_eps_growth = this.value;
+
+    this.value = new_eps_growth;
+  });
+
+  // Handle eps growth rate input
+  $('#bg-eps-growth-entry').on("keydown", function (event) {
+    if (event.key == "Enter") {
+      console.log("Handling enter event with jQuery: " + event.key);
+      event.preventDefault();
+
+      var new_eps_growth = this.value;
+      this.value = new_eps_growth;
+    }
+  }).on("blur", function () {
+    console.log("Handling blur: ");
+    var new_eps_growth = this.value;
+
+    this.value = new_eps_growth;
+  });
+
+
 });
