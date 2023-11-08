@@ -43,7 +43,8 @@ def calculate_dcf_free_cash_flow(input_cashflow_stmnts, cash_and_cash_equiv,
                                  perpetual_growth_rate):
 
     # Get the last few years of cash flow with their associated date
-    prev_cash_flows = [(entry['asOfDate'][:4], entry['FreeCashFlow']) for entry in input_cashflow_stmnts]
+    # prev_cash_flows = [(entry['asOfDate'][:4], entry['FreeCashFlow']) for entry in input_cashflow_stmnts]
+    prev_cash_flows = input_cashflow_stmnts
 
     # Calculate the growth rate for each previous year 
     for i in range(1, len(prev_cash_flows)):

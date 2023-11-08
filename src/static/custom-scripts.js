@@ -7,6 +7,9 @@ function hideLoader() {
 }
 
 
+
+
+
 function fetchData(inital_fetch) {
   // Show the loader when fetching data
   showLoader();
@@ -31,11 +34,8 @@ function fetchData(inital_fetch) {
       if ('success' in data) {
         console.log("Successful response from /fetch_data");
 
-        if (inital_fetch) {
-          // Route to main_page using flask
-          window.location.href = '/main_page';
-        }
-
+        // Route to main_page using flask
+        window.location.href = '/data_page';
       }
       else {
         alert(data.error);
@@ -53,12 +53,13 @@ function fetchData(inital_fetch) {
 }
 
 
-
-
-
 $(document).ready(function () {
   // Handle button click event with jQuery
   $('#fetch-button').click(fetchData);
+
+  $('#summary-button').click(function() {
+    $('#company-summary').toggle();
+  });
 
   // Handle initial page ticker fetch data button with jQuery
   $('#initial-ticker').on("keydown", function (e) {
@@ -80,5 +81,4 @@ $(document).ready(function () {
       return false;
     }
   });
-
 });

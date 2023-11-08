@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, jsonify, session
-from data_collection import *
+from flask import Flask, render_template, request, jsonify
+from data_collection import try_fetch_stock_data
 
 app = Flask(__name__)
 
@@ -24,11 +24,9 @@ def fetch_data():
     
     # Try to fetch the data
     try:
-        # fetched_company_data = CompanyData(ticker)
-        fetched_company_data = Ticker(ticker)
+        fetched_company_data = try_fetch_stock_data(ticker)
         if fetched_company_data:
             # Get modules to retrieve
-            modules_to_retrieve = "assetProfile"
             return jsonify({'success': True}), 200
         else:
             # Return an error response with an appropriate status code
@@ -39,16 +37,11 @@ def fetch_data():
 
 
 
-@app.route('/data-page', methods=['GET','POST'])
+@app.route('/data_page', methods=['GET', 'POST'])
 def display_main_page():
     global fetched_company_data
 
-    # We need to send in the data for the data page to use
-    modules_to_retrieve
-
-
-    return render_template('data-page.html')
-
+    return render_template('data-page.html', data=fetched_company_data)
 
 
 @app.route('/calculate_dcf', methods=['POST'])
@@ -62,10 +55,11 @@ def calculate_dcf():
 
     # return dcf_response
 
+
 if __name__ == '__main__':
     # For VM
-    app.run(debug=True, host='10.0.2.15', port='5000')
-    # app.run(debug=True, host='127.0.0.1', port='8000')
+    # app.run(debug=True, host='10.0.2.15', port='5000')
+    app.run(debug=True, host='127.0.0.1', port='8000')
 
 
 

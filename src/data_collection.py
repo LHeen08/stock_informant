@@ -1,107 +1,79 @@
 # This file is to collect data and put what I actually need into useful items to use in other areas
 from yahooquery import Ticker
-import json
 
 
 
-# What data is needed for every calculation
-# Peter Lynch evaluation: Notes Earnings growth rate * earnings
-
-
-
-
-
-class CompanyData:
-    def __init__(self, ticker):
-        self.ticker = str(ticker).upper()
-        try:
-            stock_data = Ticker(ticker, validate=True, progress=True)
-            treasury_data = Ticker('^TYX').summary_detail['^TYX']
-
+# Function to try and fetch the financial data
+def try_fetch_stock_data(ticker):
+    
+    ticker = ticker.upper()
+    
+    try: # Try to get stock data
+        stock_data = Ticker(ticker, validate=True)
+        
+        try: # Try to get treasury data
+            treasury_data = Ticker("^TYX").summary_detail["^TYX"]
         except Exception as exc:
-            raise ValueError(f"Error: Unable to retrieve data for ticker {ticker}. Error Details: {str(exc)}")
+            raise ValueError(f"Error: Unable to retrieve data for ticker ^TYX. Error Details: {str(exc)}")
+        
+    except Exception as exc:
+        raise ValueError(f"Error: Unable to retrieve data for ticker {ticker}. Error Details: {str(exc)}")
 
-        # Set instance variables for data attributes
-        self.company_full_name = stock_data.price[self.ticker]["longName"]
-        self.company_profile = stock_data.asset_profile[self.ticker]
-        self.current_price = stock_data.financial_data[self.ticker]["currentPrice"]
-        self.shares_outstanding = stock_data.key_stats[self.ticker]["sharesOutstanding"]
-        self.income_statement = self.convert_to_dict(stock_data.income_statement())
-        self.balance_sheet = self.convert_to_dict(stock_data.balance_sheet(trailing=True))
-        self.cash_flow_statement = self.convert_to_dict(stock_data.cash_flow())
-        self.trailing_eps_ttm = stock_data.key_stats[self.ticker]["trailingEps"]
-        self.net_income_ttm = self.income_statement[-1]["NetIncome"]
-        self.eps_data_from_earnings_history = self.convert_earnings_hist_to_dict(stock_data.earning_history)
-        self.eps_growth_trends = stock_data.earnings_trend[self.ticker]["trend"]
-        self.preferred_dividends = self.get_preferred_dividends()
-        self.eps_growth_current_quarter = self.get_eps_growth_current_quarter()
-        self.eps_growth_next_five_years = self.get_eps_growth_next_five_years()
-        self.current_treasury_data_aaa_bond = (treasury_data['dayLow'] + treasury_data['dayHigh']) / 2 
-        self.average_treasury_data_aaa_bond = treasury_data['twoHundredDayAverage']
-        self.ben_graham_new = self.get_ben_graham_new()
-        self.ben_graham_old = self.get_ben_graham_old()
-
-    def convert_to_dict(self, data):
-        data_dict = data.to_dict(orient="records")
-        self.convert_timestamps_to_strings(data_dict)
-        return data_dict
-
-    def convert_timestamps_to_strings(self, data):
-        for entry in data:
-            entry['asOfDate'] = entry['asOfDate'].strftime('%Y-%m-%d')
-
-
-    def convert_earnings_hist_to_dict(self, earning_hist):
-        return earning_hist.to_dict(orient="records")
-
-    def get_preferred_dividends(self):
-        income_stmnt = self.income_statement
-        if "PreferredStockDividends" in income_stmnt:
-            return income_stmnt[-1]["PreferredStockDividends"]
-        else:
-            return 0
-
-    def get_eps_growth_current_quarter(self):
-        current_quarter = [trend for trend in self.eps_growth_trends if trend["period"] == "0q"]
-        return current_quarter[0]["growth"] if current_quarter else None
-
-    def get_eps_growth_next_five_years(self):
-        next_five_years = [trend for trend in self.eps_growth_trends if trend["period"] == "+5y"]
-        return next_five_years[0]["growth"] if next_five_years else None
     
-
-    def to_JSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+    modules_to_retrieve = "assetProfile summaryDetail price summaryProfile defaultKeyStatistics earningsTrend financialData" # modules to get from object
+    cash_flow_to_use = stock_data.cash_flow().to_dict(orient="records") # get cash flow to use for dcf
+    for entry in cash_flow_to_use:
+        entry["asOfDate"] = entry["asOfDate"].strftime("%Y-%m-%d") # convert timestamps to strings
     
- 
+    prev_free_cash_flows = [(entry["asOfDate"][:4], entry["FreeCashFlow"]) for entry in cash_flow_to_use]   
     
-    def get_ben_graham_new(self):
-        intrinsic_value = round(((self.trailing_eps_ttm * (7 + (1 * self.eps_growth_next_five_years)) * self.average_treasury_data_aaa_bond) / self.current_treasury_data_aaa_bond), 2)
-        return intrinsic_value
+    modules = stock_data.get_modules(modules_to_retrieve)[ticker] # get the modules listed above
     
-    def get_ben_graham_old(self):
-        intrinsic_value = round(((self.trailing_eps_ttm * (8.5 + (2 * self.eps_growth_next_five_years)) * self.average_treasury_data_aaa_bond) / self.current_treasury_data_aaa_bond), 2)
-        return intrinsic_value
+    current_treasury_data_aaa_bond = (treasury_data["dayLow"] + treasury_data["dayHigh"]) / 2 # treasury data
+    average_treasury_data_aaa_bond = treasury_data["twoHundredDayAverage"] # treasury data
+    
+    company_name = modules["price"]["longName"] # company long name
+    current_price = modules["financialData"]["currentPrice"] # current price
+    company_summary = modules["summaryProfile"]["longBusinessSummary"] # Summary of business
+    market_cap = modules["price"]["marketCap"] # market cap
+    beta = modules["summaryDetail"]["beta"] # beta
+    
+    peg_ratio = modules["defaultKeyStatistics"]["pegRatio"] # peg ratio
+    try:
+        pe_ratio = modules["summaryDetail"]["trailingPE"]
+    except KeyError:
+        pe_ratio = "N/A"
+    eps = modules["defaultKeyStatistics"]["trailingEps"] # eps ttm
+    dividend_yield = modules["summaryDetail"]["dividendYield"] # dividend yield
+    bvps = modules["defaultKeyStatistics"]["bookValue"] # book value per share
 
-
-# company_data = CompanyData('JPM')
-
-# cash_flow_years = [(entry['asOfDate'], entry['FreeCashFlow']) for entry in company_data.cash_flow_statement]
-# print(cash_flow_years)
-
-# for i in range(1, len(cash_flow_years)):
-#         growth_rate = ((cash_flow_years[i][1] - cash_flow_years[i-1][1]) / cash_flow_years[i-1][1]) * 100
-#         cash_flow_years[i] = (*cash_flow_years[i], round(growth_rate, 2))
-#         print(growth_rate)
-
-# total_growth_rate = 0
-# for i in range(1, len(cash_flow_years)):
-#         total_growth_rate = total_growth_rate + cash_flow_years[i][2]
-
-# average_growth_rate = total_growth_rate / (len(cash_flow_years) - 1)  # Subtract 1 to exclude the first row
-# print(average_growth_rate)
-
-
-
-# print(calculate_dcf_with_obj(company_data))
-
+    next_five_years = [trend for trend in modules["earningsTrend"]["trend"] if trend["period"] == "+5y"]
+    eps_growth_rate = next_five_years[0]["growth"] if next_five_years else None # projected growth next 5 years
+    
+    cash_and_cash_equiv = modules["financialData"]["totalCash"] # total cash
+    total_debt = modules["financialData"]["totalDebt"] # total debt
+    shares = modules["defaultKeyStatistics"]["sharesOutstanding"] # shares outstanding
+    
+    # dictionary filled with useful data to return    
+    stock_fetched_data = {
+        "company_ticker" : ticker,
+        "company_name" : company_name,
+        "current_price" : round(current_price, 2),
+        "company_summary" : company_summary,
+        "cash_flow_data" : prev_free_cash_flows,
+        "current_treasury_aaa" : round(current_treasury_data_aaa_bond, 2),
+        "avg_treasury_aaa" : round(average_treasury_data_aaa_bond, 2),
+        "peg_ratio" : round(peg_ratio, 2), 
+        "pe_ratio" : round(pe_ratio, 2), 
+        "eps" : eps, 
+        "dividend_yield" : dividend_yield, 
+        "bvps" : bvps,
+        "eps_growth_rate" : eps_growth_rate, 
+        "cash_and_cash_equiv" : cash_and_cash_equiv,
+        "total_debt" : total_debt,
+        "shares" : shares,
+        "market_cap" : round(market_cap, 2),
+        "beta" : round(beta, 2)
+    }
+    
+    return stock_fetched_data
