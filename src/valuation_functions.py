@@ -47,6 +47,16 @@ def calculate_dcf_free_cash_flow(input_cashflow_stmnts, cash_and_cash_equiv,
                                  total_debt, shares_outstanding, 
                                  projected_growth_rate, discount_rate, 
                                  perpetual_growth_rate):
+    
+    # if DEBUG:         
+    print("Previous Cash Flows:", input_cashflow_stmnts)
+    print("Cash and Cash Equivalents:", cash_and_cash_equiv)
+    print("Total Debt:", total_debt)
+    print("Shares Outstanding:", shares_outstanding)
+    print("Projected Growth Rate:", projected_growth_rate)
+    print("Discount Rate:", discount_rate)
+    print("Perpetual Growth Rate:", perpetual_growth_rate)
+
 
     # Get the last few years of cash flow with their associated date
     # prev_cash_flows = [(entry['asOfDate'][:4], entry['FreeCashFlow']) for entry in input_cashflow_stmnts]
@@ -108,8 +118,10 @@ def calculate_dcf_free_cash_flow(input_cashflow_stmnts, cash_and_cash_equiv,
         "PVFFCF" : dcf_present_value_of_FFCF,
         "SumOfFFCF" : sum_of_pv_of_FFCF,
         "EquityVal" : equity_value,
-        "DCFVal" : round(dcf_val, 2)
+        "DCFVal" : dcf_val
     }
+
+    print("DCF Val : ", dcf_val)
 
     # Return a dictionary that includes all the useful info
     return data_to_return

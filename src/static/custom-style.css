@@ -9,6 +9,10 @@
   }
 
 
+  input {
+    text-align: center;
+  }
+
   #loader-container.show {
     display: flex; /* Display when showing the loader */
     justify-content: center;

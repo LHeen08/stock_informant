@@ -89,24 +89,51 @@ function updateDCF() {
   });
 }
 
+
+// Function to format numbers 
+function formatNumberAbbreviation(number) {
+  if (Math.abs(number) >= 1.0e12) {
+    return (number / 1.0e12).toFixed(2) + 'T'; // Trillions
+  } else if (Math.abs(number) >= 1.0e9) {
+    return (number / 1.0e9).toFixed(2) + 'B'; // Billions
+  } else if (Math.abs(number) >= 1.0e6) {
+    return (number / 1.0e6).toFixed(2) + 'M'; // Millions
+  } else {
+    return number.toFixed(2).toLocaleString(); // Default formatting
+  }
+}
+
+
 $(document).ready(function () {
   hideLoader();
 
   // Handle button click event with jQuery
   $("#fetch-button").click(fetchData);
 
-  // Handle company summary popover messgage
-  $("#company-summary").click(function () {
-    $("#company-summary").popover("show");
-  });
+  // Get the company quick info numbers that need to be formatted 
+  var shares_outstanding_str = $("#quick-data-shares").text();
+  console.log("shares ", shares_outstanding_str);
+  var formattedShares = formatNumberAbbreviation(shares_outstanding_str);
+  $("#quick-data-shares").text('').append($('<strong>').text(formattedShares));
 
+  var market_cap_str = $("#quick-data-market-cap").text();
+  console.log("shares ", market_cap_str);
+  var fomattedMarketCap = formatNumberAbbreviation(market_cap_str);
+  $("#quick-data-market-cap").text('').append($('<strong>').text(fomattedMarketCap));
 
   // Hold onto the old values for the forms, so if we click off and its null its the old value
   var old_dcf_eps_growth_rate_value = $("#dcf-eps-growth-entry").val();
   var old_dcf_discount_rate_value = $("#discount-rate-entry").val();
   var old_dcf_terminal_growth_value = $("#terminal-growth-entry").val();
   var old_dcf_margin_of_safety_value = $("#margin-of-safety-entry").val();
-  // console.log("OLD MOS: ", old_dcf_margin_of_safety_value);
+
+
+  
+  // Handle company summary popover messgage
+  $("#company-summary").click(function () {
+    $("#company-summary").popover("show");
+  });
+
 
 
 
@@ -139,12 +166,10 @@ $(document).ready(function () {
         event.preventDefault();
 
         var new_eps_growth = this.value;
-        if (new_eps_growth !== null && new_eps_growth.trim() !== '') {
+        if (!isNaN(new_eps_growth) && new_eps_growth.trim() !== '') {
           this.value = new_eps_growth;
           updateDCF();
-        }
-        else
-        {
+        } else {
           this.value = old_dcf_eps_growth_rate_value;
         }
       }
@@ -152,12 +177,10 @@ $(document).ready(function () {
     .on("blur", function () {
       console.log("Handling blur: ");
       var new_eps_growth = this.value;
-      if (new_eps_growth !== null && new_eps_growth.trim() !== '') {
+      if (!isNaN(new_eps_growth) && new_eps_growth.trim() !== '') {
         this.value = new_eps_growth;
         updateDCF();
-      }
-      else
-      {
+      } else {
         this.value = old_dcf_eps_growth_rate_value;
       }
     });
@@ -170,11 +193,10 @@ $(document).ready(function () {
         event.preventDefault();
 
         var discountRate = this.value;
-        if (discountRate !== null && discountRate.trim() !== '') {
+        if (!isNaN(discountRate) && discountRate.trim() !== '') {
           this.value = discountRate;
           updateDCF();
-        }
-        {
+        } else {
           this.value = old_dcf_discount_rate_value;
         }
       }
@@ -182,11 +204,10 @@ $(document).ready(function () {
     .on("blur", function () {
       console.log("Handling blur: ");
       var discountRate = this.value;
-      if (discountRate !== null && discountRate.trim() !== '') {
+      if (!isNaN(discountRate) && discountRate.trim() !== '') {
         this.value = discountRate;
         updateDCF();
-      }
-      {
+      } else {
         this.value = old_dcf_discount_rate_value;
       }
     });
@@ -200,11 +221,10 @@ $(document).ready(function () {
 
         var terminal_growth = this.value;
         // Udpate if not null
-        if (terminal_growth !== null && terminal_growth.trim() !== '') {
+        if (!isNaN(terminal_growth) && terminal_growth.trim() !== '') {
           this.value = terminal_growth;
           updateDCF();
-        }
-        {
+        } else {
           this.value = old_dcf_terminal_growth_value;
         }
       }
@@ -212,11 +232,10 @@ $(document).ready(function () {
     .on("blur", function () {
       console.log("Handling blur: ");
       var terminal_growth = this.value;
-      if (terminal_growth !== null && terminal_growth.trim() !== '') {
+      if (!isNaN(terminal_growth) && terminal_growth.trim() !== '') {
         this.value = terminal_growth;
         updateDCF();
-      }
-      {
+      } else {
         this.value = old_dcf_terminal_growth_value;
       }
     });
@@ -229,11 +248,10 @@ $(document).ready(function () {
         event.preventDefault();
 
         var marginOfSafety = this.value;
-        if (marginOfSafety !== null && marginOfSafety.trim() !== '') {
+        if (!isNaN(marginOfSafety) && marginOfSafety.trim() !== '') {
           this.value = marginOfSafety;
           updateDCF();
-        }
-        {
+        } else {
           this.value = old_dcf_margin_of_safety_value;
         }
       }
@@ -241,14 +259,14 @@ $(document).ready(function () {
     .on("blur", function () {
       console.log("Handling blur: ");
       var marginOfSafety = this.value;
-      if (marginOfSafety !== null && marginOfSafety.trim() !== '') {
+      if (!isNaN(marginOfSafety) && marginOfSafety.trim() !== '') {
         this.value = marginOfSafety;
         updateDCF();
-      }
-      {
+      } else {
         this.value = old_dcf_margin_of_safety_value;
       }
     });
+
 
   // Handle eps growth rate input
   $("#lynch-eps-growth-entry")

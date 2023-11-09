@@ -48,13 +48,12 @@ def display_main_page():
 @app.route('/calculate_dcf', methods=['POST'])
 def calculate_dcf():
     global fetched_company_data
-    # TODO: Need to take into account a margin of safety
     
-    eps_growth = float(request.values['epsGrowth'])
-    discount_rate = float(request.values['discountRate'])
-    terminal_growth_rate = float(request.values['terminalGrowthRate'])
+    # Convert the values from the request
+    eps_growth = float(request.values['epsGrowth']) / 100 # Divide by 100
+    discount_rate = float(request.values['discountRate']) / 100 # Divide by 100
+    terminal_growth_rate = float(request.values['terminalGrowthRate']) / 100 # Divide by 100
     margin_of_safety = float(request.values['marginOfSafety'])
-    
     
     calc_func_return_data = calculate_dcf_free_cash_flow(fetched_company_data["cash_flow_data"], fetched_company_data["cash_and_cash_equiv"], fetched_company_data["total_debt"], fetched_company_data["shares"], eps_growth, discount_rate, terminal_growth_rate)
     
@@ -62,17 +61,19 @@ def calculate_dcf():
     dcfVal = calc_func_return_data["DCFVal"]
     
     if margin_of_safety > 0:
-        dcfVal = dcfVal * margin_of_safety
+        dcfVal = dcfVal * (1 - (margin_of_safety / 100)) # Divide by 100 here, so we can check for negative or 0 first
 
-    dcfVal = round(dcfVal, 2)
+    # print("web app:", dcfVal)
+    dcfVal = round(dcfVal, 2) # Round to 2 decimal places
+    print("calculate_dcf() return:", dcfVal)
 
     return jsonify({"dcfVal": dcfVal})
 
 
 if __name__ == '__main__':
     # For VM
-    # app.run(debug=True, host='10.0.2.15', port='5000')
-    app.run(debug=True, host='127.0.0.1', port='8000')
+    app.run(debug=True, host='10.0.2.15', port='5000')
+    # app.run(debug=True, host='127.0.0.1', port='8000')
 
 
 

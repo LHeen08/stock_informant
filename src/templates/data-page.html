@@ -59,8 +59,8 @@
               </h5>
             </div>
             <div class="row justify-content-between">
-              <a tabindex="0" class="btn btn-md btn-outline-secondary" role="button" data-toggle="popover" data-trigger="focus"
-                title="Company Summary" data-content="{{data.company_summary}}"
+              <a tabindex="0" class="btn btn-md btn-outline-secondary" role="button" data-toggle="popover"
+                data-trigger="focus" title="Company Summary" data-content="{{data.company_summary}}"
                 id="company-summary">Company Summary</a>
             </div>
           </div>
@@ -99,7 +99,10 @@
                     <div class="card-content">
                       Growth Estimate (+5yrs):
                     </div>
-                    <p id="quick-data-eps-growth"><strong>{{data.eps_growth_rate}}</strong></p>
+                    <div class="row pr-3">
+                    <p id="quick-data-eps-growth"><strong>{{data.eps_growth_rate_percent}}</strong></p>
+                    <span><strong>%</strong></span>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -115,56 +118,60 @@
             DCF Free Cash Flow Valuation:
           </div>
           <div class="card-body pb-3 ml-3 mr-3">
-            <div class="row justify-content-between">
-              <div class="card-content"><strong>DCF Value:</strong></div>
-              <p id="dcf-val"><strong></strong>{{data.dcf_val}}</p>
-            </div>
-            <div class="row pb-3 justify-content-between align-items-center">
+            <div class="row pb-3">
               <div class="col">
-                <div class="card-content">EPS Projected Growth Rate:</div>
+                <h5 class="card-content"><strong>DCF Value:</strong></h5>
               </div>
-              <div class="col-sm-4">
-                <form class="eps-growth-rate-entry">
-                  <input type="number" name="dcf-eps-growth-entry" id="dcf-eps-growth-entry"
-                    class="form-control form-control-sm text-center"
-                    value="{{data.eps_growth_rate}}" required />
-                </form>
+              <div class="col d-flex justify-content-end">
+                <span>$</span>
+                <h5 class="card-content" id="dcf-val">{{data.dcf_val}}</h5>
               </div>
             </div>
-            <div class="row pb-3 justify-content-between align-items-center">
-              <div class="col">
-                <div class="card-content">Discount Rate:</div>
+            <div class="row pb-3 g-3 justify-content-between align-items-center">
+              <div class="col-auto">
+                <label for="dcf-eps-growth-entry" class="col-form-label">EPS Projected Growth Rate:</label>
               </div>
               <div class="col-sm-4">
-                <form class="discount-rate-entry">
-                  <input type="number" name="discount-rate" id="discount-rate-entry"
-                    class="form-control form-control-sm text-center" placeholder="Discount Rate"
-                    value="{{data.default_discount}}" required />
-                </form>
+                <div class="input-group">
+                  <input type="text" name="dcf-eps-growth-entry" id="dcf-eps-growth-entry" class="form-control"
+                    value="{{data.eps_growth_rate_percent}}">
+                  <span class="input-group-text">%</span>
+                </div>
               </div>
             </div>
-            <div class="row pb-3 justify-content-between align-items-center">
-              <div class="col">
-                <div class="card-content">Terminal Growth Rate:</div>
+            <div class="row pb-3 g-3 justify-content-between align-items-center">
+              <div class="col-auto">
+                <label for="discount-rate-entry" class="col-form-label">Discount Rate:</label>
               </div>
               <div class="col-sm-4">
-                <form class="terminal-growth-rate-entry">
-                  <input type="number" name="terminal-growth-entry" id="terminal-growth-entry"
-                    class="form-control form-control-sm text-center" placeholder="Terminal Growth Rate"
-                    value="{{data.default_terminal_growth}}" required />
-                </form>
+                <div class="input-group">
+                  <input type="text" name="discount-rate" id="discount-rate-entry" class="form-control"
+                    value="{{data.default_discount_percent}}">
+                  <span class="input-group-text">%</span>
+                </div>
               </div>
             </div>
-            <div class="row justify-content-between align-items-center">
-              <div class="col">
-                <div class="card-content">Margin Of Safety:</div>
+            <div class="row pb-3 g-3 justify-content-between align-items-center">
+              <div class="col-auto">
+                <label for="terminal-growth-entry" class="col-form-label">Terminal Growth Rate:</label>
               </div>
               <div class="col-sm-4">
-                <form class="margin-of-safety-entry">
-                  <input type="number" name="margin-of-safety-entry" id="margin-of-safety-entry"
-                    class="form-control form-control-sm text-center" placeholder="Margin Of Safety" value="0"
-                    required />
-                </form>
+                <div class="input-group">
+                  <input type="text" name="terminal-growth" id="terminal-growth-entry" class="form-control"
+                    value="{{data.default_terminal_growth_percent}}">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+            </div>
+            <div class="row pb-3 g-3 justify-content-between align-items-center">
+              <div class="col-auto">
+                <label for="margin-of-safety-entry" class="col-form-label">Margin Of Safety:</label>
+              </div>
+              <div class="col-sm-4">
+                <div class="input-group">
+                  <input type="text" name="margin-of-safety" id="margin-of-safety-entry" class="form-control" value="0">
+                  <span class="input-group-text">%</span>
+                </div>
               </div>
             </div>
           </div>

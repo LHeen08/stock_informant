@@ -74,9 +74,9 @@ def try_fetch_stock_data(ticker):
         graham_num = round(graham_num, 2)
     ben_graham_calc = calculate_benjamin_graham_new(eps, eps_growth_rate, average_treasury_data_aaa_bond, current_treasury_data_aaa_bond)
 
-    default_discount = .10
-    default_terminal_growth = .02
-    dcf_val = calculate_dcf_free_cash_flow(prev_free_cash_flows, cash_and_cash_equiv, total_debt, shares, eps_growth_rate, default_discount, default_terminal_growth)
+    default_discount_percent = 10
+    default_terminal_growth_percent = 2
+    dcf_val = calculate_dcf_free_cash_flow(prev_free_cash_flows, cash_and_cash_equiv, total_debt, shares, eps_growth_rate, (default_discount_percent / 100), (default_terminal_growth_percent / 100))
 
 
     # dictionary filled with useful data to return    
@@ -93,7 +93,7 @@ def try_fetch_stock_data(ticker):
         "eps" : eps, 
         "dividend_yield" : format(dividend_yield, ".2"), 
         "bvps" : bvps,
-        "eps_growth_rate" : format(eps_growth_rate, ".2"), 
+        "eps_growth_rate_percent" : "{:.2f}".format(eps_growth_rate * 100), # Convert to percentage
         "cash_and_cash_equiv" : cash_and_cash_equiv,
         "total_debt" : total_debt,
         "shares" : shares,
@@ -102,9 +102,9 @@ def try_fetch_stock_data(ticker):
         "peter_lynch_calcs" : peter_lynch_vals, 
         "graham_num" : graham_num, 
         "ben_graham_calc" : round(ben_graham_calc, 2), 
-        "dcf_val" : dcf_val["DCFVal"],
-        "default_discount" : default_discount, 
-        "default_terminal_growth" : default_terminal_growth
+        "dcf_val" : "{:.2f}".format(dcf_val["DCFVal"]),
+        "default_discount_percent" : default_discount_percent, 
+        "default_terminal_growth_percent" : default_terminal_growth_percent
     }
     
     return stock_fetched_data
