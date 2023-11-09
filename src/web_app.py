@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from data_collection import try_fetch_stock_data
+from valuation_functions import calculate_dcf_free_cash_flow
 
 app = Flask(__name__)
 
@@ -44,20 +45,33 @@ def display_main_page():
     return render_template('data-page.html', data=fetched_company_data)
 
 
-@app.route('/calculate_valuation_methods', methods=['POST'])
-def calculate_valuation_methods():
+@app.route('/calculate_dcf', methods=['POST'])
+def calculate_dcf():
     global fetched_company_data
     # TODO: Need to take into account a margin of safety
+    
+    eps_growth = float(request.values['epsGrowth'])
+    discount_rate = float(request.values['discountRate'])
+    terminal_growth_rate = float(request.values['terminalGrowthRate'])
+    margin_of_safety = float(request.values['marginOfSafety'])
+    
+    
+    calc_func_return_data = calculate_dcf_free_cash_flow(fetched_company_data["cash_flow_data"], fetched_company_data["cash_and_cash_equiv"], fetched_company_data["total_debt"], fetched_company_data["shares"], eps_growth, discount_rate, terminal_growth_rate)
+    
+    # just get the dcf value from the return of the function
+    dcfVal = calc_func_return_data["DCFVal"]
+    
+    if margin_of_safety > 0:
+        dcfVal = dcfVal * (margin_of_safety / 100)
 
 
-
-    # return dcf_response
+    return jsonify({"dcfVal": dcfVal})
 
 
 if __name__ == '__main__':
     # For VM
-    app.run(debug=True, host='10.0.2.15', port='5000')
-    # app.run(debug=True, host='127.0.0.1', port='8000')
+    # app.run(debug=True, host='10.0.2.15', port='5000')
+    app.run(debug=True, host='127.0.0.1', port='8000')
 
 
 
