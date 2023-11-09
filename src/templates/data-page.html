@@ -19,12 +19,12 @@
 <body>
   <div class="container-fluid">
     <div class="mt-5 row d-flex justify-content-center">
-      <h3><strong>Stock Informant</strong></h3>
+      <p class="h2"><strong>Stock Informant</strong></p>
     </div>
     <div id="input-data-row" class="mt-4 mb-4 ml-4 mr-4 row">
       <div class="col-sm-2 d-flex">
         <div class="card w-100">
-          <div class="card-header text-center">Fetch Data for Ticker</div>
+          <div class="h5 card-header text-center">Fetch Data for Ticker</div>
           <div>
             <div class="card-body">
               <div id="input-container" class="row d-flex text-center justify-content-center">
@@ -42,13 +42,26 @@
       </div>
       <div class="col d-flex justify-content-center">
         <div class="card w-100">
-          <div class="card-header">Showing Stock Data For:</div>
+          <div class="card-header">
+            <div class="row ml-2 d-flex justify-content-between align-items-center">
+              <p class="h5">Showing Stock Data For:</p>
+              <button type="button" class="btn" role="button" data-placement="top" data-trigger="hover"
+                title="{{data.company_summary}}" id="company-summary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path
+                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
           <div class="card-body pb-0 ml-3 mr-3">
             <div class="row justify-content-between">
-              <h5 class="card-title pb-2">Company name</h5>
-              <h5 class="card-title pb-2" id="company-name">
+              <p class="h5 pb-2">Company name</p>
+              <p class="h5 pb-2" id="company-name">
                 <strong>{{data.company_name}} ({{data.company_ticker}})</strong>
-              </h5>
+              </p>
             </div>
             <div class="row justify-content-between">
               <h5 class="card-subtitle mb-2 pb-2">
@@ -57,11 +70,6 @@
               <h5 class="card-subtitle mb-2 text-success pb-2" id="current-price">
                 <strong>${{data.current_price}}</strong>
               </h5>
-            </div>
-            <div class="row justify-content-between">
-              <a tabindex="0" class="btn btn-md btn-outline-secondary" role="button" data-toggle="popover"
-                data-trigger="focus" title="Company Summary" data-content="{{data.company_summary}}"
-                id="company-summary">Company Summary</a>
             </div>
           </div>
         </div>
@@ -100,9 +108,9 @@
                       Growth Estimate (+5yrs):
                     </div>
                     <div class="row pr-3">
-                    <p id="quick-data-eps-growth"><strong>{{data.eps_growth_rate_percent}}</strong></p>
-                    <span><strong>%</strong></span>
-                  </div>
+                      <p id="quick-data-eps-growth"><strong>{{data.eps_growth_rate_percent}}</strong></p>
+                      <span><strong>%</strong></span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -115,7 +123,18 @@
       <div id="dcf-card" class="col">
         <div class="card w-100">
           <div class="card-header text-center">
-            DCF Free Cash Flow Valuation:
+            <div class="row d-flex justify-content-center align-items-center">
+              <h5 class="mb-0 mr-3">DCF Free Cash Flow Valuation:</h5>
+              <button type="button" class="btn" role="button" data-placement="top" data-trigger="hover"
+                id="dcf-info-popover">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path
+                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+              </button>
+            </div>
           </div>
           <div class="card-body pb-3 ml-3 mr-3">
             <div class="row pb-3">

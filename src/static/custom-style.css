@@ -21,7 +21,12 @@
   }
 
   .popover {
-    max-width: 30%;
+    max-width: 40%;
+    height: auto;
+  }
+
+  .popover-body {
+    padding: 0px;
   }
 
   #loader-spinner {

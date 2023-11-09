@@ -104,22 +104,49 @@ function formatNumberAbbreviation(number) {
 }
 
 
+function elementExists(selector) {
+  return $(selector).length > 0;
+}
+
+
+
 $(document).ready(function () {
   hideLoader();
 
   // Handle button click event with jQuery
   $("#fetch-button").click(fetchData);
 
-  // Get the company quick info numbers that need to be formatted 
-  var shares_outstanding_str = $("#quick-data-shares").text();
-  console.log("shares ", shares_outstanding_str);
-  var formattedShares = formatNumberAbbreviation(shares_outstanding_str);
-  $("#quick-data-shares").text('').append($('<strong>').text(formattedShares));
 
-  var market_cap_str = $("#quick-data-market-cap").text();
-  console.log("shares ", market_cap_str);
-  var fomattedMarketCap = formatNumberAbbreviation(market_cap_str);
-  $("#quick-data-market-cap").text('').append($('<strong>').text(fomattedMarketCap));
+  // Get the company quick info numbers that need to be formatted 
+  if (elementExists("#quick-data-shares")) {
+    var shares_outstanding_str = $("#quick-data-shares").text();
+    console.log("Shares:", shares_outstanding_str);
+    var formattedShares = formatNumberAbbreviation(shares_outstanding_str);
+    $("#quick-data-shares").text('').append($('<strong>').text(formattedShares));
+  }
+
+  if (elementExists("#quick-data-market-cap")) {
+    var market_cap_str = $("#quick-data-market-cap").text();
+    console.log("Market Cap:", market_cap_str);
+    var formattedMarketCap = formatNumberAbbreviation(market_cap_str);
+    $("#quick-data-market-cap").text('').append($('<strong>').text(formattedMarketCap));
+  }
+
+
+  // Setup info boxes additional info
+  var dcfHelpInfo = `
+    Discounted Cash Flow (DCF) analysis assesses a company's value based on 
+    projected future free cash flows. This involves predicting cash flows over 
+    ten years, incorporating historical data and a growth rate. The analysis discounts 
+    future cash flows to present value, factoring in the time value of money and risk.
+    The equity value is calculated as (Sum of Future Free Cash Flows + Cash and Cash Equivalents - Total Debt) / Outstanding Shares. 
+    This method, though reliant on assumptions, is widely used to determine a potential investment's value.
+  `;
+
+
+  $("#dcf-info-popover").attr("title", dcfHelpInfo);
+
+
 
   // Hold onto the old values for the forms, so if we click off and its null its the old value
   var old_dcf_eps_growth_rate_value = $("#dcf-eps-growth-entry").val();
@@ -128,12 +155,10 @@ $(document).ready(function () {
   var old_dcf_margin_of_safety_value = $("#margin-of-safety-entry").val();
 
 
-  
-  // Handle company summary popover messgage
-  $("#company-summary").click(function () {
-    $("#company-summary").popover("show");
-  });
 
+  // Handle company summary popover messgage
+  $("#company-summary").popover({ trigger: "hover" });
+  $("#dcf-info-popover").popover({ trigger: "hover" });
 
 
 
