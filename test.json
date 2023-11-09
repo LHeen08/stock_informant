@@ -1,50 +1,55 @@
 {
-    "company_ticker": "USB",
-    "company_name": "U.S. Bancorp",
-    "current_price": 34.67,
-    "company_summary": "U.S. Bancorp, a financial services holding company, provides various financial services to individuals, businesses, institutional organizations, governmental entities and other financial institutions in the United States. It operates in Corporate and Commercial Banking, Consumer and Business Banking, Wealth Management and Investment Services, Payment Services, and Treasury and Corporate Support segments. The company offers depository services, including checking accounts, savings accounts, and time certificate contracts; lending services, such as traditional credit products; and credit card services, lease financing and import/export trade, asset-backed lending, agricultural finance, and other products. In addition, it provides ancillary services comprising capital markets, treasury management, and receivable lock-box collection services to corporate and governmental entity customers. Further, the company offers asset management and fiduciary services for individuals, estates, foundations, business corporations, and charitable organizations. Additionally, it provides investment and insurance products to its customers principally within its markets, as well as fund administration services to mutual and other funds. Furthermore, the company provides corporate and purchasing card, and corporate trust services. The company offers merchant processing, investment management, ATM processing, mortgage banking, insurance, and brokerage and leasing services. U.S. Bancorp was founded in 1863 and is headquartered in Minneapolis, Minnesota.",
+    "company_ticker": "GOOGL",
+    "company_name": "Alphabet Inc.",
+    "current_price": 131.84,
+    "company_summary": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, hardware, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in the Google Play store; and Fitbit wearable devices, Google Nest home products, Pixel phones, and other devices, as well as in the provision of YouTube non-advertising services. The Google Cloud segment offers infrastructure, cybersecurity, data, analytics, AI, and machine learning, and other services; Google Workspace that include cloud-based collaboration tools for enterprises, such as Gmail, Docs, Drive, Calendar, and Meet; and other services for enterprise customers. The Other Bets segment sells health technology and internet services. The company was founded in 1998 and is headquartered in Mountain View, California.",
     "cash_flow_data": [
         [
             "2019",
-            4889000000.0
+            30972000000.0
         ],
         [
             "2020",
-            3716000000.0,
-            -23.99
+            42843000000.0,
+            38.33
         ],
         [
             "2021",
-            9870000000.0,
-            165.61
+            67012000000.0,
+            56.41
         ],
         [
             "2022",
-            21119000000.0,
-            113.97
+            60010000000.0,
+            -10.45
+        ],
+        [
+            "2023",
+            77618000000.0,
+            29.34
         ]
     ],
-    "current_treasury_aaa": 4.7,
+    "current_treasury_aaa": 4.67,
     "avg_treasury_aaa": 4.08,
-    "peg_ratio": 1.2,
-    "pe_ratio": 10.35,
-    "eps": 3.35,
-    "dividend_yield": "5.44%",
-    "bvps": 29.74,
-    "eps_growth_rate": "6.00%",
-    "cash_and_cash_equiv": 67476000768,
-    "total_debt": 72488001536,
-    "shares": "1,557,010,048",
-    "market_cap": "53,981,536,256",
-    "beta": 1.04,
+    "peg_ratio": 1.26,
+    "pe_ratio": 25.11,
+    "eps": 5.25,
+    "dividend_yield": "0.014",
+    "bvps": 21.785,
+    "eps_growth_rate": "0.19",
+    "cash_and_cash_equiv": 119935000576,
+    "total_debt": 29446000640,
+    "shares": 5918000128,
+    "market_cap": 1647947284480,
+    "beta": 1.05,
     "peter_lynch_calcs": {
-        "gurufocus": 0.2412,
-        "nasdaq": 0.20099999999999998,
-        "my_method": 1.105314009661836
+        "gurufocus": 1.2588344999999999,
+        "nasdaq": 0.9990749999999999,
+        "my_method": 0.8140183154121863
     },
-    "graham_num": 47.35,
-    "ben_graham_calc": 20.54,
-    "dcf_val": 211.33,
+    "graham_num": 50.73,
+    "ben_graham_calc": 32.97,
+    "dcf_val": 503.3,
     "default_discount": 0.1,
     "default_terminal_growth": 0.02
 }

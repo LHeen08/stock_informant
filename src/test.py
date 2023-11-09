@@ -4,7 +4,7 @@ from valuation_functions import *
 from yahooquery import Ticker
 import json
 
-TICKER = "usb"
+TICKER = "googl"
 
 
 if __name__ == "__main__":

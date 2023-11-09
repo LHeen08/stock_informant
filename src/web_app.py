@@ -62,8 +62,9 @@ def calculate_dcf():
     dcfVal = calc_func_return_data["DCFVal"]
     
     if margin_of_safety > 0:
-        dcfVal = dcfVal * (margin_of_safety / 100)
+        dcfVal = dcfVal * margin_of_safety
 
+    dcfVal = round(dcfVal, 2)
 
     return jsonify({"dcfVal": dcfVal})
 

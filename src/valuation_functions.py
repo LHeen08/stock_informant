@@ -96,7 +96,7 @@ def calculate_dcf_free_cash_flow(input_cashflow_stmnts, cash_and_cash_equiv,
 
     equity_value = (sum_of_pv_of_FFCF + cash_and_cash_equiv) - total_debt # Calculate the equity value
 
-    dcf_val = round(equity_value / shares_outstanding, 2) # Calculate the DCF value
+    dcf_val = (equity_value / shares_outstanding) # Calculate the DCF value
 
     # TODO: Should this just return the DCF Val? 
     data_to_return = {
@@ -108,7 +108,7 @@ def calculate_dcf_free_cash_flow(input_cashflow_stmnts, cash_and_cash_equiv,
         "PVFFCF" : dcf_present_value_of_FFCF,
         "SumOfFFCF" : sum_of_pv_of_FFCF,
         "EquityVal" : equity_value,
-        "DCFVal" : dcf_val
+        "DCFVal" : round(dcf_val, 2)
     }
 
     # Return a dictionary that includes all the useful info

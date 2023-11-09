@@ -105,8 +105,8 @@ $(document).ready(function () {
   var old_dcf_eps_growth_rate_value = $("#dcf-eps-growth-entry").val();
   var old_dcf_discount_rate_value = $("#discount-rate-entry").val();
   var old_dcf_terminal_growth_value = $("#terminal-growth-entry").val();
-  var old_dcf_margin_of_safety_value = $("#magin-of-safety-entry").val();
-
+  var old_dcf_margin_of_safety_value = $("#margin-of-safety-entry").val();
+  // console.log("OLD MOS: ", old_dcf_margin_of_safety_value);
 
 
 
