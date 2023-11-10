@@ -61,7 +61,8 @@ def try_fetch_stock_data(ticker):
 
     next_five_years = [trend for trend in modules["earningsTrend"]["trend"] if trend["period"] == "+5y"]
     eps_growth_rate = next_five_years[0]["growth"] if next_five_years else None # projected growth next 5 years
-    
+    ev_to_ebitda = modules["defaultKeyStatistics"]["enterpriseToEbitda"] # EV / EBITDA
+
     cash_and_cash_equiv = modules["financialData"]["totalCash"] # total cash
     total_debt = modules["financialData"]["totalDebt"] # total debt
     shares = modules["defaultKeyStatistics"]["sharesOutstanding"] # shares outstanding
@@ -76,7 +77,8 @@ def try_fetch_stock_data(ticker):
 
     default_discount_percent = 10
     default_terminal_growth_percent = 2
-    dcf_val = calculate_dcf_free_cash_flow(prev_free_cash_flows, cash_and_cash_equiv, total_debt, shares, eps_growth_rate, (default_discount_percent / 100), (default_terminal_growth_percent / 100))
+    default_margin_of_safety = 10
+    dcf_val = calculate_dcf_free_cash_flow(prev_free_cash_flows, cash_and_cash_equiv, total_debt, shares, eps_growth_rate, (default_discount_percent / 100), (default_terminal_growth_percent / 100), default_margin_of_safety)
 
 
     # dictionary filled with useful data to return    
@@ -93,6 +95,7 @@ def try_fetch_stock_data(ticker):
         "eps" : eps, 
         "dividend_yield" : format(dividend_yield, ".2"), 
         "bvps" : bvps,
+        "ev_to_ebitda" : round(ev_to_ebitda, 2),
         "eps_growth_rate_percent" : "{:.2f}".format(eps_growth_rate * 100), # Convert to percentage
         "cash_and_cash_equiv" : cash_and_cash_equiv,
         "total_debt" : total_debt,
@@ -104,7 +107,8 @@ def try_fetch_stock_data(ticker):
         "ben_graham_calc" : round(ben_graham_calc, 2), 
         "dcf_val" : "{:.2f}".format(dcf_val["DCFVal"]),
         "default_discount_percent" : default_discount_percent, 
-        "default_terminal_growth_percent" : default_terminal_growth_percent
+        "default_terminal_growth_percent" : default_terminal_growth_percent,
+        "default_margin_of_safety" : default_margin_of_safety
     }
     
     return stock_fetched_data

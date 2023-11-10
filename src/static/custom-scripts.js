@@ -140,12 +140,38 @@ $(document).ready(function () {
     ten years, incorporating historical data and a growth rate. The analysis discounts 
     future cash flows to present value, factoring in the time value of money and risk.
     The equity value is calculated as (Sum of Future Free Cash Flows + Cash and Cash Equivalents - Total Debt) / Outstanding Shares. 
-    This method, though reliant on assumptions, is widely used to determine a potential investment's value.
+    This method, though reliant on assumptions, is widely used to determine a potential investment's value. You should always factor in
+    some margin of safety.
   `;
+
+  var lynchHelpInfo = `
+    Peter Lynch: You should select from industries and companies from which you are familiar and have an 
+    undestanding of the factors that will move the stock price. Know the company and their plans for increasing
+    growth and any red flags that could hurt that growth. The following metrics below should be used for comparison
+    to similar companies to provide meaningful insight.
+    <br>
+    <br>
+    GuruFocus = PEG Ratio * EPS Growth * EPS
+    <br>
+    Value > 1: Stock may be overvalued relative to its growth prospects. Value < 1: Stock might be undervalued
+    realative to its growth prospects.
+    <br>
+    <br>
+    NASDAQ = EPS Growth * EPS
+    <br>
+    Value ~1: Indicates balance between the current earnings and expected growth
+    <br>
+    <br>
+    Custom = (EPS Growth + Dividend Yield / PE Ratio) * 100
+    <br>
+    Value > 1: May indicate more favorable combination of growth and income.
+    Value < 1: May indicate less favorable combination of growth and income.
+    `;
 
 
   $("#dcf-info-popover").attr("title", dcfHelpInfo);
-
+  $("#lynch-info-popover").attr("data-html", "true");
+  $("#lynch-info-popover").attr("title", lynchHelpInfo);
 
 
   // Hold onto the old values for the forms, so if we click off and its null its the old value
@@ -159,6 +185,7 @@ $(document).ready(function () {
   // Handle company summary popover messgage
   $("#company-summary").popover({ trigger: "hover" });
   $("#dcf-info-popover").popover({ trigger: "hover" });
+  $("#lynch-info-popover").popover({trigger: "hover"});
 
 
 

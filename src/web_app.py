@@ -55,13 +55,18 @@ def calculate_dcf():
     terminal_growth_rate = float(request.values['terminalGrowthRate']) / 100 # Divide by 100
     margin_of_safety = float(request.values['marginOfSafety'])
     
-    calc_func_return_data = calculate_dcf_free_cash_flow(fetched_company_data["cash_flow_data"], fetched_company_data["cash_and_cash_equiv"], fetched_company_data["total_debt"], fetched_company_data["shares"], eps_growth, discount_rate, terminal_growth_rate)
+    calc_func_return_data = calculate_dcf_free_cash_flow(fetched_company_data["cash_flow_data"], 
+                                                         fetched_company_data["cash_and_cash_equiv"], 
+                                                         fetched_company_data["total_debt"], 
+                                                         fetched_company_data["shares"], 
+                                                         eps_growth, discount_rate, 
+                                                         terminal_growth_rate, margin_of_safety)
     
     # just get the dcf value from the return of the function
     dcfVal = calc_func_return_data["DCFVal"]
     
-    if margin_of_safety > 0:
-        dcfVal = dcfVal * (1 - (margin_of_safety / 100)) # Divide by 100 here, so we can check for negative or 0 first
+    # if margin_of_safety > 0:
+    #     dcfVal = dcfVal * (1 - (margin_of_safety / 100)) # Divide by 100 here, so we can check for negative or 0 first
 
     # print("web app:", dcfVal)
     dcfVal = round(dcfVal, 2) # Round to 2 decimal places
