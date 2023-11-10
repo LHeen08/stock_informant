@@ -8,18 +8,20 @@
 def calculate_peter_lynch_formulas(eps, eps_growth_rate, peg_ratio, pe_ratio, dividend_yield):
     peter_lynch_dict = {} # Dict for each method
     
+
     gurufocus_formula = (peg_ratio * eps_growth_rate * eps) # Calculate the GuruGocus formula
     peter_lynch_dict['gurufocus'] = round(gurufocus_formula, 2)
     
     nasdaq_formula = (eps_growth_rate * eps) # Calculate the NASDAQ formula
     peter_lynch_dict['nasdaq'] = round(nasdaq_formula, 2)
     
-    if pe_ratio == "N/A":
-         my_method = "N/A"
+    if pe_ratio == "N/A" or dividend_yield == "N/A":
+        my_method = "N/A"
+        peter_lynch_dict['my_method'] = my_method
     else: 
         my_method = ((eps_growth_rate + dividend_yield) / pe_ratio) * 100 # Calculate the My method formula
+        peter_lynch_dict['my_method'] = round(my_method, 2)
 
-    peter_lynch_dict['my_method'] = round(my_method, 2)
     
     return peter_lynch_dict
     
@@ -124,7 +126,7 @@ def calculate_dcf_free_cash_flow(input_cashflow_stmnts, cash_and_cash_equiv,
         "DCFVal" : dcf_val
     }
 
-    print("DCF Val : ", dcf_val)
+    # print("DCF Val : ", dcf_val)
 
     # Return a dictionary that includes all the useful info
     return data_to_return

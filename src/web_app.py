@@ -65,9 +65,7 @@ def calculate_dcf():
     # just get the dcf value from the return of the function
     dcfVal = calc_func_return_data["DCFVal"]
     
-    # if margin_of_safety > 0:
-    #     dcfVal = dcfVal * (1 - (margin_of_safety / 100)) # Divide by 100 here, so we can check for negative or 0 first
-
+    
     # print("web app:", dcfVal)
     dcfVal = round(dcfVal, 2) # Round to 2 decimal places
     print("calculate_dcf() return:", dcfVal)
