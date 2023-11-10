@@ -90,6 +90,42 @@ function updateDCF() {
 }
 
 
+function updatePeterLynch() {
+  // Variables for dcf
+  var epsGrowth = $("#lynch-eps-growth-entry").val();
+
+  // Create a data object to pass to Flask
+  var dataToPass = {
+    epsGrowth: epsGrowth,
+  };
+
+  console.log("Passing to flask: ", dataToPass);
+
+  // Make an ajax call to update with the new values
+  $.ajax({
+    method: "POST",
+    url: "/calculate_peter_lynch",
+    data: dataToPass,
+    dataType: "json",
+    success: function (data) {
+      if (data) {
+        console.log("Return data: ", data);
+
+        console.log("EPS Growth ", data["epsGrowth"]);
+
+        // Return the new lynch values
+        $("#lynch-eps-growth-entry").text(data["epsGrowth"]);
+      } else {
+        alert("Error getting data from /calculate_peter_lynch");
+      }
+    },
+    error: function () {
+      alert("Invalid data or an error occurred while calculating peter lynch value.");
+    },
+  });
+}
+
+
 // Function to format numbers 
 function formatNumberAbbreviation(number) {
   if (Math.abs(number) >= 1.0e12) {

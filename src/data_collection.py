@@ -11,7 +11,7 @@ def try_fetch_stock_data(ticker):
     ticker = ticker.upper()
     
     try: # Try to get stock data
-        stock_data = Ticker(ticker, validate=True)
+        stock_data = Ticker(ticker, validate=True, user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
         
         try: # Try to get treasury data
             treasury_data = Ticker("^TYX").summary_detail["^TYX"]
@@ -179,7 +179,7 @@ def multiples_valuation_find_companies(current_ticker, current_sector, current_i
 
     similar_comps_list = []
 
-    print(similar_matches)
+    # print(similar_matches)
 
     # Iterate over each closest match
     if closest_match in similar_matches:
@@ -190,7 +190,7 @@ def multiples_valuation_find_companies(current_ticker, current_sector, current_i
     else:
         print(f"No quotes found for '{closest_match}'")
 
-    tickers = Ticker(similar_comps_list, asynchronous=True, validate=True, retry=10)
+    tickers = Ticker(similar_comps_list, asynchronous=True, validate=True, retry=10, user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
 
     filtered_tickers = []
 
@@ -249,6 +249,6 @@ def multiples_valuation_find_companies(current_ticker, current_sector, current_i
             "ev/ebitda": tickers.key_stats[ticker]["enterpriseToEbitda"]
         }
 
-    print(list_of_companies_w_data)
+    # print(list_of_companies_w_data)
 
     return list_of_companies_w_data

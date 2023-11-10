@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from data_collection import try_fetch_stock_data
-from valuation_functions import calculate_dcf_free_cash_flow
+from valuation_functions import calculate_dcf_free_cash_flow, calculate_peter_lynch_formulas, calculate_benjamin_graham_new
 
 app = Flask(__name__)
 
@@ -64,7 +64,7 @@ def calculate_dcf():
     
     # just get the dcf value from the return of the function
     dcfVal = calc_func_return_data["DCFVal"]
-    
+
     
     # print("web app:", dcfVal)
     dcfVal = round(dcfVal, 2) # Round to 2 decimal places
@@ -72,6 +72,20 @@ def calculate_dcf():
 
     return jsonify({"dcfVal": dcfVal})
 
+@app.route('/calculate_peter_lynch', methods=['POST'])
+def calculate_peter_lynch():
+    global fetched_company_data
+
+    # Convert the values from the request 
+    eps_growth = float(request.values['epsGrowth']) / 100
+
+    calc_peter_lynch = calculate_peter_lynch_formulas(fetched_company_data['eps'], 
+                                                      eps_growth, 
+                                                      fetched_company_data['pegRatio'], 
+                                                      fetched_company_data['peRatio'], 
+                                                      fetched_company_data['dividendYield'])
+
+    return calc_peter_lynch
 
 if __name__ == '__main__':
     # For VM
