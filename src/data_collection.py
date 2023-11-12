@@ -84,8 +84,13 @@ def try_fetch_stock_data(ticker):
 
     next_five_years = [trend for trend in modules["earningsTrend"]["trend"] if trend["period"] == "+5y"]
     eps_growth_rate = next_five_years[0]["growth"] if next_five_years else None # projected growth next 5 years
-    ev_to_ebitda = modules["defaultKeyStatistics"]["enterpriseToEbitda"] # EV / EBITDA
-
+    
+    try:
+        ev_to_ebitda = modules["defaultKeyStatistics"]["enterpriseToEbitda"] # EV / EBITDA
+        ev_to_ebitda = round(ev_to_ebitda, 2)
+    except KeyError:
+        ev_to_ebitda = "N/A"
+        
     cash_and_cash_equiv = modules["financialData"]["totalCash"] # total cash
     total_debt = modules["financialData"]["totalDebt"] # total debt
     shares = modules["defaultKeyStatistics"]["sharesOutstanding"] # shares outstanding
@@ -121,7 +126,7 @@ def try_fetch_stock_data(ticker):
         "eps" : eps, 
         "dividend_yield" : dividend_yield, 
         "bvps" : round(bvps, 2),
-        "ev_to_ebitda" : round(ev_to_ebitda, 2),
+        "ev_to_ebitda" : ev_to_ebitda,
         "eps_growth_rate_percent" : "{:.2f}".format(eps_growth_rate * 100), # Convert to percentage
         "cash_and_cash_equiv" : cash_and_cash_equiv,
         "total_debt" : total_debt,
@@ -240,13 +245,19 @@ def multiples_valuation_find_companies(current_ticker, current_sector, current_i
             pe_ratio = round(pe_ratio, 2)
         except KeyError:
             pe_ratio = "N/A"
+            
+        try:
+            ev_to_ebitda = tickers.key_stats[ticker]["enterpriseToEbitda"]
+            ev_to_ebitda = round(ev_to_ebitda, 2)
+        except KeyError:
+            ev_to_ebitda = "N/A"
 
         # Add information to the dictionary
         list_of_companies_w_data[ticker] = {
             "company_name": tickers.price[ticker]["longName"],
             "peg": peg_ratio,
             "pe": pe_ratio,
-            "ev/ebitda": tickers.key_stats[ticker]["enterpriseToEbitda"]
+            "ev/ebitda": ev_to_ebitda
         }
 
     # print(list_of_companies_w_data)

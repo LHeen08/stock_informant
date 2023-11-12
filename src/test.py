@@ -5,7 +5,7 @@ from yahooquery import Ticker, Screener
 from Levenshtein import distance
 import json
 
-TICKER = "xom"
+TICKER = "bac"
 
 if __name__ == "__main__":
     TICKER = TICKER.upper()
