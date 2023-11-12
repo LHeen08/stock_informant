@@ -4,6 +4,7 @@ import math
 from valuation_functions import calculate_benjamin_graham_new, calculate_dcf_free_cash_flow, calculate_graham_number, calculate_peter_lynch_formulas
 from Levenshtein import distance
 import threading
+import json
 
 # Function to try and fetch the financial data
 def try_fetch_stock_data(ticker):
@@ -184,9 +185,6 @@ def multiples_valuation_find_companies(current_ticker, current_sector, current_i
 
     similar_comps_list = []
 
-    # print(similar_matches)
-
-    # Iterate over each closest match
     if closest_match in similar_matches:
         # Iterate over quotes for the current closest match
         for quote in similar_matches[closest_match]["quotes"]:
@@ -196,70 +194,64 @@ def multiples_valuation_find_companies(current_ticker, current_sector, current_i
         print(f"No quotes found for '{closest_match}'")
 
     tickers = Ticker(similar_comps_list, asynchronous=True, validate=True, retry=10, user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
+    
+    modules = ["defaultKeyStatistics", "summaryProfile", "quoteType", "summaryDetail"]
+    
+    fetched_data = tickers.get_modules(modules)
+    
+    index_by_industry = {}
+    
+    for ticker, company_data in fetched_data.items():
+        industry = company_data["summaryProfile"]["industry"].lower()
+        
+        if industry not in index_by_industry:
+            index_by_industry[industry] = set()
+        index_by_industry[industry].add(ticker)
+        
+    
+    industry_matches = index_by_industry.get(current_industry, set())
+    while len(industry_matches) < 5:
+        for other_industry, other_tickers in index_by_industry.items():
+            if other_industry != current_industry.lower():
+                additional_tickers = list(other_tickers - industry_matches)
+                industry_matches.update(additional_tickers)
+                if len(industry_matches) >= 5:
+                    break  # Stop if we have enough tickers
+        if len(industry_matches) >= 5:
+            break  # Stop the outer loop if we have enough tickers
 
-    filtered_tickers = []
-
-    # Get exact matches first
-    for ticker, data in tickers.summary_profile.items():
-        sector_key = data.get("sector", "").lower()
-        industry_key = data.get("industry", "").lower()
-
-        if sector_key == current_sector and industry_key == current_industry:
-            # Add the ticker and its data to the list
-            filtered_tickers.append((ticker, data))
-
-        # Check if the length of filtered_tickers is 5
-        if len(filtered_tickers) == 5:
-            break
-
-    # Check if the length of filtered_tickers is less than 5
-    if len(filtered_tickers) < 5:
-        # Create a set of tickers already in filtered_tickers
-        existing_tickers = set(ticker_data[0] for ticker_data in filtered_tickers)
-
-        # Iterate through tickers and add non-matching ones to filtered_tickers
-        for ticker, data in tickers.summary_profile.items():
-            sector_key = data.get("sector", "").lower()
-            industry_key = data.get("industry", "").lower()
-
-            # Check if the ticker is not already in filtered_tickers and matches the sector and industry
-            if ticker not in existing_tickers:
-                # Add the ticker and its data to the list
-                filtered_tickers.append((ticker, data))
-
-            # Check if the length of filtered_tickers is 5
-            if len(filtered_tickers) == 5:
-                break
-
+    industry_matches_list = list(industry_matches)[:5]
+    
     list_of_companies_w_data = {}
+    # modules = ["defaultKeyStatistics", "summaryDetail", "quoteType"]
+    
     # Access methods on the original Ticker object
-    for ticker, data in filtered_tickers:
+    for ticker in industry_matches_list:
         try:
-            peg_ratio = tickers.key_stats[ticker]["pegRatio"]
+            peg_ratio = fetched_data[ticker]["defaultKeyStatistics"]["pegRatio"]
             peg_ratio = round(peg_ratio, 2)
         except KeyError:
             peg_ratio = "N/A"
 
         try:
-            pe_ratio = tickers.summary_detail[ticker]["trailingPE"]
+            pe_ratio = fetched_data[ticker]["summaryDetail"]["trailingPE"]
             pe_ratio = round(pe_ratio, 2)
         except KeyError:
             pe_ratio = "N/A"
             
         try:
-            ev_to_ebitda = tickers.key_stats[ticker]["enterpriseToEbitda"]
+            ev_to_ebitda = fetched_data[ticker]["defaultKeyStatistics"]["enterpriseToEbitda"]
             ev_to_ebitda = round(ev_to_ebitda, 2)
         except KeyError:
             ev_to_ebitda = "N/A"
 
         # Add information to the dictionary
         list_of_companies_w_data[ticker] = {
-            "company_name": tickers.price[ticker]["longName"],
+            "company_name": fetched_data[ticker]["quoteType"]["longName"],
             "peg": peg_ratio,
             "pe": pe_ratio,
             "ev/ebitda": ev_to_ebitda
         }
 
-    # print(list_of_companies_w_data)
 
     return list_of_companies_w_data

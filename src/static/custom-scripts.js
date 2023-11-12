@@ -18,18 +18,18 @@
     to similar companies to provide meaningful insight.
     <br>
     <br>
-    GuruFocus = PEG Ratio x EPS Growth x EPS
+    GuruFocus: PEG Ratio x EPS Growth x EPS
     <br>
     Value > 1: Stock may be overvalued relative to its growth prospects. Value < 1: Stock might be undervalued
     relative to its growth prospects.
     <br>
     <br>
-    NASDAQ = EPS Growth x EPS
+    NASDAQ: EPS Growth x EPS
     <br>
     Value ~1: Indicates balance between the current earnings and expected growth
     <br>
     <br>
-    Custom = (EPS Growth + Dividend Yield / PE Ratio) x 100
+    Custom: (EPS Growth + Dividend Yield / PE Ratio) x 100
     <br>
     Value > 1: May indicate more favorable combination of growth and income.
     Value < 1: May indicate less favorable combination of growth and income.
