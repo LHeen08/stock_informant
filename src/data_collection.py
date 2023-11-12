@@ -120,7 +120,7 @@ def try_fetch_stock_data(ticker):
         "pe_ratio" : pe_ratio,
         "eps" : eps, 
         "dividend_yield" : dividend_yield, 
-        "bvps" : bvps,
+        "bvps" : round(bvps, 2),
         "ev_to_ebitda" : round(ev_to_ebitda, 2),
         "eps_growth_rate_percent" : "{:.2f}".format(eps_growth_rate * 100), # Convert to percentage
         "cash_and_cash_equiv" : cash_and_cash_equiv,

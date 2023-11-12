@@ -8,8 +8,8 @@
 def calculate_peter_lynch_formulas(eps, eps_growth_rate, peg_ratio, pe_ratio, dividend_yield):
     peter_lynch_dict = {} # Dict for each method
     
-
-    gurufocus_formula = (peg_ratio * eps_growth_rate * eps) # Calculate the GuruGocus formula
+    
+    gurufocus_formula = (peg_ratio * eps_growth_rate * eps) # Calculate the Gurufocus formula
     peter_lynch_dict['gurufocus'] = round(gurufocus_formula, 2)
     
     nasdaq_formula = (eps_growth_rate * eps) # Calculate the NASDAQ formula
@@ -29,7 +29,7 @@ def calculate_peter_lynch_formulas(eps, eps_growth_rate, peg_ratio, pe_ratio, di
 
 # Graham number calculation for calculating undervalued stocks
 # Shows the maximum price that should be paid for a stock
-# extermely defensive
+# extremely defensive
 def calculate_graham_number(eps, book_value_per_share):
     graham_number = (22.5 * eps * book_value_per_share)**(1/2)
     if isinstance(graham_number, complex):

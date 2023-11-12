@@ -76,49 +76,52 @@
       </div>
       <div id="quick-data" class="col">
         <div class="card w-100">
-          <div class="card-header text-center">Company Quick Info</div>
+          <div class="card-header text-center">
+            <div class="row d-flex justify-content-center align-items-center">
+              <h5 class="mb-0 pt-1 pb-1">Company Quick Info</h5>
+            </div>
+          </div>
           <div class="card-body mb-0 pb-0">
             <div class="container px-3">
               <div class="row gx-5">
                 <div class="col">
                   <div class="row justify-content-between pr-3">
                     <div class="card-content">EPS (TTM):</div>
-                    <p id="quick-data-eps"><strong>{{data.eps}}</strong></p>
+                    <p id="quick-data-eps"><strong>{{ data.eps }}</strong></p>
                   </div>
                   <div class="row justify-content-between pr-3">
                     <div class="card-content">P/E:</div>
-                    <p id="quick-data-pe"><strong>{{data.pe_ratio}}</strong></p>
+                    <p id="quick-data-pe"><strong>{{ data.pe_ratio }}</strong></p>
                   </div>
                   <div class="row justify-content-between pr-3">
                     <div class="card-content">
                       Growth Estimate (+5yrs):
                     </div>
                     <div class="row pr-3">
-                      <p id="quick-data-eps-growth"><strong>{{data.eps_growth_rate_percent}}</strong></p>
-                      <span><strong>%</strong></span>
+                      <p id="quick-data-eps-growth"><strong>{{ data.eps_growth_rate_percent }}%</strong></p>
                     </div>
                   </div>
                   <div class="row justify-content-between pr-3">
                     <div class="card-content">PEG Ratio:</div>
-                    <p id="quick-data-peg-ratio"><strong>{{data.peg_ratio}}</strong></p>
+                    <p id="quick-data-peg-ratio"><strong>{{ data.peg_ratio }}</strong></p>
                   </div>
                 </div>
                 <div class="col">
                   <div class="row justify-content-between pl-3">
                     <div class="card-content">Enterprise Value/EBITDA:</div>
-                    <p id="quick-data-ev-to-ebitda"><strong>{{data.ev_to_ebitda}}</strong></p>
+                    <p id="quick-data-ev-to-ebitda"><strong>{{ data.ev_to_ebitda }}</strong></p>
                   </div>
                   <div class="row justify-content-between pl-3">
                     <div class="card-content">Beta:</div>
-                    <p id="quick-data-beta"><strong>{{data.beta}}</strong></p>
+                    <p id="quick-data-beta"><strong>{{ data.beta }}</strong></p>
                   </div>
                   <div class="row justify-content-between pl-3">
                     <div class="card-content">Market Cap:</div>
-                    <p id="quick-data-market-cap"><strong>{{data.market_cap}}</strong></p>
+                    <p id="quick-data-market-cap"><strong>{{ data.market_cap }}</strong></p>
                   </div>
                   <div class="row justify-content-between pl-3">
                     <div class="card-content">Shares Outstanding:</div>
-                    <p id="quick-data-shares"><strong>{{data.shares}}</strong></p>
+                    <p id="quick-data-shares"><strong>{{ data.shares }}</strong></p>
                   </div>
                 </div>
               </div>
@@ -126,6 +129,8 @@
           </div>
         </div>
       </div>
+
+
     </div>
     <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around">
       <div id="dcf-card" class="col">
@@ -147,7 +152,7 @@
           <div class="card-body pb-3 ml-3 mr-3">
             <div class="row pb-3">
               <div class="col">
-                <h5 class="card-content"><strong>DCF Value:</strong></h5>
+                <h5 class="card-content"><strong><u>DCF Value:</u></strong></h5>
               </div>
               <div class="col d-flex justify-content-end">
                 <span>$</span>
@@ -205,16 +210,7 @@
           </div>
         </div>
       </div>
-      <div id="recommendation-eval-card" class="col">
-        <div class="card w-100">
-          <div class="card-header text-center">Recommendation</div>
-          <div class="card-body pb-0 ml-3 mr-3 mb-3">
-            <div class="row justify-content-center">
-              <div class="card-content"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <div id="lynch-eval-card" class="col">
         <div class="card w-100">
           <div class="card-header text-center">
@@ -245,114 +241,192 @@
               </div>
             </div>
             <div class="row pb-3">
-              <div class="col">
-                <h5 class="card-content"><strong>GuruFocus:</strong></h5>
+              <div class="col d-flex justify-content-start">
+                <h5 class="card-content"><strong><u>GuruFocus:</u></strong></h5>
               </div>
-              <div class="col d-flex justify-content-end">
+              <div class="col-sm-4 d-flex justify-content-end">
                 <h5 class="card-content" id="lynch-guru-focus">{{data.peter_lynch_calcs["gurufocus"]}}</h5>
               </div>
             </div>
             <div class="row pb-3">
-              <div class="col">
-                <h5 class="card-content"><strong>NASDAQ:</strong></h5>
+              <div class="col d-flex justify-content-start">
+                <h5 class="card-content"><strong><u>NASDAQ:</u></strong></h5>
               </div>
-              <div class="col d-flex justify-content-end">
+              <div class="col-sm-4 d-flex justify-content-end">
                 <h5 class="card-content" id="lynch-nasdaq">{{data.peter_lynch_calcs["nasdaq"]}}</h5>
               </div>
             </div>
             <div class="row pb-0">
-              <div class="col">
-                <h5 class="card-content"><strong>Custom w/ Dividends:</strong></h5>
+              <div class="col d-flex justify-content-start">
+                <h5 class="card-content"><strong><u>Custom w/ Dividends:</u></strong></h5>
               </div>
-              <div class="col d-flex justify-content-end">
+              <div class="col-sm-4 d-flex justify-content-end">
                 <h5 class="card-content" id="lynch-custom">{{data.peter_lynch_calcs["my_method"]}}</h5>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around">
-      <div id="ben-graham-formula-eval-card" class="col-auto">
-        <div class="card w-100">
-          <div class="card-header text-center">Benjamin Graham Valuation</div>
-          <div class="card-body pb-3 ml-3 mr-3">
-            <div class="row pb-3 justify-content-between align-items-center">
-              <div class="col-auto">
-                <label for="ben-graham-eps-growth-entry" class="col-form-label">EPS Projected Growth Rate:</label>
+      <div class="col">
+        <div class="row pb-3">
+          <div id="ben-graham-formula-eval-card" class="col">
+            <div class="card w-100">
+              <div class="card-header text-center">
+
+                <div class="row d-flex justify-content-center align-items-center">
+                  <h5 class="mb-0 mr-3">Benjamin Graham Valuation</h5>
+                  <button type="button" class="btn" role="button" data-placement="top" data-trigger="hover"
+                    id="ben-graham-info-popover">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-info-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                      <path
+                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-              <div class="col-sm-4">
-                <div class="input-group">
-                  <input type="text" name="ben-graham-eps-growth-entry" id="ben-graham-eps-growth-entry"
-                    class="form-control" value="{{data.eps_growth_rate_percent}}">
-                  <span class="input-group-text">%</span>
+              <div class="card-body pb-3 ml-3 mr-3">
+                <div class="row pb-3 justify-content-between align-items-center">
+                  <div class="col-auto">
+                    <label for="ben-graham-eps-growth-entry" class="col-form-label">EPS Projected Growth Rate:</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="input-group">
+                      <input type="text" name="ben-graham-eps-growth-entry" id="ben-graham-eps-growth-entry"
+                        class="form-control" value="{{data.eps_growth_rate_percent}}">
+                      <span class="input-group-text">%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row pb-0">
+                  <div class="col-8 d-flex">
+                    <h5 class="card-content"><strong><u>Benjamin Graham Formula:</u></strong></h5>
+                  </div>
+                  <div class="col d-flex justify-content-end align-items-center">
+                    <h5 class="card-content" id="ben-graham-formula">{{data.ben_graham_calc}}</h5>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="row pb-0">
-              <div class="col-8 d-flex">
-                <h5 class="card-content"><strong>Benjamin Graham Formula:</strong></h5>
+          </div>
+        </div>
+        <div class="row">
+          <div id="graham-number-eval-card" class="col">
+            <div class="card w-100">
+              <div class="card-header text-center">
+                <div class="row d-flex justify-content-center align-items-center">
+                  <h5 class="mb-0 mr-3">Graham Number</h5>
+                  <button type="button" class="btn" role="button" data-placement="top" data-trigger="hover"
+                    id="graham-number-info-popover">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-info-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                      <path
+                        d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-              <div class="col d-flex justify-content-end align-items-center">
-                <h5 class="card-content" id="ben-graham-formula">{{data.ben_graham_calc}}</h5>
+              <div class="card-body pb-2 ml-3 mr-3">
+                <div class="row pb-0">
+                  <div class="col d-flex">
+                    <p class="card-content">Book Value Per share:</p>
+                  </div>
+                  <div class="col d-flex justify-content-end align-items-center">
+                    <p id="graham-bvps">{{data.bvps}}</p>
+                  </div>
+                </div>
+                <div class="row pb-0">
+                  <div class="col">
+                    <h5 class="card-content"><strong><u>Graham Number:</u></strong></h5>
+                  </div>
+                  <div class="col d-flex justify-content-end align-items-center">
+                    <h5 class="card-content" id="graham-number">{{data.graham_num}}</h5>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="graham-number-eval-card" class="col-auto">
-        <div class="card w-100">
-          <div class="card-header text-center">Graham Number</div>
-          <div class="card-body pb-2 ml-3 mr-3">
-            <div class="row pb-0">
-              <div class="col">
-                <h5 class="card-content"><strong>Graham Number:</strong></h5>
-              </div>
-              <div class="col d-flex justify-content-end">
-                <h5 class="card-content" id="graham-number">{{data.graham_num}}</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
+    </div>
+
+    <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around">
+
+
       <div id="multiples-eval-card" class="col">
         <div class="card w-100">
-          <div class="card-header text-center">Multiples valuation</div>
+          <div class="card-header text-center">
+            <div class="row d-flex justify-content-center align-items-center">
+              <h5 class="mb-0 mr-3">Multiples Valuation:</h5>
+              <button type="button" class="btn" role="button" data-placement="top" data-trigger="hover"
+                id="multiples-valuation-info-popover">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path
+                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
           <div class="card-body pb-2 ml-3 mr-3">
             <div class="row pb-2">
-              <div class="col mr-5 pr-5">
-                <h5 class="card-content">Company</h5>
+              <div class="col-md-5 d-flex justify-content-center">
+                <h5 class="card-content"><u>Company</u></h5>
               </div>
-              <div class="col">
-                <p>EV/EBITDA</p>
+              <div class="col-md-2 d-flex justify-content-center">
+                <p><u>EV/EBITDA</u></p>
               </div>
-              <div class="col">
-                <p>P/E ratio</p>
+              <div class="col-md-2 d-flex justify-content-center">
+                <p><u>P/E Ratio</u></p>
               </div>
-              <div class="col">
-                <p>PEG ratio</p>
+              <div class="col-md-2 d-flex justify-content-center">
+                <p><u>PEG Ratio</u></p>
               </div>
             </div>
             {% for ticker, company_data in data.multiples_val_companies.items() %}
             <div class="row pb-2">
-              <div class="col pr-5 mr-5">
-                <p><strong>{{ company_data["company_name"]}} ({{ticker}})</strong></p>
+              <div class="col-md-5 d-flex align-items-center">
+                <p class="mb-0"><strong>{{ company_data["company_name"] }} ({{ ticker }})</strong></p>
               </div>
-              <div class="col">
-                <p><strong>{{ company_data["ev/ebitda"] }}</strong></p>
+              <div class="col-md-2 d-flex align-items-center justify-content-center">
+                <p class="mb-0"><strong>{{ company_data["ev/ebitda"] }}</strong></p>
               </div>
-              <div class="col">
-                <p><strong>{{ company_data["pe"] }}</strong></p>
+              <div class="col-md-2 d-flex align-items-center justify-content-center">
+                <p class="mb-0"><strong>{{ company_data["pe"] }}</strong></p>
               </div>
-              <div class="col">
-                <p><strong>{{ company_data["peg"] }}</strong></p>
+              <div class="col-md-2 d-flex align-items-center justify-content-center">
+                <p class="mb-0"><strong>{{ company_data["peg"] }}</strong></p>
               </div>
             </div>
+            <!-- Add a line under each row -->
+            <hr class="my-2">
             {% endfor %}
           </div>
         </div>
       </div>
+      <div id="recommendation-eval-card" class="col">
+        <div class="card w-100">
+          <div class="card-header text-center">
+            <div class="row d-flex justify-content-center align-items-center">
+              <h5 class="mb-0 pt-1 pb-1">Analysis:</h5>
+            </div>
+          </div>
+          <div class="card-body pb-0 ml-3 mr-3 mb-3">
+            <div class="row justify-content-center">
+              <div class="card-content"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+  </div>
   </div>
   <div class="mt-4 mb-4 ml-4 mr-4 row d-flex justify-content-around"></div>
   </div>

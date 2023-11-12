@@ -48,3 +48,8 @@
     margin: auto;
     width: 55%;
   }
+
+  .card-header {
+    padding-bottom: .5rem;
+    padding-top: .5rem;
+  }
