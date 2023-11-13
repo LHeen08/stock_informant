@@ -44,7 +44,10 @@ def fetch_data():
 def display_main_page():
     global fetched_company_data
 
-    return render_template("data-page.html", data=fetched_company_data)
+
+    recommendation_columns = ['Strong Buy', 'Buy', 'Hold', 'Sell', 'Strong Sell']
+
+    return render_template("data-page.html", data=fetched_company_data, recommendation_columns=recommendation_columns)
 
 
 @app.route("/calculate_dcf", methods=["POST"])
@@ -117,11 +120,11 @@ def calculate_ben_graham():
 if __name__ == "__main__":
     if platform.system() == "Darwin" :
         app.run(debug=True, host="127.0.0.1", port="8000") # Using port 8000 for mac...
-    # else:
-        # app.run(debug=True, host="127.0.0.1", port="5000")
+    else:
+        app.run(debug=True, host="127.0.0.1", port="5000")
     
     # Used for VM
-    app.run(debug=True, host="10.0.2.15", port="5000")
+    # app.run(debug=True, host="10.0.2.15", port="5000")
 
 
 

@@ -23,7 +23,7 @@ def try_fetch_stock_data(ticker):
         raise ValueError(f"Error: Unable to retrieve data for ticker {ticker}. Error Details: {str(exc)}")
 
     
-    modules_to_retrieve = "assetProfile summaryDetail price summaryProfile defaultKeyStatistics earningsTrend financialData" # modules to get from object
+    modules_to_retrieve = "assetProfile summaryDetail price summaryProfile defaultKeyStatistics earningsTrend financialData recommendationTrend" # modules to get from object
     cash_flow_to_use = stock_data.cash_flow().to_dict(orient="records") # get cash flow to use for dcf
 
     # Convert date and timestamps to strings, dont add to list if FreeCashFlow is nan
@@ -109,6 +109,16 @@ def try_fetch_stock_data(ticker):
     default_margin_of_safety = 10
     dcf_val = calculate_dcf_free_cash_flow(prev_free_cash_flows, cash_and_cash_equiv, total_debt, shares, eps_growth_rate, (default_discount_percent / 100), (default_terminal_growth_percent / 100), default_margin_of_safety)
 
+    # Get the recommended ratings
+    rec_trends = modules["recommendationTrend"]["trend"]
+    print(rec_trends)
+    rec_trends = [format_keys(entry) for entry in rec_trends]
+    print(rec_trends)
+
+    # rec_latest_trends = {}
+    # for key, value in rec_trends.items():
+    #     if key != 'period':
+    #         rec_latest_trends[key] = value
 
     thread.join()
     multiples_valuation_companies = result_holder["multiples_valuation_companies"]
@@ -141,7 +151,8 @@ def try_fetch_stock_data(ticker):
         "default_discount_percent" : default_discount_percent, 
         "default_terminal_growth_percent" : default_terminal_growth_percent,
         "default_margin_of_safety" : default_margin_of_safety,
-        "multiples_val_companies" : multiples_valuation_companies 
+        "multiples_val_companies" : multiples_valuation_companies,
+        "rec_trends" : rec_trends 
     }
 
     
@@ -255,3 +266,19 @@ def multiples_valuation_find_companies(current_ticker, current_sector, current_i
 
 
     return list_of_companies_w_data
+
+
+def format_keys(dictionary):
+    formatted_dict = {}
+    for key, value in dictionary.items():
+        if key == 'period':
+            formatted_dict[key] = value
+        elif key.startswith('strong'):
+            # Capitalize and insert a space before 'Buy' or 'Sell'
+            formatted_key = 'Strong ' + key[6:].capitalize()
+            formatted_dict[formatted_key] = value
+        else:
+            # Capitalize the first letter of each word
+            formatted_key = ' '.join(word.capitalize() for word in key.split())
+            formatted_dict[formatted_key] = value
+    return formatted_dict

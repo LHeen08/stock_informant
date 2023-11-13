@@ -1,5 +1,5 @@
 // Setup info boxes additional info
-let dcfHelpInfo = `
+const dcfHelpInfo = `
     Discounted Cash Flow (DCF) analysis assesses a company's value based on 
     projected future free cash flows. This involves predicting cash flows over 
     ten years, incorporating historical data and a growth rate. The analysis discounts 
@@ -11,7 +11,7 @@ let dcfHelpInfo = `
     some margin of safety.
   `;
 
-let lynchHelpInfo = `
+const lynchHelpInfo = `
     Peter Lynch: You should select from industries and companies from which you are familiar and have an 
     understanding of the factors that will move the stock price. Know the company and their plans for increasing
     growth and any red flags that could hurt that growth. The following metrics below should be used for comparison
@@ -35,16 +35,16 @@ let lynchHelpInfo = `
     Value < 1: May indicate less favorable combination of growth and income.
     `;
 
-let benGrahamInfo = `
+const benGrahamInfo = `
     The Benjamin Graham Valuation is a formula for valuing growth stocks. It is used to estimate the intrinsic value of the stock. 
   `;
-let grahamNumInfo = `
+const grahamNumInfo = `
     The Graham Number measures a stocks fundamental value by taking into account the EPS and Book Value Per Share. It is for a defensive investor to determine an upper bound of the price range that the investor should be willing to pay for a stock. Based off this theory any stock price below the graham number would be considered undervalued.
     <br>
     Formula: Square Root(22.5 x EPS x Book Value Per Share)
   `;
 
-let multiplesValuationInfo = `
+const multiplesValuationInfo = `
     The multiples valuation is used to compare similar companies multiples to gauge their performance in comparison to the currently researched company. This is used as a reference for a quick broad comparison. 
   `;
 
@@ -484,9 +484,37 @@ function analysisGraham() {
 }
 
 
+// Function to get the month for the table columns in ratings analysis tab
+function getMonthForRatings() {
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+
+  const currentDate = new Date();  
+
+  // Calculate previous month
+  const threeMonthsAgoIndex = (currentDate.getMonth() - 3 + 12) % 12;
+  const twoMonthsAgoIndex = (currentDate.getMonth() - 2 + 12) % 12;
+  const oneMonthAgoIndex = (currentDate.getMonth() - 1 + 12) % 12;
+  const currentDateIndex = currentDate.getMonth();
+
+  
+  const currentMonth = monthNames[currentDateIndex];
+  const threeMonthsAgo = monthNames[threeMonthsAgoIndex];
+  const twoMonthsAgo = monthNames[twoMonthsAgoIndex];
+  const oneMonthAgo = monthNames[oneMonthAgoIndex];
+
+  // console.log(currentMonth, threeMonthsAgo, twoMonthsAgo, oneMonthAgo);
+  $("#ratings-current-month").text(currentMonth);
+  $("#ratings-one-month-ago").text(oneMonthAgo);
+  $("#ratings-two-months-ago").text(twoMonthsAgo);
+  $("#ratings-three-months-ago").text(threeMonthsAgo);
+}
+
+
 
 $(document).ready(function () {
   hideLoader();
+
+  getMonthForRatings();
 
   // Handle button click event with jQuery
   $("#fetch-button").click(fetchData);

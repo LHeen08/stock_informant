@@ -7,10 +7,27 @@ import json
 
 TICKER = "aapl"
 
+def format_keys(dictionary):
+    formatted_dict = {}
+    for key, value in dictionary.items():
+        if key == 'period':
+            formatted_dict[key] = value
+        elif key.startswith('strong'):
+            # Capitalize and insert a space before each capital letter after 'strong'
+            formatted_key = key[0:6] + ' ' + key[6:].capitalize()
+            formatted_dict[formatted_key] = value
+        else:
+            # Capitalize the first letter of each word
+            formatted_key = ' '.join(word.capitalize() for word in key.split())
+            formatted_dict[formatted_key] = value
+    return formatted_dict
+
+
+
 if __name__ == "__main__":
     TICKER = TICKER.upper()
     # try:
-    data = Ticker(TICKER, validate=True)
+    # data = Ticker(TICKER, validate=True)
     #     treasury_data = Ticker("^TYX").summary_detail["^TYX"]
     #     success = True
     # except Exception as e:
@@ -20,13 +37,20 @@ if __name__ == "__main__":
         
     # if success:
 
-    # data = try_fetch_stock_data(TICKER)
+    data = try_fetch_stock_data(TICKER)
+    print(data["rec_trends"])
+
+    # Applying the formatting to each dictionary in the list
+    # formatted_data = [format_keys(entry) for entry in data["rec_trends"]]
+    # print(formatted_data)
     
-    rec_trends = data.recommendation_trend.to_dict(orient="records")
-    # print(rec_trends[0])
-    for key, value in rec_trends[0].items():
-        if key != 'period':
-            print(key, value)
+    # rec_trends = data.recommendation_trend.to_dict(orient="records")
+    # # print(rec_trends[0])
+    # for key, value in rec_trends[0].items():
+    #     if key != 'period':
+    #         print(key, value)
+    
+
 
     # stats = test_data.summary_profile[TICKER]
     # # Store the current: TICKER, sector, and industry

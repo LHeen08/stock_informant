@@ -481,7 +481,8 @@
                 <div class="container">
                   <div class="row d-flex align-items-center">
                     <div class="col-4 d-flex justify-content-center"><u>GuruFocus:</u></div>
-                    <div class="col-2 d-flex justify-content-start" id="gurufocus-analysis-value">{{data.peter_lynch_calcs["gurufocus"]}}</div>
+                    <div class="col-2 d-flex justify-content-start" id="gurufocus-analysis-value">
+                      {{data.peter_lynch_calcs["gurufocus"]}}</div>
                     <div class="col-6 d-flex justify-content-center">
                       <p id="gurufocus-analysis-valuation"></p>
                     </div>
@@ -491,7 +492,8 @@
                 <div class="container">
                   <div class="row d-flex align-items-center">
                     <div class="col-4 d-flex justify-content-center"><u>NASDAQ:</u></div>
-                    <div class="col-2 d-flex justify-content-start" id="nasdaq-analysis-value">{{data.peter_lynch_calcs["nasdaq"]}}</div>
+                    <div class="col-2 d-flex justify-content-start" id="nasdaq-analysis-value">
+                      {{data.peter_lynch_calcs["nasdaq"]}}</div>
                     <div class="col-6 d-flex justify-content-center">
                       <p id="nasdaq-analysis-valuation"></p>
                     </div>
@@ -501,9 +503,10 @@
                 <div class="container">
                   <div class="row d-flex align-items-center">
                     <div class="col-4 d-flex justify-content-center"><u>Custom w/ Dividends:</u></div>
-                    <div class="col-2 d-flex justify-content-start" id="custom-analysis-value">{{data.peter_lynch_calcs["my_method"]}}</div>
-                    <div class="col-6 d-flex justify-content-center" >
-                        <p id="custom-analysis-valuation"></p>
+                    <div class="col-2 d-flex justify-content-start" id="custom-analysis-value">
+                      {{data.peter_lynch_calcs["my_method"]}}</div>
+                    <div class="col-6 d-flex justify-content-center">
+                      <p id="custom-analysis-valuation"></p>
                     </div>
                   </div>
                 </div>
@@ -583,9 +586,31 @@
 
             <div class="tab-pane fade" id="ratings">
               <div class="card-body">
-                <!-- Ratings Content Goes Here -->
-                <p>Content for Ratings tab.</p>
+                <div class="row justify-content-center">
+                  <p><u><strong>Analyst Recommendations:</strong></u></p>
+                </div>
               </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="text-center" scope="col">Recommendation</th>
+                    <th class="text-center" scope="col" id="ratings-current-month"></th>
+                    <th class="text-center" scope="col" id="ratings-one-month-ago"></th>
+                    <th class="text-center" scope="col" id="ratings-two-months-ago"></th>
+                    <th class="text-center" scope="col" id="ratings-three-months-ago"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for column in recommendation_columns %}
+                  <tr>
+                    <td class="text-center font-weight-bold">{{ column }}</td>
+                    {% for recommendation in data.rec_trends %}
+                    <td class="text-center">{{ recommendation[column] }}</td>                    
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
