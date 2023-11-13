@@ -1,5 +1,5 @@
-  // Setup info boxes additional info
-  let dcfHelpInfo = `
+// Setup info boxes additional info
+let dcfHelpInfo = `
     Discounted Cash Flow (DCF) analysis assesses a company's value based on 
     projected future free cash flows. This involves predicting cash flows over 
     ten years, incorporating historical data and a growth rate. The analysis discounts 
@@ -11,7 +11,7 @@
     some margin of safety.
   `;
 
-  let lynchHelpInfo = `
+let lynchHelpInfo = `
     Peter Lynch: You should select from industries and companies from which you are familiar and have an 
     understanding of the factors that will move the stock price. Know the company and their plans for increasing
     growth and any red flags that could hurt that growth. The following metrics below should be used for comparison
@@ -35,21 +35,18 @@
     Value < 1: May indicate less favorable combination of growth and income.
     `;
 
-  let benGrahamInfo = `
+let benGrahamInfo = `
     The Benjamin Graham Valuation is a formula for valuing growth stocks. It is used to estimate the intrinsic value of the stock. 
-  `
-  ;
-  let grahamNumInfo = `
+  `;
+let grahamNumInfo = `
     The Graham Number measures a stocks fundamental value by taking into account the EPS and Book Value Per Share. It is for a defensive investor to determine an upper bound of the price range that the investor should be willing to pay for a stock. Based off this theory any stock price below the graham number would be considered undervalued.
     <br>
     Formula: Square Root(22.5 x EPS x Book Value Per Share)
   `;
 
-  let multiplesValuationInfo = `
+let multiplesValuationInfo = `
     The multiples valuation is used to compare similar companies multiples to gauge their performance in comparison to the currently researched company. This is used as a reference for a quick broad comparison. 
   `;
-  
-
 
 function showLoader() {
   $("#loader-container").addClass("show");
@@ -132,6 +129,7 @@ function updateDCF() {
 
         // Return the new dcf value
         $("#dcf-val").text(data["dcfVal"]);
+        $("#dcf-analysis").text(data["dcfVal"]);
       } else {
         alert("Error getting data from /calculate_dcf");
       }
@@ -180,7 +178,6 @@ function updatePeterLynch() {
   });
 }
 
-
 // Function to update peter lynch box
 function updateBenGraham() {
   // Variables for eps growth entry
@@ -205,6 +202,7 @@ function updateBenGraham() {
 
         // Return the new ben graham calc
         $("#ben-graham-formula").text(data["bg_val"]);
+        $("#ben-graham-analysis").text(data["bg_val"]);
       } else {
         alert("Error getting data from /calculate_peter_lynch");
       }
@@ -259,8 +257,6 @@ $(document).ready(function () {
       .append($("<strong>").text(formattedMarketCap));
   }
 
-
-
   // Set the text for the popover messages
   $("#dcf-info-popover").attr("data-html", "true");
   $("#dcf-info-popover").attr("title", dcfHelpInfo);
@@ -272,7 +268,6 @@ $(document).ready(function () {
   $("#graham-number-info-popover").attr("title", grahamNumInfo);
   $("#multiples-valuation-info-popover").attr("data-html", "true");
   $("#multiples-valuation-info-popover").attr("title", multiplesValuationInfo);
-
 
   // Hold onto the old values for the forms, so if we click off and its null its the old value
   var old_dcf_eps_growth_rate_value = $("#dcf-eps-growth-entry").val();
@@ -288,10 +283,9 @@ $(document).ready(function () {
   $("#company-summary").popover({ trigger: "hover" });
   $("#dcf-info-popover").popover({ trigger: "hover" });
   $("#lynch-info-popover").popover({ trigger: "hover" });
-  $("#ben-graham-info-popover").popover({trigger: "hover"});
-  $("#graham-number-info-popover").popover({trigger: "hover"});
-  $("#multiples-valuation-info-popover").popover({trigger: "hover"});
-
+  $("#ben-graham-info-popover").popover({ trigger: "hover" });
+  $("#graham-number-info-popover").popover({ trigger: "hover" });
+  $("#multiples-valuation-info-popover").popover({ trigger: "hover" });
 
   // Handle initial page ticker fetch data button with jQuery
   $("#initial-ticker").on("keydown", function (e) {

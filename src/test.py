@@ -10,7 +10,7 @@ TICKER = "aapl"
 if __name__ == "__main__":
     TICKER = TICKER.upper()
     # try:
-    # test_data = Ticker(TICKER, validate=True)
+    data = Ticker(TICKER, validate=True)
     #     treasury_data = Ticker("^TYX").summary_detail["^TYX"]
     #     success = True
     # except Exception as e:
@@ -20,7 +20,13 @@ if __name__ == "__main__":
         
     # if success:
 
-    data = try_fetch_stock_data(TICKER)
+    # data = try_fetch_stock_data(TICKER)
+    
+    rec_trends = data.recommendation_trend.to_dict(orient="records")
+    # print(rec_trends[0])
+    for key, value in rec_trends[0].items():
+        if key != 'period':
+            print(key, value)
 
     # stats = test_data.summary_profile[TICKER]
     # # Store the current: TICKER, sector, and industry
