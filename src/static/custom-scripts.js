@@ -129,9 +129,11 @@ function updateDCF() {
 
         console.log("dcf value: ", data["dcfVal"]);
 
+        dcfVal = data["dcfVal"].toLocaleString();
+
         // Return the new dcf value
-        $("#dcf-val").text(data["dcfVal"]);
-        $("#dcf-analysis-value").text(data["dcfVal"]);
+        $("#dcf-val").text(dcfVal);
+        $("#dcf-analysis-value").text(dcfVal);
 
         analysisDCFUpdate();
       } else {
@@ -210,9 +212,11 @@ function updateBenGraham() {
       if (data) {
         console.log("Return data: ", data);
 
+        bgVal = data["bg_val"].toLocaleString();
+
         // Return the new ben graham calc
-        $("#ben-graham-formula").text(data["bg_val"]);
-        $("#ben-graham-analysis-value").text(data["bg_val"]);
+        $("#ben-graham-formula").text(bgVal);
+        $("#ben-graham-analysis-value").text(bgVal);
 
         analysisGraham();
       } else {
@@ -253,7 +257,8 @@ function analysisDCFUpdate() {
   // Remove "$" sign and convert to a floating-point number
   var numericPrice = parseFloat(currentPriceText.replace("$", ""));
 
-  var dcfVal = Number($("#dcf-val").text());
+  var dcfWithCommas = $("#dcf-val").text();
+  var dcfVal = parseFloat(dcfWithCommas.replace(",", ""));
 
   console.log("DCF analysis currentPrice: ", numericPrice, " dcf: ", dcfVal);
 
@@ -488,7 +493,7 @@ function analysisGraham() {
 function getMonthForRatings() {
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
-  const currentDate = new Date();  
+  const currentDate = new Date();
 
   // Calculate previous month
   const threeMonthsAgoIndex = (currentDate.getMonth() - 3 + 12) % 12;
@@ -496,7 +501,7 @@ function getMonthForRatings() {
   const oneMonthAgoIndex = (currentDate.getMonth() - 1 + 12) % 12;
   const currentDateIndex = currentDate.getMonth();
 
-  
+
   const currentMonth = monthNames[currentDateIndex];
   const threeMonthsAgo = monthNames[threeMonthsAgoIndex];
   const twoMonthsAgo = monthNames[twoMonthsAgoIndex];

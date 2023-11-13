@@ -111,14 +111,7 @@ def try_fetch_stock_data(ticker):
 
     # Get the recommended ratings
     rec_trends = modules["recommendationTrend"]["trend"]
-    print(rec_trends)
     rec_trends = [format_keys(entry) for entry in rec_trends]
-    print(rec_trends)
-
-    # rec_latest_trends = {}
-    # for key, value in rec_trends.items():
-    #     if key != 'period':
-    #         rec_latest_trends[key] = value
 
     thread.join()
     multiples_valuation_companies = result_holder["multiples_valuation_companies"]
