@@ -68,7 +68,8 @@
                 Current Price
               </h5>
               <h5 class="card-subtitle mb-2 text-success pb-2" id="current-price">
-                <strong>${{data.current_price}}</strong>
+                <span>$</span>
+                <strong>{{data.current_price}}</strong>
               </h5>
             </div>
           </div>
@@ -437,35 +438,34 @@
             <div class="tab-pane fade show active" id="dcf-analysis">
               <div class="card-body">
                 <div class="row justify-content-center">
-                  <p>DCF Analysis:</p>
+                  <p><u><strong>DCF Analysis:</strong></u></p>
                 </div>
-                <div class="row">
-                  <!-- Left side with Current Price and DCF Fair Value -->
-                  <div class="col-md-6">
-                    <div class="row justify-content-start pb-4">
-                      <div class="col d-flex">
-                        <p class="card-content"><strong><u>Current Price:</u></strong></p>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-4 d-flex flex-column justify-content-center">
+                      <div style="height: 50px;">
+                        <div class="row d-flex justify-content-between">
+                          <div class="col d-flex justify-content-start">
+                            <p><u>Current Price:</u></p>
+                          </div>
+                          <div class="col d-flex justify-content-end">
+                            <p>${{data.current_price}}</p>
+                          </div>
+                        </div>
                       </div>
-                      <div class="col d-flex">
-                        <p class="card-content" id="current-price-dcf-analysis">${{data.current_price}}</p>
+                      <div class="row d-flex justify-content-between">
+                        <div class="col d-flex justify-content-start">
+                          <p><u>DCF Fair Value:</u></p>
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                          <span>$</span>
+                          <p id="dcf-analysis-value">{{data.dcf_val}}</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="row pb-0">
-                      <div class="col d-flex">
-                        <p class="card-content"><strong><u>DCF Fair Value:</u></strong></p>
-                      </div>
-                      <div class="col d-flex">
-                        <span>$</span>
-                        <p class="card-content" id="dcf-analysis">{{data.dcf_val}}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Right side with the value -->
-                  <div class="col d-flex justify-content-center">
-                    <div class="row align-items-center">
-                      <div class="col d-flex justify-content-center">
-                        <h5 class="card-content" id="dcf-analysis-grade"></h5>
-                      </div>
+                    <div class="col-md-8 d-flex flex-column justify-content-center align-items-center">
+                      <p id="dcf-analysis-valuation"></p>
+                      <p id="dcf-analysis-info" class="text-center"></p>
                     </div>
                   </div>
                 </div>
@@ -474,57 +474,37 @@
             <div class="tab-pane fade" id="lynch-analysis">
               <div class="card-body">
                 <div class="row justify-content-center">
-                  <p>Lynch Analysis:</p>
+                  <p><u><strong>Lynch Analysis:</strong></u></p>
                 </div>
-                <!-- GuruFocus Analysis -->
-                <div class="row">
-                  <div class="col d-flex justify-content-start">
-                    <p class="card-body"><strong><u>GuruFocus:</u></strong</p>
-                  </div>
-                  <div class="col d-flex justify-content-start">
-                    <p class="card-body" id="lynch-gurufocus-analysis">{{data.peter_lynch_calcs["gurufocus"]}}</p>
-                  </div>
-                  <div class="col d-flex justify-content-center">
-                    <p class="card-body">value</p>
+                <div class="container">
+                  <div class="row d-flex align-items-center">
+                    <div class="col-4 d-flex justify-content-center"><u>GuruFocus:</u></div>
+                    <div class="col-2 d-flex justify-content-start" id="gurufocus-analysis-value">{{data.peter_lynch_calcs["gurufocus"]}}</div>
+                    <div class="col-6 d-flex justify-content-center">
+                      <p id="gurufocus-analysis-valuation"></p>
+                    </div>
                   </div>
                 </div>
                 <hr class="my-2">
-
-                <!-- NASDAQ Analysis -->
-                <div class="row d-flex align-items-center">
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="col">
-                        <p class="card-content"><strong><u>NASDAQ:</u></strong></p>
-                      </div>
-                      <div class="col">
-                        <p class="card-content" id="lynch-nasdaq-analysis">${{data.current_price}}</p>
-                      </div>
+                <div class="container">
+                  <div class="row d-flex align-items-center">
+                    <div class="col-4 d-flex justify-content-center"><u>NASDAQ:</u></div>
+                    <div class="col-2 d-flex justify-content-start" id="nasdaq-analysis-value">{{data.peter_lynch_calcs["nasdaq"]}}</div>
+                    <div class="col-6 d-flex justify-content-center">
+                      <p id="nasdaq-analysis-valuation"></p>
                     </div>
-                  </div>
-                  <div class="col">
-                    <h5 class="card-content" id="lynch-nasdaq-analysis-grade">value</h5>
                   </div>
                 </div>
                 <hr class="my-2">
-
-                <!-- Custom Analysis -->
-                <div class="row d-flex align-items-center">
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="col">
-                        <p class="card-content"><strong><u>Custom w/ Dividends:</u></strong></p>
-                      </div>
-                      <div class="col">
-                        <p class="card-content" id="lynch-custom-analysis">${{data.current_price}}</p>
-                      </div>
+                <div class="container">
+                  <div class="row d-flex align-items-center">
+                    <div class="col-4 d-flex justify-content-center"><u>Custom w/ Dividends:</u></div>
+                    <div class="col-2 d-flex justify-content-start" id="custom-analysis-value">{{data.peter_lynch_calcs["my_method"]}}</div>
+                    <div class="col-6 d-flex justify-content-center" >
+                        <p id="custom-analysis-valuation"></p>
                     </div>
                   </div>
-                  <div class="col">
-                    <h5 class="card-content" id="lynch-custom-analysis-grade">value</h5>
-                  </div>
                 </div>
-
               </div>
             </div>
             <div class="tab-pane fade" id="ben-graham-analysis">
@@ -532,69 +512,9 @@
                 <div class="row justify-content-center">
                   <p>Benjamin Graham Analysis:</p>
                 </div>
-                <div class="row">
-                  <!-- Left side with Current Price and DCF Fair Value -->
-                  <div class="col-md-6">
-                    <div class="row justify-content-start pb-4">
-                      <div class="col d-flex">
-                        <p class="card-content"><strong><u>Current Price:</u></strong></p>
-                      </div>
-                      <div class="col d-flex">
-                        <p class="card-content" id="current-price-ben-graham-analysis">${{data.current_price}}</p>
-                      </div>
-                    </div>
-                    <div class="row pb-0">
-                      <div class="col d-flex">
-                        <p class="card-content"><strong><u>Ben Graham Fair Value:</u></strong></p>
-                      </div>
-                      <div class="col d-flex">
-                        <span>$</span>
-                        <p class="card-content" id="ben-graham-analysis">{{data.ben_graham_calc}}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Right side with the value -->
-                  <div class="col d-flex justify-content-center">
-                    <div class="row align-items-center">
-                      <div class="col d-flex justify-content-center">
-                        <h5 class="card-content" id="ben-graham-analysis-grade">value</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <hr class="my-2">
                 <div class="row pt-2 justify-content-center">
                   <p>Graham Number Analysis:</p>
-                </div>
-                <div class="row">
-                  <!-- Left side with Current Price and DCF Fair Value -->
-                  <div class="col-md-6">
-                    <div class="row justify-content-start pb-4">
-                      <div class="col d-flex">
-                        <p class="card-content"><strong><u>Current Price:</u></strong></p>
-                      </div>
-                      <div class="col d-flex">
-                        <p class="card-content" id="current-price-graham-num-analysis">${{data.current_price}}</p>
-                      </div>
-                    </div>
-                    <div class="row pb-0">
-                      <div class="col d-flex">
-                        <p class="card-content"><strong><u>Ben Graham Fair Value:</u></strong></p>
-                      </div>
-                      <div class="col d-flex">
-                        <span>$</span>
-                        <p class="card-content" id="graham-num-analysis">{{data.graham_num}}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Right side with the value -->
-                  <div class="col d-flex justify-content-center">
-                    <div class="row align-items-center">
-                      <div class="col d-flex justify-content-center">
-                        <h5 class="card-content" id="ben-graham-analysis-grade">value</h5>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

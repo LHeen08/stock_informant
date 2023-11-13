@@ -117,11 +117,11 @@ def calculate_ben_graham():
 if __name__ == "__main__":
     if platform.system() == "Darwin" :
         app.run(debug=True, host="127.0.0.1", port="8000") # Using port 8000 for mac...
-    else:
-        app.run(debug=True, host="127.0.0.1", port="5000")
+    # else:
+        # app.run(debug=True, host="127.0.0.1", port="5000")
     
     # Used for VM
-    # app.run(debug=True, host="10.0.2.15", port="5000")
+    app.run(debug=True, host="10.0.2.15", port="5000")
 
 
 

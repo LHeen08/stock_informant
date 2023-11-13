@@ -93,3 +93,30 @@ form.ticker-entry * {
 .speed .units {
   font-size: 3vw;
 }
+
+
+#dcf-analysis-valuation {
+  border-radius: 10px;
+  padding: 5px;
+}
+
+#dcf-analysis-info {
+  width: 75%;
+}
+
+#gurufocus-analysis-valuation {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0;
+}
+
+#nasdaq-analysis-valuation {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0;
+}
+#custom-analysis-valuation {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0;
+}

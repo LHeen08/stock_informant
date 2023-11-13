@@ -98,6 +98,8 @@ function fetchData(initial_fetch) {
   });
 }
 
+
+// Update DCF values
 function updateDCF() {
   // Variables for dcf
   var epsGrowth = $("#dcf-eps-growth-entry").val();
@@ -129,7 +131,9 @@ function updateDCF() {
 
         // Return the new dcf value
         $("#dcf-val").text(data["dcfVal"]);
-        $("#dcf-analysis").text(data["dcfVal"]);
+        $("#dcf-analysis-value").text(data["dcfVal"]);
+
+        analysisDCFUpdate();
       } else {
         alert("Error getting data from /calculate_dcf");
       }
@@ -166,6 +170,12 @@ function updatePeterLynch() {
         $("#lynch-guru-focus").text(data["gurufocus"]); // Guru focus entry
         $("#lynch-nasdaq").text(data["nasdaq"]); // Guru focus entry
         $("#lynch-custom").text(data["my_method"]); // Guru focus entry
+
+        // upate analysis values
+        $("#gurufocus-analysis-value").text(data["gurufocus"]);
+        $("#nasdaq-analysis-value").text(data["nasdaq"]);
+        $("#custom-analysis-value").text(data["my_method"]);
+        analysisLynch();
       } else {
         alert("Error getting data from /calculate_peter_lynch");
       }
@@ -232,6 +242,151 @@ function elementExists(selector) {
   return $(selector).length > 0;
 }
 
+
+// Function to update the analysis for dcf
+function analysisDCFUpdate() {
+
+  // Get the text content of the element with id="current-price"
+  var currentPriceText = $("#current-price").text();
+  // Remove "$" sign and convert to a floating-point number
+  var numericPrice = parseFloat(currentPriceText.replace("$", ""));
+
+  var dcfVal = Number($("#dcf-val").text());
+
+  console.log("DCF analysis currentPrice: ", numericPrice, " dcf: ", dcfVal);
+
+  // Determine +20% and -20% from dcf fair val
+  var underval = dcfVal * (1 - .20);
+  var overval = dcfVal * (1 + .20);
+
+  var undervalPercent = ((underval - numericPrice) / underval) * 100;
+  var overvalPercent = ((numericPrice - overval) / numericPrice) * 100;
+
+  var outputText;
+  var backgroundColor;
+
+  if (numericPrice > underval && numericPrice < overval) {
+    // Current price is fair value    
+    outputText = "Fair Value";
+    backgroundColor = "yellow";
+    moreInfo = "Stock is currently within 20% of DCF Val";
+
+  }
+  else if (numericPrice <= underval) {
+    // Current price is undervalued
+    outputText = "Undervalued";
+    backgroundColor = "lightgreen"; // Set the background color for undervalued
+    moreInfo = `Based off of the DCF Value and Current Price the stock is undervalued by <strong>${undervalPercent.toFixed(2)}%</strong>`;
+
+  }
+  else {
+    // Current price is overvalued
+    outputText = "Overvalued"
+    backgroundColor = "lightcoral"; // Set the background color for overvalued
+    moreInfo = `Based off of the DCF Value and Current Price the stock is overvalued by <strong>${overvalPercent.toFixed(2)}%</strong>`;
+
+  }
+
+
+
+  $("#dcf-analysis-valuation")
+    .text("")
+    .append($("<strong>").html(outputText))
+    .css("background-color", backgroundColor); // Set the background color of the element
+
+  $("#dcf-analysis-info").html(moreInfo);
+
+}
+
+
+// Perform peter lynch calculations analysis
+function analysisLynch() {
+  var gurufocus = $("#gurufocus-analysis-value").text();
+  var nasdaq = $("#nasdaq-analysis-value").text();
+  var custom = $("#custom-analysis-value").text();
+
+
+  // Determine if undervalued, fair value or overvalued for each
+  var guruOutput;
+  var guruBackground;
+  var nasdaqOutput;
+  var nasdaqBackground;
+  var customOutput;
+  var customBackground
+
+  // guru: > 1 might be overvalued, < 1 might be undervalued
+  if (gurufocus > 1) {
+    // Stock might be overvalued
+    guruOutput = "Overvalued";
+    guruBackground = "lightcoral";
+
+  }
+  else {
+    // Stock might be undervalued
+    guruOutput = "Undervalued";
+    guruBackground = "lightgreen";
+  }
+
+
+  // nasdaq: 
+  $("#gurufocus-analysis-valuation")
+    .text("")
+    .append($("<strong>").html(guruOutput))
+    .css("background-color", guruBackground);
+
+
+  // within 10% of 1 lets consider fair value
+  // guru: > 1 might be overvalued, < 1 might be undervalued
+  if (nasdaq >= .90 && nasdaq <= 1.10) {
+    nasdaqOutput = "Fair Value";
+    nasdaqBackground = "yellow";
+  }
+  else if (nasdaq > 1.10) {
+    // Stock might be overvalued
+    nasdaqOutput = "Overvalued";
+    nasdaqBackground = "lightcoral";
+
+  }
+  else {
+    // Stock might be undervalued
+    nasdaqOutput = "Undervalued";
+    nasdaqBackground = "lightgreen";
+  }
+
+  $("#nasdaq-analysis-valuation")
+    .text("")
+    .append($("<strong>").html(nasdaqOutput))
+    .css("background-color", nasdaqBackground);
+
+
+  // custom method: <1 overvalued, 1-1.5 fair value, >1.5 undervalue
+  if (custom < 1) {
+    // Stock might be overvalued
+    customOutput = "Overvalued";
+    customBackground = "lightcoral";
+
+  }
+  else if(custom >= 1 && custom < 1.5){
+    // Stock might be undervalued
+    customOutput = "Fair Value";
+    customBackground = "yellow";
+  }
+  else{
+    // Stock may be undervalued
+    customOutput = "Undervalued";
+    customBackground = "lightgreen";
+  }
+
+
+  $("#custom-analysis-valuation")
+  .text("")
+  .append($("<strong>").html(customOutput))
+  .css("background-color", customBackground);
+
+}
+
+
+
 $(document).ready(function () {
   hideLoader();
 
@@ -286,6 +441,13 @@ $(document).ready(function () {
   $("#ben-graham-info-popover").popover({ trigger: "hover" });
   $("#graham-number-info-popover").popover({ trigger: "hover" });
   $("#multiples-valuation-info-popover").popover({ trigger: "hover" });
+
+
+  // Call analysis function updates
+  analysisDCFUpdate();
+  analysisLynch();
+
+
 
   // Handle initial page ticker fetch data button with jQuery
   $("#initial-ticker").on("keydown", function (e) {
@@ -472,4 +634,6 @@ $(document).ready(function () {
         this.value = old_ben_graham_eps_growth;
       }
     });
+
+
 });
