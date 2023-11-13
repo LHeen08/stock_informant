@@ -301,10 +301,11 @@
                   </div>
                 </div>
                 <div class="row pb-0">
-                  <div class="col-8 d-flex">
+                  <div class="col-8 d-flex align">
                     <h5 class="card-content"><strong><u>Benjamin Graham Formula:</u></strong></h5>
                   </div>
-                  <div class="col d-flex justify-content-end align-items-center">
+                  <div class="col d-flex justify-content-end">
+                    <span>$</span>
                     <h5 class="card-content" id="ben-graham-formula">{{data.ben_graham_calc}}</h5>
                   </div>
                 </div>
@@ -338,11 +339,12 @@
                     <p id="graham-bvps">{{data.bvps}}</p>
                   </div>
                 </div>
-                <div class="row pb-0">
+                <div class="row d-flex">
                   <div class="col">
                     <h5 class="card-content"><strong><u>Graham Number:</u></strong></h5>
                   </div>
-                  <div class="col d-flex justify-content-end align-items-center">
+                  <div class="col d-flex justify-content-end">
+                    <span>$</span>
                     <h5 class="card-content" id="graham-number">{{data.graham_num}}</h5>
                   </div>
                 </div>
@@ -510,11 +512,71 @@
             <div class="tab-pane fade" id="ben-graham-analysis">
               <div class="card-body">
                 <div class="row justify-content-center">
-                  <p>Benjamin Graham Analysis:</p>
+                  <p><u><strong>Benjamin Graham Analysis:</strong></u></p>
                 </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 d-flex flex-column justify-content-center">
+                      <div style="height: 50px;">
+                        <div class="row d-flex justify-content-between">
+                          <div class="col d-flex justify-content-center">
+                            <p><u>Current Price:</u></p>
+                          </div>
+                          <div class="col d-flex justify-content-start">
+                            <p>${{data.current_price}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row d-flex justify-content-between">
+                        <div class="col d-flex justify-content-center">
+                          <p><u>Benjamin Graham Formula:</u></p>
+                        </div>
+                        <div class="col d-flex justify-content-start">
+                          <span>$</span>
+                          <p id="ben-graham-analysis-value">{{data.ben_graham_calc}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                      <p id="ben-graham-analysis-valuation"></p>
+                      <p id="ben-graham-analysis-info" class="text-center"></p>
+                    </div>
+                  </div>
+                </div>
+
+
                 <hr class="my-2">
                 <div class="row pt-2 justify-content-center">
-                  <p>Graham Number Analysis:</p>
+                  <p><u><strong>Graham Number Analysis:</strong></u></p>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 d-flex flex-column justify-content-center">
+                      <div style="height: 50px;">
+                        <div class="row d-flex justify-content-between">
+                          <div class="col d-flex justify-content-center">
+                            <p><u>Current Price:</u></p>
+                          </div>
+                          <div class="col d-flex justify-content-start">
+                            <p>${{data.current_price}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row d-flex justify-content-between">
+                        <div class="col d-flex justify-content-center">
+                          <p><u>Graham Number:</u></p>
+                        </div>
+                        <div class="col d-flex justify-content-start">
+                          <span>$</span>
+                          <p id="graham-num-analysis-value">{{data.graham_num}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                      <p id="graham-num-analysis-valuation"></p>
+                      <p id="graham-num-analysis-info" class="text-center"></p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -212,7 +212,9 @@ function updateBenGraham() {
 
         // Return the new ben graham calc
         $("#ben-graham-formula").text(data["bg_val"]);
-        $("#ben-graham-analysis").text(data["bg_val"]);
+        $("#ben-graham-analysis-value").text(data["bg_val"]);
+
+        analysisGraham();
       } else {
         alert("Error getting data from /calculate_peter_lynch");
       }
@@ -360,18 +362,23 @@ function analysisLynch() {
 
 
   // custom method: <1 overvalued, 1-1.5 fair value, >1.5 undervalue
-  if (custom < 1) {
+
+  if (custom == "N/A") {
+    customOutput = "N/A";
+    customBackground = "";
+  }
+  else if (custom < 1) {
     // Stock might be overvalued
     customOutput = "Overvalued";
     customBackground = "lightcoral";
 
   }
-  else if(custom >= 1 && custom < 1.5){
+  else if (custom >= 1 && custom < 1.5) {
     // Stock might be undervalued
     customOutput = "Fair Value";
     customBackground = "yellow";
   }
-  else{
+  else {
     // Stock may be undervalued
     customOutput = "Undervalued";
     customBackground = "lightgreen";
@@ -379,10 +386,101 @@ function analysisLynch() {
 
 
   $("#custom-analysis-valuation")
-  .text("")
-  .append($("<strong>").html(customOutput))
-  .css("background-color", customBackground);
+    .text("")
+    .append($("<strong>").html(customOutput))
+    .css("background-color", customBackground);
 
+}
+
+
+// Graham analysis function
+function analysisGraham() {
+  var benGraham = Number($("#ben-graham-analysis-value").text());
+  var grahamNum = Number($("#graham-num-analysis-value").text());
+
+  // Get the text content of the element with id="current-price"
+  var currentPriceText = $("#current-price").text();
+  // Remove "$" sign and convert to a floating-point number
+  var numericPrice = parseFloat(currentPriceText.replace("$", ""));
+
+  // Determine +20% and -20% from dcf fair val
+  var bgUnderval = benGraham * (1 - .20);
+  var bgOverval = benGraham * (1 + .20);
+  var gnUnderval = grahamNum * (1 - .20);
+  var gnOverval = grahamNum * (1 + .20);
+
+
+  var bgUndervalPercent = ((bgUnderval - numericPrice) / bgUnderval) * 100;
+  var bgOvervalPercent = ((numericPrice - bgOverval) / numericPrice) * 100;
+
+  var gnUndervalPercent = ((gnUnderval - numericPrice) / gnUnderval) * 100;
+  var gnOvervalPercent = ((numericPrice - gnOverval) / numericPrice) * 100;
+
+  var bgOutputText;
+  var bgBackgroundColor;
+  var bgMoreInfo;
+
+  // Do ben graham formula first
+  if (numericPrice > bgUnderval && numericPrice < bgOverval) {
+    // Current price is fair value    
+    bgOutputText = "Fair Value";
+    bgBackgroundColor = "yellow";
+    bgMoreInfo = "Stock is currently within 20% of Benjamin Graham Value";
+
+  }
+  else if (numericPrice <= bgUnderval) {
+    // Current price is undervalued
+    bgOutputText = "Undervalued";
+    bgBackgroundColor = "lightgreen"; // Set the background color for undervalued
+    bgMoreInfo = `Based off of the Benjamin Graham Value and Current Price the stock is undervalued by <strong>${bgUndervalPercent.toFixed(2)}%</strong>`;
+  }
+  else {
+    // Current price is overvalued
+    bgOutputText = "Overvalued"
+    bgBackgroundColor = "lightcoral"; // Set the background color for overvalued
+    bgMoreInfo = `Based off of the Benjamin Graham Value and Current Price the stock is overvalued by <strong>${bgOvervalPercent.toFixed(2)}%</strong>`;
+  }
+
+
+  $("#ben-graham-analysis-valuation")
+    .text("")
+    .append($("<strong>").html(bgOutputText))
+    .css("background-color", bgBackgroundColor); // Set the background color of the element
+
+  $("#ben-graham-analysis-info").html(bgMoreInfo);
+
+  var gnOutputText;
+  var gnBackgroundColor;
+  var gnMoreInfo;
+
+  // Do ben graham formula first
+  if (numericPrice > gnUnderval && numericPrice < gnOverval) {
+    // Current price is fair value    
+    gnOutputText = "Fair Value";
+    gnBackgroundColor = "yellow";
+    gnMoreInfo = "Stock is currently within 20% of Benjamin Graham Value";
+
+  }
+  else if (numericPrice <= gnUnderval) {
+    // Current price is undervalued
+    gnOutputText = "Undervalued";
+    gnBackgroundColor = "lightgreen"; // Set the background color for undervalued
+    gnMoreInfo = `Based off of the Graham Number and Current Price the stock is undervalued by <strong>${gnUndervalPercent.toFixed(2)}%</strong>`;
+  }
+  else {
+    // Current price is overvalued
+    gnOutputText = "Overvalued"
+    gnBackgroundColor = "lightcoral"; // Set the background color for overvalued
+    gnMoreInfo = `Based off of the Graham Number and Current Price the stock is overvalued by <strong>${gnOvervalPercent.toFixed(2)}%</strong>`;
+  }
+
+
+  $("#graham-num-analysis-valuation")
+    .text("")
+    .append($("<strong>").html(gnOutputText))
+    .css("background-color", gnBackgroundColor); // Set the background color of the element
+
+  $("#graham-num-analysis-info").html(gnMoreInfo);
 }
 
 
@@ -446,6 +544,7 @@ $(document).ready(function () {
   // Call analysis function updates
   analysisDCFUpdate();
   analysisLynch();
+  analysisGraham();
 
 
 

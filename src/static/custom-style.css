@@ -120,3 +120,13 @@ form.ticker-entry * {
   padding: 5px;
   margin: 0;
 }
+
+#ben-graham-analysis-valuation {
+  border-radius: 10px;
+  padding: 5px;
+}
+
+#graham-num-analysis-valuation {
+  border-radius: 10px;
+  padding: 5px;
+}
