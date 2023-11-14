@@ -479,34 +479,37 @@
                   <p><u><strong>Lynch Analysis:</strong></u></p>
                 </div>
                 <div class="container">
-                  <div class="row d-flex align-items-center">
+                  <div class="row d-flex align-items-center justify-content-center">
                     <div class="col-4 d-flex justify-content-center"><u>GuruFocus:</u></div>
                     <div class="col-2 d-flex justify-content-start" id="gurufocus-analysis-value">
                       {{data.peter_lynch_calcs["gurufocus"]}}</div>
-                    <div class="col-6 d-flex justify-content-center">
+                    <div class="col-6 d-flex flex-column justify-content-center align-items-md-center">
                       <p id="gurufocus-analysis-valuation"></p>
+                      <p id="gurufocus-analysis-info" class="text-center"></p>
                     </div>
                   </div>
                 </div>
                 <hr class="my-2">
                 <div class="container">
-                  <div class="row d-flex align-items-center">
+                  <div class="row d-flex align-items-center justify-content-center">
                     <div class="col-4 d-flex justify-content-center"><u>NASDAQ:</u></div>
                     <div class="col-2 d-flex justify-content-start" id="nasdaq-analysis-value">
                       {{data.peter_lynch_calcs["nasdaq"]}}</div>
-                    <div class="col-6 d-flex justify-content-center">
+                    <div class="col-6 d-flex flex-column justify-content-center align-items-md-center">
                       <p id="nasdaq-analysis-valuation"></p>
+                      <p id="nasdaq-analysis-info" class="text-center"></p>
                     </div>
                   </div>
                 </div>
                 <hr class="my-2">
                 <div class="container">
-                  <div class="row d-flex align-items-center">
+                  <div class="row d-flex align-items-center justify-content-center">
                     <div class="col-4 d-flex justify-content-center"><u>Custom w/ Dividends:</u></div>
                     <div class="col-2 d-flex justify-content-start" id="custom-analysis-value">
                       {{data.peter_lynch_calcs["my_method"]}}</div>
-                    <div class="col-6 d-flex justify-content-center">
+                    <div class="col-6 d-flex flex-column justify-content-center align-items-md-center">
                       <p id="custom-analysis-valuation"></p>
+                      <p id="custom-analysis-info" class="text-center"></p>
                     </div>
                   </div>
                 </div>
@@ -605,7 +608,7 @@
                   <tr>
                     <td class="text-center font-weight-bold">{{ column }}</td>
                     {% for recommendation in data.rec_trends %}
-                    <td class="text-center">{{ recommendation[column] }}</td>                    
+                    <td class="text-center">{{ recommendation[column] }}</td>
                     {% endfor %}
                   </tr>
                   {% endfor %}
