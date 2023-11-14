@@ -377,22 +377,31 @@
               </button>
             </div>
           </div>
-          <div class="card-body pb-2 ml-3 mr-3">
-            <div class="row pb-2">
-              <div class="col-md-5 d-flex justify-content-center">
-                <h5 class="card-content"><u>Company</u></h5>
-              </div>
-              <div class="col-md-2 d-flex justify-content-center">
-                <p><u>EV/EBITDA</u></p>
-              </div>
-              <div class="col-md-2 d-flex justify-content-center">
-                <p><u>P/E Ratio</u></p>
-              </div>
-              <div class="col-md-2 d-flex justify-content-center">
-                <p><u>PEG Ratio</u></p>
-              </div>
-            </div>
-            {% for ticker, company_data in data.multiples_val_companies.items() %}
+            <table class="table">
+                <thead>
+                  <th class="text-center"scope="col">Company</th>
+                  <th class="text-center"scope="col">EV/EBITDA</th>
+                  <th class="text-center"scope="col">PE Ratio</th>
+                  <th class="text-center"scope="col">PEG Ratio</th>
+                </thead>
+                <tbody>
+                  <tr class="highlight-row">
+                    <td class="text-center"><strong>Current:</strong> {{ data.company_name }} ({{ data.company_ticker }})</td>
+                    <td class="text-center">{{data.ev_to_ebitda}}</td>
+                    <td class="text-center">{{data.pe_ratio}}</td>
+                    <td class="text-center">{{data.peg_ratio}}</td>
+                  <tr>
+                  {% for ticker, company_data in data.multiples_val_companies.items() %}
+                  <tr>
+                    <td class="text-center">{{ company_data["company_name"] }} ({{ ticker }})</td>
+                    <td class="text-center">{{ company_data["ev/ebitda"] }}</td>
+                    <td class="text-center">{{ company_data["pe"] }}</td>
+                    <td class="text-center">{{ company_data["peg"] }}</td>
+                  <tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+            <!-- {% for ticker, company_data in data.multiples_val_companies.items() %}
             <div class="row pb-2">
               <div class="col-md-5 d-flex align-items-center">
                 <p class="mb-0"><strong>{{ company_data["company_name"] }} ({{ ticker }})</strong></p>
@@ -407,11 +416,9 @@
                 <p class="mb-0"><strong>{{ company_data["peg"] }}</strong></p>
               </div>
             </div>
-            <!-- Add a line under each row -->
             <hr class="my-2">
-            {% endfor %}
-          </div>
-        </div>
+            {% endfor %} -->
+            </div>
       </div>
       <div id="recommendation-eval-card" class="col">
         <div class="card w-100">
