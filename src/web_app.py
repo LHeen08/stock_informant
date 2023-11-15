@@ -118,21 +118,24 @@ def calculate_ben_graham():
 
 
 
-
-
-if __name__ == "__main__":
-
+# Main function
+def main():
     port = 5000 + random.randint(0, 999)
     url = "http://127.0.0.1:{0}".format(port)
 
     threading.Timer(1.25, lambda: webbrowser.open(url)).start()
 
     app.run(port=port, debug=False)
-
     # if platform.system() == "Darwin" :
     #     app.run(debug=False, host="127.0.0.1", port="8000") # Using port 8000 for mac...
     # else:
     #     app.run(debug=True, host="127.0.0.1", port="5000")
+
+
+
+if __name__ == "__main__":
+    main() # Run main
+
     
 
 
