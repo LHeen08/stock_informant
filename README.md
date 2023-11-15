@@ -5,7 +5,7 @@ Stock Informant is an easy to use dashboard to perform some fundamental valuatio
 
 ## Description
 
- The purpose of stock informant was to create an easy to use program that fetches required data and perform some valuation calculations to help determine a stocks intrinsic value without having to manually do all this in Excel. Stock Informant provides some company information and technicals that are then used in the calculations. Some detail is provided for the calculations as to their purpose and values used (just hover over the info circle for the boxes that have it). It also provides some analysis, based off of the calculations and their values, to determine if it thinks the stock is fairly-valued/undervalued/overvalued.
+ The purpose of stock informant was to create an easy to use program that fetches required data and perform some valuation calculations to help determine a stocks intrinsic value without having to manually do all this in Excel. Stock Informant provides some company information and financial data that are then used in the calculations. Some detail is provided for the calculations as to their purpose and values used (just hover over the info circle for the boxes that have it). It also provides some analysis, based off of the calculations and their values, to determine if it thinks the stock is fairly-valued/undervalued/overvalued. It uses yahooquery api to gather stock information and Flask to output to a local server to display the data on the dashboard.
 
 ## Getting Started
 
