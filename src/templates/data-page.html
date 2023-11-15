@@ -67,9 +67,9 @@
               <h5 class="card-subtitle mb-2 pb-2">
                 Current Price
               </h5>
-              <h5 class="card-subtitle mb-2 text-success pb-2" id="current-price">
+              <h5 class="card-subtitle mb-2 text-success pb-2">
                 <span>$</span>
-                <strong>{{data.current_price}}</strong>
+                <strong id="current-price">{{data.current_price}}</strong>
               </h5>
             </div>
           </div>
@@ -86,46 +86,46 @@
             <div class="container px-3">
               <div class="row gx-5">
                 <div class="col">
-                  <div class="row justify-content-between pr-3">
+                  <div class="row justify-content-between pr-3 mb-2">
                     <div class="card-content">EPS (TTM):</div>
                     <p id="quick-data-eps"><strong>{{ data.eps }}</strong></p>
                   </div>
-                  <div class="row justify-content-between pr-3">
+                  <div class="row justify-content-between pr-3 mb-2">
                     <div class="card-content">P/E:</div>
                     <p id="quick-data-pe"><strong>{{ data.pe_ratio }}</strong></p>
                   </div>
-                  <div class="row justify-content-between pr-3">
+                  <div class="row justify-content-between pr-3 mb-2">
                     <div class="card-content">
                       Growth Estimate (+5yrs):
                     </div>
-                    <div class="row pr-3">
-                      <p id="quick-data-eps-growth"><strong>{{ data.eps_growth_rate_percent }}%</strong></p>
-                    </div>
+                    <p id="quick-data-eps-growth" class="ml-3"><strong>{{ data.eps_growth_rate_percent }}%</strong></p>
                   </div>
-                  <div class="row justify-content-between pr-3">
+                  <div class="row justify-content-between pr-3 mb-2">
                     <div class="card-content">PEG Ratio:</div>
                     <p id="quick-data-peg-ratio"><strong>{{ data.peg_ratio }}</strong></p>
                   </div>
                 </div>
                 <div class="col">
-                  <div class="row justify-content-between pl-3">
+                  <div class="row justify-content-between pl-3 mb-2">
                     <div class="card-content">Enterprise Value/EBITDA:</div>
                     <p id="quick-data-ev-to-ebitda"><strong>{{ data.ev_to_ebitda }}</strong></p>
                   </div>
-                  <div class="row justify-content-between pl-3">
+                  <div class="row justify-content-between pl-3 mb-2">
                     <div class="card-content">Beta:</div>
                     <p id="quick-data-beta"><strong>{{ data.beta }}</strong></p>
                   </div>
-                  <div class="row justify-content-between pl-3">
+                  <div class="row justify-content-between pl-3 mb-2">
                     <div class="card-content">Market Cap:</div>
                     <p id="quick-data-market-cap"><strong>{{ data.market_cap }}</strong></p>
                   </div>
-                  <div class="row justify-content-between pl-3">
+                  <div class="row justify-content-between pl-3 mb-2">
                     <div class="card-content">Shares Outstanding:</div>
                     <p id="quick-data-shares"><strong>{{ data.shares }}</strong></p>
                   </div>
                 </div>
               </div>
+            </div>
+
             </div>
           </div>
         </div>

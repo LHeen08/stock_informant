@@ -560,6 +560,12 @@ $(document).ready(function () {
       .append($("<strong>").text(formattedMarketCap));
   }
 
+  // Make some of the numbers toLocaleString() for better looking output
+  $("#current-price").text(parseFloat($("#current-price").text()).toLocaleString());
+  $("#dcf-val").text(parseFloat($("#dcf-val").text()).toLocaleString());
+  $("#ben-graham-formula").text(parseFloat($("#ben-graham-formula").text()).toLocaleString());
+  $("#graham-number").text(parseFloat($("#graham-number").text()).toLocaleString());
+
   // Set the text for the popover messages
   $("#dcf-info-popover").attr("data-html", "true");
   $("#dcf-info-popover").attr("title", dcfHelpInfo);
