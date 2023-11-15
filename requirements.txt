@@ -1,4 +1,5 @@
 Flask==3.0.0
+flaskwebgui==1.0.8
 python_Levenshtein==0.23.0
 python_Levenshtein==0.23.0
 waitress==2.1.2

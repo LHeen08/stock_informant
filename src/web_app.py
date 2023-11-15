@@ -1,13 +1,18 @@
 from flask import Flask, render_template, request, jsonify
 from data_collection import try_fetch_stock_data
 from valuation_functions import calculate_dcf_free_cash_flow, calculate_peter_lynch_formulas, calculate_benjamin_graham_new
-import platform
-import random, threading, webbrowser
+from waitress import serve
+from flaskwebgui import FlaskUI # import FlaskUI
 
+SERVER_PORT = 8080 # port for production server
+SERVER_URL = "http://localhost:{0}".format(SERVER_PORT)
 
 
 
 app = Flask(__name__)
+
+
+
 
 
 app.secret_key = "my_flask_app"  # Replace with your own secret key
@@ -120,17 +125,7 @@ def calculate_ben_graham():
 
 # Main function
 def main():
-    port = 5000 + random.randint(0, 999)
-    url = "http://127.0.0.1:{0}".format(port)
-
-    threading.Timer(1.25, lambda: webbrowser.open(url)).start()
-
-    app.run(port=port, debug=False)
-    # if platform.system() == "Darwin" :
-    #     app.run(debug=False, host="127.0.0.1", port="8000") # Using port 8000 for mac...
-    # else:
-    #     app.run(debug=True, host="127.0.0.1", port="5000")
-
+    FlaskUI(app=app, server="flask").run()
 
 
 if __name__ == "__main__":
