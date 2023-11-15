@@ -1,10 +1,9 @@
 # This file is to collect data and put what I actually need into useful items to use in other areas
 from yahooquery import Ticker, Screener
-import math
-from valuation_functions import calculate_benjamin_graham_new, calculate_dcf_free_cash_flow, calculate_graham_number, calculate_peter_lynch_formulas
 from Levenshtein import distance
+import math
 import threading
-import json
+from valuation_functions import calculate_benjamin_graham_new, calculate_dcf_free_cash_flow, calculate_graham_number, calculate_peter_lynch_formulas
 
 # Function to try and fetch the financial data
 def try_fetch_stock_data(ticker):
@@ -40,9 +39,7 @@ def try_fetch_stock_data(ticker):
     # Create a dictionary to hold the result
     result_holder = {"multiples_valuation_companies": None}
     # Make another thread do this:
-    thread = threading.Thread(target=find_multiples_valuation_companies, args=(ticker, current_sector, current_industry, result_holder))
-    # Find similar companies to use for multiples valuation
-    #  = multiples_valuation_find_companies(ticker, current_sector, current_industry)
+    thread = threading.Thread(target=find_multiples_valuation_companies, args=(ticker, current_sector, current_industry, result_holder))     # Find similar companies to use for multiples valuation
     thread.start()
 
     current_treasury_data_aaa_bond = (treasury_data["dayLow"] + treasury_data["dayHigh"]) / 2 # treasury data
@@ -227,7 +224,6 @@ def multiples_valuation_find_companies(current_ticker, current_sector, current_i
     industry_matches_list = list(industry_matches)[:5]
     
     list_of_companies_w_data = {}
-    # modules = ["defaultKeyStatistics", "summaryDetail", "quoteType"]
     
     # Access methods on the original Ticker object
     for ticker in industry_matches_list:
