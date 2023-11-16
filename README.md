@@ -23,9 +23,17 @@ Stock Informant is an easy to use dashboard to perform some fundamental valuatio
 ### Executing program
 
 * To run the program just run the exe or binary file!
-
-
+---
+### A note on current MacOS issues
+* Currently on MacOS with the most recent software version, the app is not using flaskwebgui like the windows and linux versions. This is because there are some threading issues with "objc_initializeAfterForkError" (a quick google search of that should show you the issue). So as of right now the workaround without adjusting users environment variables is to open a web browser and handle the browser close with javascript to kill the process.
+* If you are on Mac and the process is still running and the browser window is closed or their is odd behavior within the browser, either ctrl+c in the terminal where the server is running or close the terminal window.
+---
 ## Help
+For the MacOS install you will probably run into "“stock-informant” cannot be opened because it is from an unidentified developer.". To fix this:
+* Open System Settings.
+* Click Privacy & Security, scroll down, and click the Open Anyway button to confirm your intent to open or install the app.
+* The warning prompt reappears and, if you're absolutely sure that you want to open the app anyway, you can click Open. 
+*via* [Apple Website](https://support.apple.com/en-us/HT202491)
 
 On Linux you may need to change the permissions of the binary file to be executable
 ```
