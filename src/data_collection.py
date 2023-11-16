@@ -2,7 +2,6 @@
 from yahooquery import Ticker, Screener
 from Levenshtein import distance
 import math
-import threading
 from valuation_functions import calculate_benjamin_graham_new, calculate_dcf_free_cash_flow, calculate_graham_number, calculate_peter_lynch_formulas
 
 # Function to try and fetch the financial data
@@ -29,18 +28,10 @@ def try_fetch_stock_data(ticker):
     prev_free_cash_flows = [(entry["asOfDate"].strftime("%Y-%m-%d")[:4], entry["FreeCashFlow"]) 
                             for entry in cash_flow_to_use if not math.isnan(entry.get("FreeCashFlow"))]
 
-    
     modules = stock_data.get_modules(modules_to_retrieve)[ticker] # get the modules listed above
-
 
     current_sector = modules["summaryProfile"]["sector"].lower() # current company sector
     current_industry = modules["summaryProfile"]["industry"].lower() # current company industry
-
-    # Create a dictionary to hold the result
-    result_holder = {"multiples_valuation_companies": None}
-    # Make another thread do this:
-    thread = threading.Thread(target=find_multiples_valuation_companies, args=(ticker, current_sector, current_industry, result_holder))     # Find similar companies to use for multiples valuation
-    thread.start()
 
     current_treasury_data_aaa_bond = (treasury_data["dayLow"] + treasury_data["dayHigh"]) / 2 # treasury data
     average_treasury_data_aaa_bond = treasury_data["twoHundredDayAverage"] # treasury data
@@ -110,9 +101,8 @@ def try_fetch_stock_data(ticker):
     rec_trends = modules["recommendationTrend"]["trend"]
     rec_trends = [format_keys(entry) for entry in rec_trends]
 
-    thread.join()
-    multiples_valuation_companies = result_holder["multiples_valuation_companies"]
-
+    multiples_valuation_companies = multiples_valuation_find_companies(ticker, current_sector, current_industry)
+    
     # dictionary filled with useful data to return    
     stock_fetched_data = {
         "company_ticker" : ticker,
@@ -147,10 +137,6 @@ def try_fetch_stock_data(ticker):
 
     
     return stock_fetched_data
-
-
-def find_multiples_valuation_companies(ticker, current_sector, current_industry, result_holder):
-    result_holder["multiples_valuation_companies"] = multiples_valuation_find_companies(ticker, current_sector, current_industry)
 
 
 # This function looks up similar companies using the Screener from yahooquery

@@ -3,9 +3,8 @@ from flaskwebgui import FlaskUI # import FlaskUI
 from valuation_functions import calculate_dcf_free_cash_flow, calculate_peter_lynch_formulas, calculate_benjamin_graham_new
 from data_collection import try_fetch_stock_data
 import logging
-
-SERVER_PORT = 8080 # port for production server
-SERVER_URL = "http://localhost:{0}".format(SERVER_PORT)
+import platform
+import os, signal
 
 
 app = Flask(__name__)
@@ -120,10 +119,28 @@ def calculate_ben_graham():
     return jsonify({"bg_val": calc_bg})
 
 
+@app.route("/exit_server", methods=["POST"])
+def exit_server():
+    os.kill(os.getpid(), signal.SIGINT)
+    return "Server Exiting..."
+
 
 # Main function
 def main():
-    FlaskUI(app=app, server="flask").run()
+    if platform.system() == "Darwin":
+        import webbrowser
+        import random
+        import threading
+        print("Currently running on MacOS, starting a web browser instead...")
+        port = 5000 + random.randint(0, 999)
+        url = "http://127.0.0.1:{0}".format(port)
+
+        threading.Timer(1.25, lambda: webbrowser.open(url, new=1, autoraise=True)).start()
+
+        app.run(port=port, debug=False)
+        
+    else:
+        FlaskUI(app=app, server="flask").run()
 
 
 if __name__ == "__main__":

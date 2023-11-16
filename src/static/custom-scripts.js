@@ -533,13 +533,20 @@ function getMonthForRatings() {
   $("#ratings-three-months-ago").text(threeMonthsAgo);
 }
 
+
 $(document).ready(function () {
+  // Initially set to true
+  let shouldExit = true;
+
   hideLoader();
 
   getMonthForRatings();
 
   // Handle button click event with jQuery
-  $("#fetch-button").click(fetchData);
+  $("#fetch-button").click(function () {
+    shouldExit = false; // Flag set false, don't want to exit
+    fetchData();
+  });
 
   // Get the company quick info numbers that need to be formatted
   if (elementExists("#quick-data-shares")) {
@@ -786,4 +793,28 @@ $(document).ready(function () {
         this.value = old_ben_graham_eps_growth;
       }
     });
+
+
+  // Handle before unload
+  $(window).on("beforeunload", function () {
+    if (shouldExit) {
+      $.ajax({
+        method: "POST",
+        url: "/exit_server",
+        success: function (data) {
+        },
+        error: function () {
+          console.log("Error occurred while trying to exit the server.");
+        }
+      });
+    }
+  });
+
+  // Handle back button:
+  // Handle the back button press
+  window.onpopstate = function (event) {
+    shouldExit = false;
+  };
+
+
 });
