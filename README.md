@@ -18,11 +18,11 @@ Stock Informant is an easy to use dashboard to perform some fundamental valuatio
 
 ### Installing
 
-* Go the the releases section and download required binary/executable for your targeted OS
+* Go the the releases section and download required binary/executable for your targeted OS (if downloading zip for mac, extract then run)
 
 ### Executing program
 
-* To run the program just run the exe or binary file!
+* To run the program just run the exe/binary file
 ---
 ### A note on current MacOS issues
 * Currently on MacOS with the most recent software version, the app is not using flaskwebgui like the windows and linux versions. This is because there are some threading issues with "objc_initializeAfterForkError" (a quick [google search](https://www.google.com/search?channel=ftrc&client=firefox-b-1-d&q=objc_initializeAfterForkError) of that should show you the issue). So as of right now the workaround without adjusting users environment variables is to open a web browser and handle the browser close with javascript to kill the process.
