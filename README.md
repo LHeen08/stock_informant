@@ -43,11 +43,6 @@ On Linux you may need to change the permissions of the binary file to be executa
 $ sudo chmod +x [binary_file_name]
 ```
 
-## Version History
-
-* 0.1
-    * Initial Release
-
 ## License
 
 This project is licensed under the GNU General Public License v3.0 - see the LICENSE.md file for details
