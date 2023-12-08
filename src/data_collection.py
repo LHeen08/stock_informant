@@ -4,11 +4,8 @@ from Levenshtein import distance
 import math
 from valuation_functions import calculate_benjamin_graham_new, calculate_dcf_free_cash_flow, calculate_graham_number, calculate_peter_lynch_formulas
 
-# Function to try and fetch the financial data
+# This function tries to fetch the data from the api
 def try_fetch_stock_data(ticker):
-    
-    ticker = ticker.upper()
-    
     try: # Try to get stock data
         stock_data = Ticker(ticker, validate=True, user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
         
@@ -19,6 +16,21 @@ def try_fetch_stock_data(ticker):
         
     except Exception as exc:
         raise ValueError(f"Error: Unable to retrieve data for ticker {ticker}. Error Details: {str(exc)}")
+    
+    # return the stock data
+    return {"stock_data": stock_data, "treasury_data": treasury_data}
+
+
+# Function to try and fetch the financial data
+def collect_stock_data(ticker):
+    
+    ticker = ticker.upper()
+    
+    # Attempt to fetch the data
+    fetched_data = try_fetch_stock_data(ticker)
+
+    stock_data = fetched_data["stock_data"]
+    treasury_data = fetched_data["treasury_data"]
 
     
     modules_to_retrieve = "assetProfile summaryDetail price summaryProfile defaultKeyStatistics earningsTrend financialData recommendationTrend" # modules to get from object
@@ -109,6 +121,8 @@ def try_fetch_stock_data(ticker):
         "company_name" : company_name,
         "current_price" : round(current_price, 2),
         "company_summary" : company_summary,
+        "current_sector" : current_sector,
+        "current_industry" : current_industry,
         "cash_flow_data" : prev_free_cash_flows,
         "current_treasury_aaa" : round(current_treasury_data_aaa_bond, 2),
         "avg_treasury_aaa" : round(average_treasury_data_aaa_bond, 2),
@@ -180,8 +194,13 @@ def multiples_valuation_find_companies(current_ticker, current_sector, current_i
     else:
         print(f"No quotes found for '{closest_match}'")
 
-    tickers = Ticker(similar_comps_list, asynchronous=True, validate=True, retry=10, user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
-    
+    try:
+        tickers = Ticker(similar_comps_list, asynchronous=True,validate=True, retry=10, user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36")
+    except Exception as exc:
+        print(f"Error: Unable to retrieve data for list of tickers {similar_comps_list}. Error Details: {str(exc)}")
+        raise ValueError(f"Error: Unable to retrieve data for list of tickers {similar_comps_list}. Error Details: {str(exc)}")
+
+
     modules = ["defaultKeyStatistics", "summaryProfile", "quoteType", "summaryDetail"]
     
     fetched_data = tickers.get_modules(modules)

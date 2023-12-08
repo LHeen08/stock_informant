@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, jsonify
-from flaskwebgui import FlaskUI # import FlaskUI
 from valuation_functions import calculate_dcf_free_cash_flow, calculate_peter_lynch_formulas, calculate_benjamin_graham_new
-from data_collection import try_fetch_stock_data
+from data_collection import collect_stock_data
 import logging
-import platform
 import os, signal
+import webbrowser
+import random
+import threading
 
 
 app = Flask(__name__)
@@ -14,7 +15,7 @@ log.disabled = True
 
 app.secret_key = "my_flask_app"  # Replace with your own secret key
 
-# Initialize a variable to store the fetched data ( this is the actual object of the stock )
+# Initialize a variable to store the fetched data
 fetched_company_data = None
 
 # Define a route to render the HTML page
@@ -32,7 +33,7 @@ def fetch_data():
     
     # Try to fetch the data
     try:
-        fetched_company_data = try_fetch_stock_data(ticker)
+        fetched_company_data = collect_stock_data(ticker)
         if fetched_company_data:
             # Get modules to retrieve
             return jsonify({"success": True}), 200
@@ -127,20 +128,14 @@ def exit_server():
 
 # Main function
 def main():
-    if platform.system() == "Darwin":
-        import webbrowser
-        import random
-        import threading
-        print("Currently running on MacOS, starting a web browser instead...")
-        port = 5000 + random.randint(0, 999)
-        url = "http://127.0.0.1:{0}".format(port)
+    print("[Info] Starting app")
+    port = 5000 + random.randint(0, 999)
+    url = "http://127.0.0.1:{0}".format(port)
 
-        threading.Timer(1.25, lambda: webbrowser.open(url, new=1, autoraise=True)).start()
+    threading.Timer(1.25, lambda: webbrowser.open(url, new=1, autoraise=True)).start()
 
-        app.run(port=port, debug=False)
-        
-    else:
-        FlaskUI(app=app, server="flask").run()
+    app.run(port=port, debug=False)
+    
 
 
 if __name__ == "__main__":
